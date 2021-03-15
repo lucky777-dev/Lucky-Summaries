@@ -1,0 +1,500 @@
+#+latex_class: luckypdf
+#+language: fr
+#+title: STA2 - Lucky Summary
+#+author: Sm!le42
+#+tags: @he2b @esi @bloc1 @sta2 @statistiques @solutions @lucky @smile
+
+* Chapitre 1 -- Introduction au calcul des probabilités
+
+** Exercice 3
+
+Un dé est truqué de sorte qu’en le lançant, la probabilité d’obtenir 6 vaut le triple de celle d’obtenir toute autre valeur. Avec ce dé, quelle est la probabilité d’obtenir un point pair ?
+
+*** Solution /(\(\sfrac{5}{8}\))/
+
+| P(1) = \(\sfrac{1}{8}\) | P(2) = \(\sfrac{1}{8}\) | P(3) = \(\sfrac{1}{8}\) | P(4) = \(\sfrac{1}{8}\) | P(5) = \(\sfrac{1}{8}\) | *P(6) =* \(\mathbf{\sfrac{3}{8}}\) |
+
+#+begin_center
+*P(Pair)* = P(2)+P(4)+P(6)
+
+= \(\sfrac{1}{8}\) + \(\sfrac{1}{8}\) + \(\sfrac{3}{8}\)
+
+\(\textcolor{luckydarkgreen}{=\mathbf{\sfrac{5}{8}}}\)
+#+end_center
+
+** Exercice 4
+Trois chevaux sont en course. Le premier à 2 fois plus de chances de gagner que le deuxième, celui-ci a aussi 2 fois plus de chances de gagner que le troisième. Quelles sont les probabilités de gagner de chacun des trois chevaux ?
+
+*** Solution /(\(\sfrac{4}{7}\);\(\sfrac{2}{7}\);\(\sfrac{1}{7}\))/
+
+#+attr_latex: :align |c|c|c|c|
+|--------+-----+-----+---|
+| Cheval |   1 |   2 | 3 |
+|--------+-----+-----+---|
+| Proba  | 4*x | 2*x | x |
+|--------+-----+-----+---|
+#+begin_center
+/x/ = \(\frac{1}{4+2+1}\) = \(\sfrac{1}{7}\)
+#+end_center
+#+attr_latex: :align |c|c|c|c|
+|--------+--------------------------------------------+--------------------------------------------+--------------------------------------------|
+| Cheval |                                          1 |                                          2 |                                          3 |
+|--------+--------------------------------------------+--------------------------------------------+--------------------------------------------|
+| Proba  | \(\textcolor{luckydarkgreen}{\bold{4/7}}\) | \(\textcolor{luckydarkgreen}{\bold{2/7}}\) | \(\textcolor{luckydarkgreen}{\bold{1/7}}\) |
+|--------+--------------------------------------------+--------------------------------------------+--------------------------------------------|
+
+** Exercice 5
+
+Soit un jeu de 52 cartes dont on tire une carte au hasard. On définit les évènements aléatoires suivants:
+- A : obtenir un as
+- B : obtenir une carte rouge
+- C : obtenir un cœur.
+
+Définissez les évènements suivants et calculez-en la probabilité :
+1. A \cap B
+2. B \cap C
+3. A \cup C
+4. B \cup C
+
+*** Solution /(\(\sfrac{1}{26}\);\(\sfrac{1}{4}\);\(\sfrac{4}{13}\);\(\sfrac{1}{2}\))/
+
+- P(A) = \(\sfrac{4}{52}\) = \(\sfrac{1}{13}\)
+- P(B) = \(\sfrac{26}{52}\) = \(\sfrac{1}{2}\)
+- P(C) = \(\sfrac{13}{52}\) = \(\sfrac{1}{4}\)
+
+**** *A \cap B* /\(\textcolor{gray}{\text{--> As et Rouge}}\)/
+
+= P(A *et* B) = \(\sfrac{1}{13}\) * \(\sfrac{1}{2}\)
+\(\textcolor{luckydarkgreen}{\mathbf{= \sfrac{1}{26}}}\)
+
+**** *B \cap C* /\(\textcolor{gray}{\text{--> Rouge et Coeur}}\)/
+
+= P(B *et* C) = P(C) \(\textcolor{luckydarkgreen}{\mathbf{= \sfrac{1}{4}}}\) /\(\textcolor{gray}{\text{--> Car un coeur est toujours rouge}}\)/
+
+**** *A \cup C* /\(\textcolor{gray}{\text{--> As ou Coeur}}\)/
+
+= P(A *ou* C) = P(A)+P(C)--P(A *et* C) /\(\textcolor{gray}{\text{--> On retire les As Rouges comptés en double}}\)/
+
+= \(\sfrac{4}{52}\) + \(\sfrac{13}{52}\) -- (\(\sfrac{4}{52}\) * \(\sfrac{1}{4}\))
+
+\(\textcolor{luckydarkgreen}{\mathbf{= \sfrac{4}{13}}}\)
+
+**** *B \cup C* \(\textcolor{gray}{\text{--> Rouge ou Coeur}}\)
+
+= P(B *ou* C) = P(B) /\(\textcolor{gray}{\text{--> Car un coeur est toujours rouge}}\)/
+
+\(\textcolor{luckydarkgreen}{\mathbf{= \sfrac{1}{2}}}\)
+
+** Exercice 9
+
+Soit un groupe composé de 12 hommes dont la moitié a des lunettes et de 15 femmes dont le tiers a des lunettes. Si on choisit une personne au hasard dans ce groupe, quelle est la probabilité que cette personne soit un homme ou porte des lunettes ?
+
+*** Solution /(\(\sfrac{17}{27}\))/
+
+#+attr_latex: :align c|c|c|c|
+|        | Lunettes                        | !Lunettes | Total                           |
+|--------+---------------------------------+-----------+---------------------------------|
+| Hommes | \(\textcolor{teal}{\bold{6}}\)  |         6 | \(\textcolor{teal}{\bold{12}}\) |
+|--------+---------------------------------+-----------+---------------------------------|
+| Femmes | 5                               |        10 | 15                              |
+|--------+---------------------------------+-----------+---------------------------------|
+| Total  | \(\textcolor{teal}{\bold{11}}\) |        16 | \(\textcolor{teal}{\bold{27}}\) |
+
+--> P(Hommes *ou* Lunettes)
+
+= P(Homme) + P(Lunettes) -- P(Homme *et* Lunettes)
+
+= \(\sfrac{12}{27}\) + \(\sfrac{11}{27}\) -- \(\sfrac{6}{27}\)
+
+\(\textcolor{luckydarkgreen}{\mathbf{= \sfrac{17}{27}}}\)
+
+#+begin_quote
+*Même résultat avec la Loi /complémentaire/ de Morgan:*
+
+P(Homme ou Lunettes) = 1 -- P(Femmes et !Lunettes)
+
+= 1 -- \(\sfrac{10}{27}\) \(\textcolor{luckydarkgreen}{\mathbf{= \sfrac{17}{27}}}\)
+#+end_quote
+
+** Exercice 10
+
+Lors de vacances scolaires, deux activités sportives sont proposées : natation et vélo. On sait que 40% des participants se sont inscrits à la natation, 50% aux randonnées vélo et 25% se sont inscrits au deux. Quelle est la probabilité qu’un participant choisi au hasard ne fasse pas de sport ?
+
+*** Solution /(35%)/
+
+#+attr_latex: :align |c|c|c|c|
+|-----------+------+-------+-------|
+|           | Vélo | !Vélo | Total |
+|-----------+------+-------+-------|
+| Natation  |  25% |   15% |   40% |
+|-----------+------+-------+-------|
+| !Natation |  25% |   35% |   60% |
+|-----------+------+-------+-------|
+| Total     |  50% |   50% |  100% |
+|-----------+------+-------+-------|
+
+P(!Sport) = P(!Vélo *et* !Natation) \(\textcolor{luckydarkgreen}{\bold{= 35\%}}\)
+
+#+begin_quote
+*Alternative:*
+
+P(!Sport) = 1 -- P(Natation *ou* Vélo)
+
+= 1 -- P(Natation) + P(Vélo) -- P(Natation *et* Vélo)
+
+= 100% -- 40% + 50% -- 25% \(\textcolor{luckydarkgreen}{\bold{= 35\%}}\)
+#+end_quote
+
+** Exercice 11
+Un marchand d’électro-ménager a réalisé des statistiques sur les ventes de frigos tout au long du mois de décembre dernier. Les probabilités du nombre de frigos vendus par jour sont données dans le tableau suivant :
+
+#+attr_latex: :align |c|c|
+| *Nombre de frigos vendus par jour* | *Probabilité* |
+|------------------------------------+---------------|
+|                                  0 |           0.2 |
+|                                  1 |           0.4 |
+|                                  2 |           0.3 |
+|                         Au moins 3 |           0.1 |
+|------------------------------------+---------------|
+
+1. Quelle est la probabilité qu’il vende au moins un frigo ?
+2. Quelle est la probabilité qu’il ne vende pas de frigos sur 2 jours consécutifs ?
+3. Quelle est la probabilité qu’il vende un et un seul frigo sur 3 jours consécutifs ?
+
+*** Solution (80%;4%;4.8%)
+**** *P(Vendre au moins 1 frigo)*
+
+= P(1 frigo *ou* 2 frigos *ou* au moins 3 frigos)
+
+= P(1) + P(2) + P(Au moins 3)
+
+= 0.4 + 0.3 + 0.1 = 0.8 \(\textcolor{luckydarkgreen}{\bold{= 80\%}}\)
+
+**** *P(Pas de frigo vendu en 2 jours)*
+
+= P(0 frigo le jour 1 *et* 0 frigo le jour 2)
+
+= P(0 frigo jour1 *** 0 frigo jour2)
+
+= 0.2 * 0.2 = 0.04 \(\textcolor{luckydarkgreen}{\bold{= 4\%}}\)
+
+**** *P(1 frigo en 3 jours)*
+#+begin_quote
+3 cas possibles:
+- P(*1 frigo jour1* *et* 0 frigo jour2 *et* 0 frigo jour3) \textcolor{luckydarkgray}{(ou)}
+- P(0 frigo jour1 *et* *1 frigo jour2* *et* 0 frigo jour3) \textcolor{luckydarkgray}{(ou)}
+- P(0 frigo jour1 *et* 0 frigo jour2 *et* *1 frigo jour3*)
+#+end_quote
+= (0.4 * 0.2 * 0.2) + (0.2 * 0.4 * 0.2) + (0.2 * 0.2 * 0.4)
+
+= 3 * (0.4 * 0.2 * 0.2)
+
+= 3 * 0.016
+
+= 0.048 \(\textcolor{luckydarkgreen}{\bold{= 4.8\%}}\)
+** Exercice 12
+On jette 3 fois un dé "normal". Calculez:
+1. La probabilité d'obtenir le point 6 en exactement 1 fois
+2. La probabilité d'obtenir le point 6 au moins une fois
+3. La probabilité d'obtenir 3 points différents
+*** Solution (\(\sfrac{25}{72}\);\(\sfrac{91}{216}\);\(\sfrac{5}{9}\))
+**** *P(Une fois 6 en 3 coups)*
+#+begin_quote
+3 cas possibles:
+- P(*6 coup1 et* !6 coup2 *et* !6 coup3) \textcolor{luckydarkgray}{(ou)}
+- P(!6 coup1 *et 6 coup2 et* !6 coup3) \textcolor{luckydarkgray}{(ou)}
+- P(!6 coup1 *et* !6 coup2 *et 6 coup3*)
+#+end_quote
+= 3 * (\sfrac{1}{6} * \sfrac{5}{6} * \sfrac{5}{6})
+
+= 3 * \sfrac{25}{216} \(\textcolor{luckydarkgreen}{\mathbf{= \sfrac{25}{72}}}\)
+**** *P(6 au moins une fois)*
+
+= 1 -- P(Jamais 6)
+
+= 1 -- (\sfrac{5}{6} * \sfrac{5}{6} * \sfrac{5}{6})
+
+= 1 -- \sfrac{125}{216}
+
+\(\textcolor{luckydarkgreen}{\mathbf{= \sfrac{91}{216}}}\)
+**** *P(3 différents)*
+
+= P(1er = 1er *et* 2ème != 1er *et* 3ème != deux premiers)
+
+= \sfrac{6}{6} * \sfrac{5}{6} * \sfrac{4}{6}
+
+= 1 * \sfrac{20}{36} \(\textcolor{luckydarkgreen}{\mathbf{= \sfrac{5}{9}}}\)
+** Exercice 13
+On tire trois cartes avec remise intermédiaire dans un jeu de 52 cartes. Calculez:
+1. La probabilité que la deuxième soit un Roi et la troisième différente d'un Roi
+2. La probabilité qu'exactement deux des cartes soient un Roi
+3. La probabilité de tirer 3 fois la même carte
+
+*** Solution (\sfrac{12}{169};\sfrac{36}{2197};\sfrac{1}{2704})
+**** *P(carte2 = Roi et carte3 != Roi)*
+
+= P(1ère = peu importe *et* 2ème = Roi *et* 3ème != Roi)
+
+= \sfrac{52}{52} * \sfrac{4}{52} * \sfrac{48}{52}
+
+= 1 * \sfrac{1}{13} * \sfrac{12}{13} \(\textcolor{luckydarkgreen}{\mathbf{= \sfrac{12}{169}}}\)
+**** *P(Deux des cartes sont un Roi)*
+#+begin_quote
+3 cas possibles:
+- P(Roi carte1 *et* Roi carte2 *et !Roi carte3*) \textcolor{luckydarkgray}{(ou)}
+- P(Roi carte1 *et !Roi carte2 et* Roi carte3) \textcolor{luckydarkgray}{(ou)}
+- P(*!Roi carte1 et* Roi carte2 *et* Roi carte3)
+#+end_quote
+= 3 * ( \sfrac{4}{52} * \sfrac{4}{52} * \sfrac{48}{52})
+
+= 3 * ( \sfrac{1}{13} * \sfrac{1}{13} * \sfrac{12}{13})
+
+= 3 * \sfrac{12}{2197} \(\textcolor{luckydarkgreen}{\mathbf{= \sfrac{36}{2197}}}\)
+**** *P(3 fois la même carte)*
+
+= P(carte1 = carte2 = carte3)
+
+= P(1ère = peu importe *et* 2ème = 1ère *et* 3ème = 1ère)
+
+= \sfrac{52}{52} * \sfrac{1}{52} * \sfrac{1}{52}
+
+= 1 * \sfrac{1}{52} * \sfrac{1}{52}
+
+= (\sfrac{1}{52})^2 \(\textcolor{luckydarkgreen}{\mathbf{= \sfrac{1}{2704}}}\)
+** Exercice 16
+On tire deux cartes dans un jeu de 52 cartes sans remise intermédiaire:
+1. La première carte est un Roi. Quelle est la probabilité que la deuxième carte soit encore un Roi?
+2. Quelle est la probabilité d'obtenir deux Rois?
+3. Quelle est la probabilité d'obtenir au moins 1 Roi?
+*** Solution (\sfrac{3}{52};\sfrac{1}{221};\sfrac{33}{221})
+**** *P(2ème carte est un Roi sachant que la 1ère est un Roi)*
+
+= P(Roi carte2 | Roi carte1)
+
+= \sfrac{4}{52} -- \sfrac{1}{52}
+
+\(\textcolor{luckydarkgreen}{\mathbf{= \sfrac{3}{52}}}\)
+**** *P(Deux Rois)*
+
+= P(Roi carte1 *et* Roi carte2)
+
+= \sfrac{4}{52} * \sfrac{3}{51}
+
+= \sfrac{1}{13} * \sfrac{1}{17} \(\textcolor{luckydarkgreen}{\mathbf{= \sfrac{1}{221}}}\)
+**** *P(Au moins 1 Roi)*
+
+= P(1ère pas Roi) *et* P(2ème pas Roi *sachant que* 1ère pas Roi)
+
+= 1-- P(Aucun Roi)
+#+begin_quote
+\color{luckydarkgray}
+*P(Aucun Roi)*
+
+= P(1ère pas Roi) * P(2ème pas Roi *sachant que* 1ère pas Roi)
+
+= P(1ère !Roi) * P(2ème !Roi | 1ère !Roi)
+
+= \sfrac{48}{52} * \sfrac{47}{51}
+\color{black}
+#+end_quote
+1 -- P(Aucun Roi)
+
+= 1 -- \sfrac{48}{52} * \sfrac{47}{51} \(\textcolor{luckydarkgreen}{\mathbf{= \sfrac{33}{221}}}\)
+** Exercice 17
+Trois personnes tirent sans remise un billet au hasard dans un ensemble de billets numérotés de 1 à 20. Quelle est la probabilité que les trois billets soient impairs?
+*** Solution (9%)
+P(Billet1 impair *et* Billet2 impair *et* Billet3 impair)
+#+begin_quote
+3 conditions à respecter:
+- P(Billet 1 impair) \textcolor{luckydarkgray}{(et)}
+- P(Billet 2 impair *sachant que* Billet 1 impair) \textcolor{luckydarkgray}{(et)}
+- P(Billet 3 impair *sachant que* Billet 1 impair *et* Billet 2 impair)
+#+end_quote
+= P(Billet1 impair) *** P(Billet2 impair *|* Billet1 impair) *** P(Billet3 impair *|* Billet1 impair *** Billet2 impair)
+
+= \sfrac{10}{20} * \sfrac{9}{20} * \sfrac{8}{20}
+
+= \sfrac{1}{2} * \sfrac{9}{20} * \sfrac{2}{5} = \sfrac{9}{100} \(\textcolor{luckydarkgreen}{\mathbf{= 9\%}}\)
+** Exercice 18
+Un sac contient 3 boules blanches et 7 boules noires. Quatre personnes A, B, C et D tirent dans cet ordre une boule sans la remettre dans le sac. La première personne qui tire une boule blanche gagne le jeu. Calculez la probabilité de gagner le jeu pour chacune des personnes.
+
+*** Solution (\sfrac{3}{10};\sfrac{7}{30};\sfrac{21}{120};\sfrac{1}{8})
+**** *P(A gagne)*
+
+\(\textcolor{luckydarkgreen}{\mathbf{= \sfrac{3}{10}}}\) \textcolor{luckydarkgray}{(3 boules blanches sur (3+7) boules)}
+
+**** *P(B gagne)*
+
+= P(A noire *et* B blanche)
+
+= P(A noire) * P(B blanche | A noire)
+
+= \sfrac{7}{10} * \sfrac{3}{9}
+
+= \sfrac{7}{10} * \sfrac{1}{3} \(\textcolor{luckydarkgreen}{\mathbf{= \sfrac{7}{30}}}\)
+**** *P(C gagne)*
+
+= P(A noire *et* B noire *et* C blanche)
+
+= P(A noire) * P(B noire | A noire) * P(C blanche | A noire *et* B noire)
+
+= \sfrac{7}{10} * \sfrac{6}{9} * \sfrac{3}{8}
+
+= \sfrac{7}{10} * \sfrac{1}{3} * \sfrac{3}{4} \(\textcolor{luckydarkgreen}{\mathbf{= \sfrac{21}{120}}}\)
+**** *P(D gagne)*
+
+= P(A noire *et* B noire *et* C noire *et* C blanche)
+
+= P(A noire) * P(B noire | A noire) * P(C noire | A noire *et* B noire) * P(D blanche | A noire *et* B noire *et* C noire)
+
+= \sfrac{7}{10} * \sfrac{6}{9} * \sfrac{5}{8} * \sfrac{3}{7} \(\textcolor{luckydarkgreen}{\mathbf{= \sfrac{1}{8}}}\)
+** Exercice 21
+Dans un certain pays, la population en âge de travail est répartie de la manière suivante:
+- 51% sont des hommes possédant un emploi
+- 3% sont des hommes au chômage
+- 41% sont des femmes possédant un emploi
+- 5% sont des femmes au chômage
+Calculez la probabilité:
+1. Qu'une personne choisie au hasard soit un homme
+2. Qu'une personne choisie au hasard soit un chômeur
+3. Qu'un chômeur choisi au hasard soit un homme
+4. Qu'un homme choisi au hasard soit un chômeur
+*** Solution (54%;8%;\sfrac{3}{8};\sfrac{1}{18})
+#+attr_latex: :align c|c|c|c|
+|         | Homme | Femme | Total |
+|---------+-------+-------+-------|
+| Emploi  |   51% |   41% |   92% |
+| Chômage |    3% |    5% |    8% |
+| Total   |   54% |   46% |  100% |
+|---------+-------+-------+-------|
+
+**** *P(Homme)*
+
+= 51% + 3% \(\textcolor{luckydarkgreen}{\mathbf{= 54\%}}\)
+**** *P(Chômeur)*
+
+= 3% + 5% \(\textcolor{luckydarkgreen}{\mathbf{= 8\%}}\)
+**** *P(Homme | Chômeur)*
+
+= \(\frac{\text{P(Homme et Chômeur)}}{\text{P(Chômeur)}}\)
+
+= \(\frac{3\%}{8\%}\) \(\textcolor{luckydarkgreen}{\mathbf{= \sfrac{3}{8}}}\)
+**** *P(Chômeur | Homme)*
+
+= \(\frac{\text{P(Chômeur et Homme)}}{\text{P(Homme)}}\)
+
+= \(\frac{\text{3\%}}{\text{54\%}}\)
+
+= \sfrac{3}{54} \(\textcolor{luckydarkgreen}{\mathbf{= \sfrac{1}{18}}}\)
+** Exercice 22
+On dispose de 2 urnes *U1* /(5 boules rouges et 3 boules blanches)/ et *U2* /(4 boules rouges et 6 boules blanches)/. Des tirages sont effectués suivant les règles suivantes:
+
+Si une boule rouge a été tirée alors le tirage suivant se fait dans la même urne, mais si une boule blanche a été tirée, alors le tirage suivant se fera dans l'autre urne. Le premier tirage se fait dans U1.
+
+Si les tirages se font sans remise, quelles sont les probabilités d'obtenir:
+1. Trois boules rouges en 3 tirages
+2. Trois boules blanches en 3 tirages
+3. Une boule blanche suivie de 2 boules rouges en 3 tirages
+4. Une boule rouge en 3ème sachant que les 2 premières sont blanches
+*** Solution (\sfrac{5}{28};\sfrac{9}{140};\sfrac{1}{20};\sfrac{5}{7})
+\color{luckydarkgray}
+=(Voir Figure 1)=
+\color{black}
+#+caption: Chapitre 1 Exercice 22 Schéma
+#+attr_latex: :width 100px
+file:1-22.png
+
+**** *P(Trois boules rouges en 3 tirages)*
+
+= P(Boule1 rouge U1 *et* Boule2 rouge U1 *et* Boule3 rouge U1)
+
+= P(Boule1 rouge U1) * P(Boule2 rouge U1 | Boule1 rouge U1) * P(Boule3 rouge U1 | Boule1 rouge U1 *et* Boule2 rouge U1)
+
+= \sfrac{5}{8} * \sfrac{4}{7} * \sfrac{3}{6} \(\textcolor{luckydarkgreen}{\mathbf{= \sfrac{5}{28}}}\)
+**** *P(Trois boules blanches en 3 tirages)*
+
+= P(Boule1 blanche U1 *et* Boule2 blanche en U2 *et* Boule3 blanche en U1)
+
+= P(Boule1 blanche U1) * P(Boule2 blanche U2 | Boule1 blanche U1) * P(Boule3 blanche U1 | Boule1 blanche U1 *et* Boule2 blanche U2)
+
+= \sfrac{3}{8} * \sfrac{6}{10} * \sfrac{2}{7} \(\textcolor{luckydarkgreen}{\mathbf{= \sfrac{9}{140}}}\)
+**** *P(Une boule blanche suivie de 2 boules rouges en 3 tirages)*
+
+= P(Boule1 blanche U1 *et* Boule2 rouge U2 *et* Boule3 rouge U2)
+
+= P(Boule1 blanche U1) * P(Boule2 rouge U2 | Boule1 blanche U1) * P(Boule3 rouge U2 | Boule1 blanche U1 *et* Boule2 rouge U2)
+
+= \sfrac{3}{8} * \sfrac{4}{10} * \sfrac{3}{9} \(\textcolor{luckydarkgreen}{\mathbf{= \sfrac{1}{20}}}\)
+**** *P(Une boule rouge en 3ème sachant que les 2 premières sont blanches)*
+
+= P(Boule3 rouge | Boule1 blanche U1 *et* Boule2 blanche U2)
+
+\(\textcolor{luckydarkgreen}{\mathbf{= \sfrac{5}{7}}}\) \textcolor{luckydarkgray}{(On connaît les valeurs de Boule1 et Boule2)}
+
+** Exercice 24
+Soient deux dés *A* et *B* ayant respectivement 4 faces rouges et 2 blanches, 4 faces blanches et 2 rouges.
+
+On choisit un des deux dés avec une pièce tombant deux fois plus souvent sur pile que sur face: pile donne le dé *A* et face donne le dé *B*. Ensuite on jette le dé choisi et on regarde la couleur obtenue.
+1. Quelle est la probabilité d'obtenir une face rouge?
+2. Quelle est la probabilité d'obtenir une face blanche?
+3. On répète tout le processus 3 fois de suite? Quelle est la probabilité d'obtenir rouge aux 3 lancés si on a obtenu rouge aux 2 premiers lancers?
+
+*** Solution (\sfrac{5}{9};\sfrac{4}{9};\sfrac{5}{9})
+\color{luckydarkgray}
+=(Voir Figure 2)=
+\color{black}
+#+caption: Chapitre 1 Exercice 24 Schéma
+#+attr_latex: :width 100px
+file:1-24.png
+**** *P(Rouge)*
+
+= (\sfrac{2}{3} * \sfrac{2}{3}) + (\sfrac{1}{3} * \sfrac{1}{3}) \(\textcolor{luckydarkgreen}{\mathbf{= \sfrac{5}{9}}}\)
+**** *P(Blanche)*
+
+= (\sfrac{2}{3} * \sfrac{1}{3}) + (\sfrac{1}{3} * \sfrac{2}{3}) \(\textcolor{luckydarkgreen}{\mathbf{= \sfrac{4}{9}}}\)
+#+begin_quote
+*Alternative:*
+P(Blanche) = 1 -- P(Rouge) \textcolor{luckydarkgray}{(On peut utiliser P(Rouge) calculé  à l'exercice 1)}
+
+= 1 -- \sfrac{5}{9} \(\textcolor{luckydarkgreen}{\mathbf{= \sfrac{4}{9}}}\)
+#+end_quote
+
+**** *P(Rouge au 3ème lancer sachant que Rouge aux 2 premiers lancers)*
+
+= P(Rouge lancer3 | Rouge lancer1 *et* Rouge lancer2)
+
+= P(Rouge) \textcolor{luckydarkgray}{(La probabilité Rouge au 3ème lancer est la même que la probabilité Rouge tout court)}
+
+\(\textcolor{luckydarkgreen}{\mathbf{= \sfrac{5}{9}}}\)
+** Exercice 25
+Un fabricant de baromètres a testé un nouveau modèle très simple, et a constaté que celui-ci était de temps en temps inexact:
+
+Pour 10% des jours où il pleuvait, il affichait /beau temps/, et pour 30% des jours où il faisait beau, il affichait /pluie/.
+
+Sachant que le baromètre a été vendu dans une région où il pleut en moyenne  jour sur 5:
+1. Quelle est la probabilité que le baromètre indique /pluie/?
+2. Quelle est la probabilité que l'indication du baromètre soit correcte?
+*** Solution (\sfrac{21}{50};\sfrac{37}{50})
+\color{luckydarkgray}
+=(Voir Figure 3)=
+\color{black}
+#+caption: Chapitre 1 Exercice 25 Schéma
+#+attr_latex: :width 100px
+file:1-25.png
+**** *P(Affiche Pluie)*
+
+= P(Pluie *et* Affiche Pluie) *ou* P(Beau temps *et* Affiche Pluie)
+
+= (\sfrac{1}{5} * \sfrac{9}{10}) + (\sfrac{4}{5} * \sfrac{3}{10}) \(\textcolor{luckydarkgreen}{\mathbf{= \sfrac{21}{50}}}\)
+**** *P(Indication correcte)*
+
+= P(Pluie *et* Affiche Pluie) *ou* P(Beau temps *et* Affiche Beau temps)
+
+= (\sfrac{1}{5} * \sfrac{9}{10}) + (\sfrac{4}{5} * \sfrac{7}{10}) \(\textcolor{luckydarkgreen}{\mathbf{= \sfrac{37}{50}}}\)
+** Exercice 26
+Un patineur participe à une compétition. Deux de ses sauts l'inquiètent. Il ne réussit le premier saut périlleux que dans 95% des cas. Comme il est émotif, s'il ne réussit pas ce premier saut, il rate le deuxième 3 fois sur 10. Sinon, si tout va bien au premier saut, il réussit le deuxième dans 90% des cas. Calculez:
+1. La probabilité que le patineur réussisse le second saut
+2. La probabilité que le patineur rate le deuxième saut sachant que le 1er était réussi
+3. La probabilité que le patineur réussisse les deux sauts
+
+\luckynote{A venir...}{La suite est en cours d'écriture}

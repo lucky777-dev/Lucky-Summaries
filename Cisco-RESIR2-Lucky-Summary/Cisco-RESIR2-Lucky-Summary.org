@@ -1,0 +1,749 @@
+#+latex_class: luckypdf
+#+language: fr
+#+title: Cisco (RESIR2) - Lucky Summary
+#+author: Sm!le42
+
+* Composants réseaux
+** <<Network>>Network
+Un réseau est un *ensemble inter-connecté*, fait de composants autorisant la *circulation de flux* ou d'éléments finis.
+
+\textcolor{luckydarkgray}{(Ensemble de relations)}
+** Rôle d'hôte
+*** <<Host>>Hôtes ou périphériques finaux
+Parfois appelés *clients*, ce sont des *ordinateurs connectés* à un réseau et qui participent directement aux communications transmises sur le réseau.
+
+\textcolor{luckydarkgray}{(Ex: Ordinateur, téléphone, tablette, imprimante...)}
+*** <<IPAddress>>Adresse IP
+*Numéro* qui *identifie* [[Host][l'hôte]] et le [[Network][réseau]] auquel l'hôte est connecté.
+**** *IPv4:*
+/Adresses IP/ codées sur *32 bits*. Au maximum 2^{32} adresses /(soit 4 294 967 296)/ peuvent donc être attribuées simultanément en théorie (en pratique, un certain nombre ne sont pas utilisables).
+
+Une /adresse IPv4/ est représentée sous la forme de *quatre nombres entiers* séparés par des points. \textcolor{luckydarkgray}{(Ex: 193.43.55.67)}
+
+Chacun des nombres représente *un octet*. La plage d'attribution s'étend de /0.0.0.0/ à /255.255.255.255/, sachant qu'il existe des contraintes empêchant l'utilisation de certaines adresses (réservée, masque, broadcast...).
+**** *IPv6:*
+Grâce à des adresses de *128 bits* /(au lieu de 32 bits en IPv4)/, on dispose d'un espace d'adressage bien plus important qu'IPv4 /(plus de 340 sextillions, ou *340*10^{36}* adresse différentes)/.
+
+Cette quantité d'adresses considérable permet une plus grande *flexibilité* dans l'attribution des adresses et une meilleure agrégation des routes dans la table de routage d'Internet. La traduction d'adresse, qui a été rendue populaire par le manque d'adresses IPv4, n'est plus nécessaire.
+
+Le *déploiement* d'IPv6 sur Internet est *compliqué* en raison de l'*incompatibilité* des adresses IPv4 et IPv6. Les traducteurs d'adresses automatiques se heurtent à des problèmes pratiques importants. Pendant une *phase de transition* où coexistent IPv6 et IPv4, les hôtes disposent d'une *double pile*, c'est-à-dire qu'ils disposent à la fois d'adresses IPv6 et IPv4, et des tunnels permettent de traverser les groupes de routeurs qui ne prennent pas encore en charge IPv6.
+*** <<Serveur>>Serveur
+*Ordinateur* équipé de logiciels lui permettant de *fournir des informations*, /comme des messages électroniques ou des pages web/, à d'autres [[Host][périphériques finaux]] sur le réseau.
+
+CLIENT-------INTERNET-------SERVEUR
+#+begin_quote
+*Notes:* Chaque service nécessite un *logiciel serveur distinct*. Un seul ordinateur peut exécuter différents types de logiciel client.
+
+\textcolor{luckydarkgray}{(Ex: Logiciel de serveur web pour offrir des services web. Un utilisateur peut vérifier son courrier électronique et consulter une page web tout en utilisant une messagerie instantanée et en écoutant un flux audio.)}
+#+end_quote
+** <<PeerToPeer>>Peer-To-Peer
+Lorsqu'un *ordinateur* fait à la fois office de *serveur* et de *client* sur le réseau.
+
+\textcolor{luckydarkgray}{(Ex: Réseaux particuliers, petites entreprises...)}
+#+begin_quote
+*Avantages:* 
+\color{luckydarkgreen}
++ Facile à configurer
++ Moins complexe
++ Coût réduit car appareils réseau et serveurs dédiés pas toujours nécessaires
++ Peut-être utilisé pour des tâches simples
+\color{black}
+*Inconvénients:* 
+\color{luckydarkred}
+- Pas d'administration centralisée
+- Peu sécurisé
+- Non évolutif
+- Tous les périphériques peuvent servir à la fois de client et de serveur, ce qui peut ralentir les performances.
+\color{black}
+#+end_quote
+** Équipements actifs
+*** <<PeripheriqueIntermediaire>>Périphérique intermédiaire
+Périphérique *reliant* différents dispositifs finaux au réseau, et *fournissant la connectivité* en s'assurant que les données sont *transmises* sur le réseau.
+
+\textcolor{luckydarkgray}{(Ex: Routeur, routeur sans fil, pare-feu, commutateur LAN, commutateur multicouche...)}
+#+begin_quote
+*Rôles:* 
+- Régénérer et retransmettre les signaux de communications.
+- Gérer des informations indiquant les chemins qui existent à travers le réseau et l'inter-réseau.
+- Indiquer aux autres périphériques les erreurs et les échecs de communication.
+- Diriger des données vers d'autres chemins en cas d'échec de liaison.
+- Classifier et diriger des messages en fonction des priorités.
+- Autoriser ou refuser le flux des données, selon des paramètres de sécurité.
+#+end_quote
+*Notes:* Tous les dispositifs intermédiaires remplissent la fonction de répéteur. Les dispositifs intermédiaires peuvent connecter plusieurs réseaux individuels pour former un inter-réseau.
+*** <<Repeteur>>Répéteur
+Dispositif qui *régénère et retransmet* les signaux de communication.
+** <<SupportReseau>>Support réseau
+*Canal* via lequel le *message se déplace* de la source à la destination.
+
+Les plus connus sont:
+- Le cuivre
+- La fibre optique
+- Les ondes électromagnétiques
+\color{black}
+#+begin_quote
+\color{luckydarkgray}
+Critères à prendre en compte:
+- Distance maximale des supports
+- Environnement
+- Quantité de donnée et vitesse de transmission
+- Coût des supports et de l'installation
+#+end_quote
+** <<DataCenter>>Data center (Centre de données)
+Installation utilisée pour *héberger* les systèmes informatiques et les composants associés.
+#+begin_quote
+Un data center peut occuper une pièce d'un bâtiment, un ou plusieurs étages, voire même un bâtiment entier de la taille d'un entrepôt.
+
+Sa construction et son entretien sont en général très coûteux, ainsi, les grandes entreprises utilisent des centres de données privés, alors que les entreprises de plus petite taille, qui n'ont pas le budget suffisant pour gérer leur propre data center privé, vont plutôt en louer.
+#+end_quote
+* Topologies et représentations du réseau
+** Représentation du réseau
+*** <<DiagrammeTopologie>>Diagramme de topologie
+*Représentation visuelle* des connexions d'un réseau, permettant de comprendre facilement comment les appareils sont connectés dans ce réseau.
+*** <<CarteInterface>>Carte d'interface (NIC)
+*Relie physiquement* le dispositif terminal au réseau.
+*** <<PortPhysique>>Port physique
+*Connecteur* ou prise sur un dispositif de réseau où le support se connecte à un dispositif terminal ou à un autre dispositif de réseau.
+*** <<Interface>>Interface
+*Ports spécialisés* sur un dispositif de réseau qui se connecte à des réseaux individuels.
+#+begin_quote
+Comme les routeurs connectent les réseaux, les ports des routeurs sont appelés /interfaces réseaux/.
+
+\textcolor{luckydarkgray}{Les termes port et interface sont souvent utilisés l'un pour l'autre.}
+#+end_quote
+* Types courants de réseaux
+** Réseaux de tailles diverses
+*** Petit réseau domestique
+Relie *quelques ordinateurs* entre eux et à Internet.
+
+\textcolor{luckydarkgray}{(Ex: Réseau classique familial)}
+*** Réseau de petit bureau et de bureau à domicile (SOHO)
+Permet aux ordinateurs d'un *bureau à domicile* ou d'un *bureau distant* de se connecter à un *réseau d'entreprise* ou d'accéder à des *ressources centralisées* et partagées.
+
+\textcolor{luckydarkgray}{(Ex: Très petites entreprises)}
+*** Moyen et grand réseaux
+Possibilité d'avoir de *nombreux emplacements* avec des centaines ou des milliers d'hôtes inter-connectés.
+
+\textcolor{luckydarkgray}{(Ex: Entreprises, écoles...)}
+*** Réseau mondial
+Connexion de *centaines de millions* d'ordinateurs dans le *monde entier*.
+
+\textcolor{luckydarkgray}{(Ex: Internet)}
+** LAN et WAN
+*** <<LAN>>LAN (Local Area Network)
+Un réseau local est une *infrastructure de réseau* qui fournit un accès aux utilisateurs et aux dispositifs finaux dans une *petite zone géographique*.
+
+\textcolor{luckydarkgray}{(Ex: Maison, école, immeuble, campus...)}
+#+begin_quote
+*Caractéristiques:*
+- Zone limitée
+- Administré par une seule personne
+- Bande passante à haut débit pour les périphériques terminaux internes et intermédiaires
+#+end_quote
+*** <<WLAN>>WLAN (Wireless Local Area Network)
+Un WLAN est un [[LAN][LAN]] utilisant la technologie sans fil.
+*** <<WAN>>WAN (World Area Network)
+Un réseau mondial est une *infrastructure de réseau* qui donne accès à d'autres réseaux sur une *vaste zone géographique*, qui est généralement détenue et gérée par une grande entreprise ou un [[ISP][fournisseur de services de télécommunication]].
+#+begin_quote
+*Caractéristiques:*
+- Vaste zone géographique \textcolor{luckydarkgray}{(Villes, états, provinces, pays, continents...)}
+- Administré par plusieurs prestataires de services
+- Liaisons à plus bas débit entre les réseaux locaux
+#+end_quote
+** <<Internet>>Internet
+Ensemble *mondial* de [[Network][réseaux]] privés et publics inter-connectés. (Réseau de réseaux)
+** Intranet et extranet
+*** <<Intranet>>Intranet
+Connexion *privée* de [[LAN][LAN]] et de [[WAN][WAN]] qui appartiennent à une organisation.
+#+begin_quote
+Il offre un accès aux membres de l'entreprise, à ses employés ou à d'autres personnes sous réserve d'une autorisation.
+#+end_quote
+*** <<Extranet>>Extranet
+Accès sûr et sécurisé pour aux personnes qui travaillent pour une organisation différente, mais qui ont besoin d'accéder aux données de l'organisation.
+#+begin_quote
+\color{luckydarkgray}
+Exemples:
+- Entreprise qui donne accès aux fournisseurs et entrepreneurs de l'extérieur
+- Hôpital qui fournit un système de réservation aux médecins afin qu'ils puissent prendre des rendez-vous pour leurs patients
+- Bureau local de l'éducation qui fournit des informations sur le budget et le personnel aux écoles de son district
+\color{black}
+#+end_quote
+#+begin_center
+*\textcolor{luckydarkred}{INTERNET}-------\textcolor{luckydarkblue}{(EXTRANET)}-------\textcolor{luckydarkgreen}{((INTRANET))}*
+
+\textcolor{luckydarkred}{Pas d'accès}--------\textcolor{luckydarkblue}{(Accès restreint)}------\textcolor{luckydarkgreen}{((Accès complet))}
+#+end_center
+
+* Connexions Internet
+** Technologie d'accès à Internet
+*** <<ISP>>ISP (Internet Service Provider)
+*Fournisseur* d'accès à Internet. \textcolor{luckydarkgray}{(Ex: Proximus, Orange...)}
+*** <<WISP>>WISP (Wireless Internet Service Provider)
+Un WISP /(Wireless Internet Services Provider)/ est un [[ISP][fournisseur d'accès Internet]] qui connecte les abonnés à un point d'accès ou à un point d'échange désigné en utilisant des technologies *sans fil* similaires à celles que l'on trouve dans les [[WLAN][réseaux locaux sans fil]] des foyers.
+
+Cette configuration n'est pas très différente de la technologie [[DSL][DSL]] ou du [[Cable][câble]]. La *principale différence* est la connexion entre le maison et l'ISP: Celle-ci se fait sans fil et n'utilise pas de câble.
+** Connexions Internet des bureaux à domicile et des petits bureaux
+*** <<Cable>>Câble
+Utilisation du même câble que celui qui achemine la *télévision* par câble.
+#+begin_quote
+*Avantages:*
+\color{luckydarkgreen}
+- Large bande passante
+- Connexion permanente à l'Internet
+\color{black}
+#+end_quote
+*** <<DSL>>DSL (Digital Subscriber Line)
+Utilisation d'une *ligne téléphonique*.
+#+begin_quote
+*Avantages:*
+\color{luckydarkgreen}
+- Large bande passante
+- Connexion permanente à l'Internet
+- Grande disponibilité
+\color{black}
+#+end_quote
+**** <<ADSL>> *ADSL:*
+/Asymmetric Digital Subscriber Line/
+
+Vitesse descendante *supérieure* à la vitesse ascendante.
+**** <<SDSL>> *SDSL:*
+/Symmetric Digital Subscriber Line/
+
+Vitesse descendante et ascendante *identiques* et élevées.
+
+**** <<VDSL>> *VDSL:*
+/Very high-speed rate Digital Subscriber Line/
+
+Vitesse de transmissoin *très élevée*. \textcolor{luckydarkgray}{(Symmetric ou Asymmetric)}
+*** <<Cellulaire>>Cellulaire
+Utilisation d'un réseau de téléphonie *mobile*.
+#+begin_quote
+*Avantage:*
+
+\textcolor{luckydarkgreen}{Permet une connexion dans une région qui, autrement, n'aurait aucune  connectivité Internet.}
+
+*Inconvénient:*
+
+\textcolor{luckydarkred}{Les antennes paraboliques nécessitent une ligne de vue claire vers le satellite.}
+#+end_quote
+*** <<LigneCommutee>>Ligne commutée
+Utilisation d'une *ligne téléphonique* et d'un *modem*.
+#+begin_quote
+*Avantages:*
+\color{luckydarkgreen}
+- Peu coûteux
+- Utile lors de déplacements
+\color{black}
+*Inconvénient:*
+
+\textcolor{luckydarkred}{Faible bande passante, insuffisante pour les transferts de données importantes}
+#+end_quote
+** Connexion Internet d'entreprise
+*** <<LigneLoueeDediee>>Ligne louées dédiée
+Circuit *réservé* au sein du réseau du [[ISP][fournisseur de service]], qui relie des bureaux géographiquement séparés par un réseau privé de voix et/ou de données. (Généralement loué sur une base mensuelle ou annuelle)
+*** <<Ethernet>>Ethernet (ou Ethernet WAN)
+Étend la technologie d'accès [[LAN][LAN]] au [[WAN][WAN]].
+*** <<BusinessDSL>>Business DSL
+Souvent [[SDSL][SDSL]].
+*** <<Satellite>>Satellite
+Lorsqu'une solution câblée n'est pas disponible, on peut avoir recours à des satellites en orbite autour de la Terre, qui fournissent une connexion Internet sans fil.
+** Réseau convergent
+*** <<ReseauSepare>>Réseaux séparés traditionnels
+Réseaux utilisant des *technologies différentes* pour le transport du signal de communication, et ne *pouvant donc pas communiquer entre eux*. 
+
+Chaque réseau a son propre ensemble de règles et de normes pour garantir le bon fonctionnement des communications.
+
+\textcolor{luckydarkgray}{(Ex: Les ordinateurs, téléphones, services de diffusion, ne peuvent pas communiquer entre eux. On ne peut donc pas voir un appel téléphonique sur un ordinateur)}
+*** <<ReseauConvergent>>Réseaux convergents
+Réseaux *capables de transmettre* des données, de la voix et de la vidéo entre de nombreux types d'*appareils différents* sur la même infrastructure de réseau. Cette infrastructure réseau utilise le même ensemble de /règles/, de /contrats/ et de /normes/ mis en oeuvre.
+
+\textcolor{luckydarkgray}{(Ex: Les ordinateurs, téléphones, services de diffusion, peuvent communiquer entre eux grâce à une règle de contrat standard commune)}
+* Réseaux fiables
+** <<ArchitectureReseau>>Architecture réseau
+Technologies qui soutiennent l'infrastructure et les services programmés et les règles, ou protocoles, qui font circuler les données sur le réseau.
+** <<TolerancePannes>>Tolérance aux pannes
+Limitation du nombre de dispositifs affectés lors d'une panne. Conception de façon à permettre une récupération rapide en cas de panne. Utilisation de la redondance.
+*** <<Redondance>>Redondance
+Utilisation de plusieurs chemins entre la source et la destination d'un message. Ainsi, si un chemin échoue, les messages sont instantanément envoyés sur un autre lien.
+*** <<CommutationPaquets>>Commutation par paquets
+*Fractionnement du trafic en /paquets/* qui sont acheminés sur un réseau partagé. Ainsi, un message unique (tel qu'un e-mail ou un flux vidéo) est fractionné en de nombreux blocs de messages appelés /paquets/, qui contiennent chacun les informations d'adressage nécessaires de la source et de la destination du message. Les routeurs du réseau commutent les paquets en fonction de l'état du réseau à ce moment là, ce qui signifie que *tous les paquets d'un même message peuvent emprunter des chemins très différents pour atteindre la même destination* car le routeur modifie dynamiquement l'itinéraire lorsqu'une connexion est défaillante (--> Redondance).
+** Évolutivité
+*** <<ReseauEvolutif>>Réseau évolutif
+Un réseau évolutif se *développe rapidement* pour prendre en charge les nouveaux utilisateurs et applications, et ceci *sans dégrader les performances* des services auxquels les utilisateurs existant accèdent. En outre, les réseaux sont évolutifs étant donné que les concepteurs font *appel à des normes et à des protocoles reconnus*. Ainsi, les fournisseurs de logiciels et de matériel peuvent se concentrer sur l'amélioration des produits et des services, sans se soucier d'avoir à développer un nouvel ensemble de règles pour s'assurer leur fonctionnement dans le réseau.
+
+\textcolor{luckydarkgray}{(Ex: Il est posible de connecter des utilisateurs supplémentaires, et même des réseaux entiers, à Internet, sans que les performances soient dégradés au niveau de l'utilisateur)}
+** <<QoS>>Qualité de service (QoS)
+Mécanisme essentiel pour *gérer l'encombrement* et assurer une fourniture fiable des contenus à l'ensemble des utilisateurs. Lorsque le volume du trafic est supérieur à ce qui peut être transporté sur le réseau, les appareils gardent les paquets en mémoire jusqu'à ce que des ressources soient disponibles pour les transmettre.
+
+\textcolor{luckydarkgray}{(Ex: Si un utilisateur demande une page web, et un autre est au téléphone, lorsqu'une politique de QoS est mise en oeuvre, le routeur peut gérer le flux de données et le trafic voix en donnant la priorité aux communcations voix en cas de congestion du réseau)}
+
+*Note:* Les pages web se voient généralement affecter une priorité moins élevée. Un appel de voix sur IP (VoIP) devra être prioritaire pour maintenir une expérience utilisateur fluide et ininterrompue.
+*** <<Encombrement>>Encombrement
+Lorsque la demande de bande passante excède la quantité disponible.
+*** <<BandePassante>>Bande passante
+Nombre de bits pouvant être transmis par seconde. (bit/s)
+** <<SecuriteReseau>>Sécurité du réseau
+Les administrateurs de réseaux doivent répondre à deux types de préoccupations en matière de sécurité des réseaux:
+- La sécurité des infrastructures de réseau \textcolor{luckydarkgray}{(Sécurité physique)}
+- La sécurité des informations \textcolor{luckydarkgray}{(Sécurité virtuelle)}
+
+Il y a 3 exigences principales:
+**** <<Confidentialité>> *Confidentialité:* Seuls les destinataires prévus et autorisés peuvent accéder aux données et les lire.
+**** <<Integrite>> *Intégrité:* Garantir aux utilisateurs que les informations n'ont pas été altérées lors de leur transmission, de l'origine à la destination.
+**** <<Disponibilite>> *Disponibilité:* Garantir aux utilisateurs un accès rapide et fiable aux services de données.
+* Tendances des réseaux
+Avec l'arrivée de nouvelles technologies et de nouveaux appareils sur le marché, les entreprises et les consommateurs doivent en permanence s'adapter à un environnement en constante évolution. Il existe plusieurs nouvelles tendances relatives au réseau qui vont affecter les entreprises et les consommateurs.
+** <<BYOD>>BYOD (Bring Your Own Device)
+Le BYOD donne aux utilisateurs finaux la liberté d'utiliser des outils personnels pour accéder aux informations et communiquer à travers un réseau d'entreprise ou de campus. C'est ce qu'on appelle le "Bring Your Own Device". \textcolor{luckydarkgray}{(--> "Apporte Ton Propre Appareil")}
+** <<CollaborationEnLigne>>Collaboration en ligne
+C'est le fait de travailler avec une ou plusieurs autres personnes sur un projet commun. Ceci offre un moyen de se connecter, d'interagir et d'atteindre des objectifs instantanément.
+** <<CommunicationVideo>>Communication vidéo
+Outil puissant pour communiquer avec d'autres utilisateurs à distance, tant u niveau régional qu'international. La vidéo devient une condition essentielle pour collaborer efficacement à mesure que les entreprises se développent au-delà des frontières géographiques et culturelles.
+** <<CloudComputing>>Cloud computing
+Le cloud computing nous permet de stocker des fichiers personnels, et même de sauvegarder un disque entier sur des serveurs via l'Internet, grâce aux [[DataCenter][centres de données]].
+
+Il existe 4 principaux types de clouds:
+**** <<CloudPublic>> *Cloud public*
+
+Services mis à la disposition du grand public via Internet, pouvant être gratuits ou payants.
+**** <<CloudPrive>> *Cloud privé*
+
+Services destinés à une organisation ou une entité spécifique.
+**** <<CloudHybride>> *Cloud hybride*
+
+Constitué de deux ou plusieurs clouds, où chaque partie reste un objet distinct, mais où les deux sont reliés par une architecture unique. \textcolor{luckydarkgray}{(Ex: Une partie privée, et une partie publique)}
+**** <<CloudCommunautes>> *Cloud de communautés*
+
+Créé pour une utilisation exclusive par des entités ou des entreprises spécifiques, semblable à un environnement de cloud public, mais offrant les niveaux de sécurité, de confidentialité et de conformité réglementaire d'un cloud privé.
+** <<TendanceTechnologiqueDomestique>>Tendances technologiques domestiques
+Celles-ci n'affectent pas seulement la façon dont nous communiquons au travail et à l'école, mais elles modifient également de nombreux aspects de la maison. les dernières tendances pour la maison incluent les /technologies domestiques intelligents/.
+
+*Technologies domestiques intelligentes:* Celles-ci s'intègrent dans les appareils ménagers quotidiens, qui peuvent ensuite se connecter à d'autres appareils pour les rendre plus /"intelligents"/ ou /automatisés/.
+
+Les technologies domestiques intelligents sont en cours de développement et s'intègreront bientôt à toutes les pièces de la maison.
+
+La technologie domestique intelligente deviendra de plus en plus courant à mesure que les réseaux domestiques et la technologie de l'Internet à haut débit se développeront.
+
+\textcolor{luckydarkgray}{(Ex: Four programmable afin de déterminer certaines heures et températures en fonction de vos disponibilités et des aliments utilisés, avec possibilité de recevoir une notification sur un autre appareil lorsque le repas est prêt.}
+** <<ReseauCourantElectrique>>Réseau sur courant électrique
+Utilisation du *câblage électrique* existant pour connecter les appareils. Le réseau sur courant porteur transmet des informations en envoyant les données sur des *fréquences spécifiques*. Ainsi, les périphériques peuvent se connecter au [[LAN][LAN]] en utilisant n'importe quelle prise de courant.
+
+Aucun câble de données n'a besoin d'être installé, et il y a peu (ou pas) d'électricité supplémentaire utilisée.
+
+La mise en réseau par courant électrique n'est pas un substitut au câblage dédié dans les réseaux de données, toutefois, elle constitue une alternative lorsque les câbles de réseau de données ou les communications sans fil ne sont pas possibles ou efficaces.
+** <<HautDebitSansFil>>Haut débit sans fil
+Celle-ci utilise la même [[Cellulaire][technologie cellulaire]] qu'un téléphone intelligent. Une antenne est installée à l'extérieur de la maison pour offrir une connectivité avec ou *sans fil* aux périphériques à domicile.
+
+Dans de nombreuses régions, le haut débit sans fil domestique est en concurrence avec la technologie [[DSL][DSL]] et le [[Cable][câble]].
+* <<SecuriteReseau>>Sécurité du réseau
+** <<MenacesSecurite>>Menaces de sécurité
+La sécurité des réseaux fait partie intégrante des réseaux informatiques, que le réseau se trouve dans un foyer avec une seule connexion à l'Internet ou qu'il s'agisse d'une entreprise comptant des millions d'utilisateurs.
+
+La sécurisation d'un réseau implique des protocoles, des technologies, des dispositifs, des outils et des techniques afin de protéger les données et d'*atténuer les menaces*. Ces risques ou menaces peuvent être *externes* ou *internes*.
+*** Menaces internes
+Violations par la faute d'utilisateurs *internes du réseau*.
+
+En raison du développement des stratégies [[BYOD][BYOD]], les données d'entreprises sont beaucoup plus vulnérables.
+#+begin_quote
+\color{luckydarkgray}
+Exemples:
+- Perte ou vol d'un périphérique
+- Mauvaise utilisation d'un périphérique
+- Employé malveillant
+\color{black}
+#+end_quote
+*** Menaces externes
+Violations par la faute d'utilisateur *externes au réseau* (venant Internet).
+**** <<Virus>> *Virus, vers et chevaux de Troie:*
+Logiciels malveillants et code arbitraire s'exécutant sur un périphérique utilisateur.
+**** <<Spyware>> *Spyware et adware:*
+Types de logiciels installés sur l'appareil d'un utilisateur. Ce logiciel *recueille* alors secrètement des *informations* sur l'utilisateur.
+**** <<JourZero>> *Attaques du jour zéro:*
+Appelées aussi /attaques de l'heure zéro/, elles se produisent le *premier jour* où une vulnérabilité est connue.
+**** <<ActeursMenace>> *Attaques des acteurs de menace:*
+Une personne malveillante attaque les *appareils* des utilisateurs ou les *ressources* du réseau.
+**** <<DoS>> *DoS (Denial of Service attack):*
+Ces /attaques par déni de service/ *ralentissent* ou *bloquent* les applications et les processus sur un périphérique réseau.
+**** *Interception et vol de données:*
+Cette attaque permet de *capturer des informations privées* sur le réseau d'une organisation.
+**** *Usurpation d'identité:*
+Cette attaque consiste à *voler les identifiants* de connexion d'un utilisateur afin d'accéder à des données privées.
+** <<SolutionsSecurite>>Solutions de sécurité
+Il n'existe pas de solution unique capable de protéger le réseau contre toutes les menaces existantes. Pour cette raison, la sécurité doit être implémentée en *plusieurs couches* et faire appel à *plusieurs solutions* de sécurité.
+*** Sécurité d'un réseau domestique
+La mise en place de la /sécurité d'un réseau domestique/ est habituellement plutôt simple.
+
+Généralement elle est implémentée sur les *appareils terminaux*, ainsi qu'au *point de connexion à l'Internet*, et on peut même compter sur les services contractuels d'[[ISP][ISP]].
+**** <<Antivirus>> *Antivirus et antispyware:*
+Ces applications aident à protéger les terminaux contre l'infection par des logiciels malveillants.
+**** *Filtrage par pare-feu:*
+Blocage des accès non autorisés à l'entrée et à la sortie du réseau. Il peut s'agir d'un système de [[Firewall][pare-feu]] basé sur l'hôte qui empêche tout accès non autorisé au dispositif final, ou d'un service de filtrage de base sur le routeur domestique pour empêcher tout accès non autorisé du monde extérieur vers le réseau.
+*** Sécurité d'un réseau d'entreprise
+La mise en place de la /sécurité d'un réseau d'entreprise/ implique généralement de *nombreux composants intégrés* dans le réseau afin de contrôler et de filtrer le trafic.
+
+Les réseaux d'entreprises utilisent un antivirus, un antispyware et un filtrage de pare-feu, mais ils ont également d'autres exigences de sécurité:
+**** *Systèmes de pare-feu dédiés:*
+Ceux-ci offrent des capacités de [[Firewall][pare-feu]] plus avancées qui peuvent filtrer de *grandes quantités de trafic* avec une plus grande granularité.
+**** <<ACL>> *ACL (Access Control List):*
+Les listes de contrôle d'accès permettent de filtrer d'avantage l'accès et l'acheminement du trafic en fonction des [[IPAddress][adresses IP]] et des applications.
+**** <<IPS>> *IPS (Intrusion Prevention System):*
+Les /systèmes de prévention d'intrusion/ identifient les menaces qui se répandent rapidement, comme les attaques de type [[JourZero][jour zéro]].
+**** *VPN:*
+Les [[VPN][VPN]] fournissent un accès sécurisé à une organisation pour les travailleurs à distance.
+
+* <<OS>>OS (Operating System)
+Un /système d'exploitation/ est un ensemble de programmes qui dirige l'utilisation des ressources d'un ordinateur par des logiciels applicatifs.
+
+Le système d'exploitation est le logiciel :
+- Principal car il permet à l'ordinateur et aux programmes de fonctionner
+- Qui se lance en second après le firmware (/programme d'amorçage/ ou /bootloader/) exécuté lors de la mise en marche de l'ordinateur.
+
+Tous les *périphériques finaux* et *réseau* requièrent un /système d'exploitation/.
+** Objectifs d'un OS
+Les [[OS][OS]] réseau sont similaires aux OS d'un ordinateur classique.
+
+Grâce à un [[GUI][GUI]], l'*OS d'un PC* permet à l'utilisateur de procéder aux opérations suivantes:
+- Utiliser une souris pour faire des sélections ou exécuter des programmes
+- Entrer des commandes textuelles
+- Afficher des images sur un écran
+Un *OS réseau* utilisant un [[CLI][CLI]] permet à un technicien réseau d'effectuer les opérations  suivantes:
+- Utiliser un clavier pour exécuter des programmes réseau basés sur *CLI*
+- Utiliser un clavier pour entrer des commandes textuelles
+- Afficher des images sur un écran
+** <<Kernel>>Kernel
+Le /noyau/ d'un OS est sa partie qui assure la *communication* entre le *matériel* informatique et les *logiciels*, et qui gère le mode d'utilisation des ressources matérielles pour satisfaire la configuration logicielle.
+** Interpréteur de commandes
+L'/interpréteur de commandes/ d'un OS est un interface qui permet aux utilisateurs de demander des tâches spécifiques à partir de l'ordinateur. Ces requêtes peuvent être effectuées via l'interface *CLI* /(Command Line Interface)/ ou *GUI* /(Graphical User Interface)/.
+
+Les *GUI* ne disposent pas toujours de toutes les fonctionnalités disponibles dans le *CLI*, et elles peuvent également tomber en panne ou simplement ne pas fonctionner correctement. C'est pourquoi l'accès aux périphériques réseau se fait habituellement vie le *CLI*.
+* <<UI>>UI (User Interface)
+** <<CLI>>CLI (Command Line Interface)
+L'/interface en ligne de commande/ est le moyen *textuel* utilisé par les utilisateurs afin d'accéder à l'*interpréteur de commandes*.
+#+begin_quote
+Nécessite très *peu de ressources* pour fonctionner et offre une grande *stabilité* par rapport au *GUI*, cependant, l'utilisateur doit connaître la structure de commandes sous-jacente qui contrôle le système.
+#+end_quote
+** <<GUI>>GUI (Graphical User Interface)
+L'/interface graphique/ permet aux utilisateurs d'interagir avec le système à l'aide d'un environnement utilisant des *éléments graphiques* /(icônes, menus, fenêtres...)/. \textcolor{luckydarkgray}{(Ex: Windows, MacOS, KDE...)}
+#+begin_quote
+Plus convivial que le *CLI* et ne nécessite pas de connaître la structure de commandes sous-jacente qui contrôle le système. En revanche, le *GUI* est moins fiable et plus lent que le *CLI*.
+#+end_quote
+* Méthodes d'accès
+Un [[Switch][commutateur]] transmet le trafic par défaut et n'a *pas besoin* d'être explicitement configuré pour fonctionner.
+
+\textcolor{luckydarkgray}{(Ex: Deux hôtes configurés connectés au même nouveau commutateur seraient en mesure de communiquer)}
+
+Quel que soit le comportement par défaut d'un nouveau commutateur, *tous* les commutateurs doivent être *configurés* et *sécurisés*.
+** <<AccesConsole>>Console
+[[PortPhysique][Port]] de gestion permettant un accès *hors réseau* à un périphérique. L'accès hors bande désigne l'accès via un canal de gestion dédié qui est utilisé uniquement pour la maintenance des périphériques.
+
+*Avantage:* \textcolor{luckydarkgreen}{Le périphériques est accessible même si aucun service réseau n'a été configuré.}
+** <<SSH>>SSH (Secure Shell)
+Moyen d'établir *à distance* une connexion [[CLI][CLI]] *sécurisée* via une interface virtuelle sur un réseau. Les connexions SSH requièrent des *services réseau actifs* sur le périphériques, notamment une interface active possédant une adresse.
+** <<Telnet>>Telnet
+Moyen *non sécurisé* d'établir une connexion [[CLI][CLI]] à distance via une interface virtuelle sur un réseau. Contrairement à /SSH/, /Telnet/ fournit une connexion qui n'est *pas sécurisée ni cryptée*, et ne doit donc être utilisé que dans un environnement de travaux pratiques.
+
+Les informations d'authentification des utilisateurs, les mots de passe et les commandes sont envoyés sur le réseau *en clair*.
+** <<EmulationTerminal>>Programmes d'émulation de terminal
+Programme permettant de se *connecter* à un périphérique réseau via une connexion série sur un port de [[AccesConsole][console]] ou via une connexion [[SSH][SSH]] ou [[Telnet][Telnet]].
+
+\textcolor{luckydarkgray}{(Ex: PuTTY, Tera Term, SecureCRT...)}
+
+Ceux-ci permettent d'*améliorer la productivité* grâce à différentes fonctionnalités comme la *personnalisation* de la taille des fenêtres, de la taille des polices ou des jeux de couleurs.
+* Utilisation de l'IOS de Cisco via le CLI
+** Mode privilégié
+Par mesure de sécurité, le logiciel Cisco IOS sépare l'accès à la gestion en deux modes de commande:
+- Mode d'exécution *utilisateur* avec *accès limité* aux commandes \textcolor{luckydarkgray}{(Symbole '>')}
+- Mode d'exécution *privilégié* avec *accès complet* aux commandes \textcolor{luckydarkgray}{(Symbole '\#')}
+#+begin_quote
+/Commande pour entrer en mode privilégié:/ =enable=.
+
+/Commande pour revenir en mode utilisateur:/ =disable=.
+#+end_quote
+** Mode de configuration globale
+Pour *configurer* un périphérique, l'utilisateur doit passer en mode de *configuration globale*. Celui-ci affecte le fonctionnement du périphérique dans son ensemble. Ce mode se reconnaît à l'invite de commande se terminant par *\text{(config)\#}* après le nom de l'appareil. \textcolor{luckydarkgray}{(Ex: Switch(config)\#)}
+
+Une fois le mode de configuration globale activé, l'utilisateur a accès à des *sous-modes* de configuration. Les deux sous-modes de configuration les plus courants sont ceux-ci:
+- Mode de configuration *en ligne* \textcolor{luckydarkgray}{(Via Console, SSH, Telnet ou AUX)}
+- Mode de configuration d'*interface* \textcolor{luckydarkgray}{(Configuration de l'interface réseau d'un port de Switch ou routeur)}
+
+Lors de l'utilisation d'un [[CLI][CLI]], le mode actif est reconnaissable à son invite de commandes unique.
+#+begin_center
+=Périphérique (mode-mode) mode=
+#+end_center
+\color{luckydarkgray}
+Exemples:
+- *\text{Switch(config-line)\#}* /= Configuration *en ligne* de *Switch* en mode *privilégié*/
+- *\text{Foo(config-if)\#}* /= Configuration *interface* de *Foo* en mode *privilégié*/
+\color{black}
+#+begin_quote
+/Commande pour entrer en mode de configuration globale:/ =configure terminal=.
+
+/Commande pour sortir d'un mode de configuration:/ =exit=.
+
+/Commande pour quitter tous les modes de configuration:/ =end= /ou/ =Ctrl+Z=.
+#+end_quote
+#+begin_quote
+\color{luckydarkgray}Exemple:
+- =Switch>=
+- =Switch> enable=
+- =Switch#=
+- =Switch# configure terminal=
+- =Switch(config)#=
+- =Switch(config)# line console 0=
+- =Switch(config-line)#=
+- =Switch(config-line)# exit=
+- =Switch(config)#=
+- =Switch(config)# interface vlan 1=
+- =Switch(config-if)#=
+- =Switch(config-if)# end= /( ou/ =CTRL+Z= /)/
+- =Switch#=
+- =Switch# disable=
+- =Switch>=
+\color{black}
+#+end_quote
+** Structure des commandes IOS de base
+Les commandes de base sont formées ainsi:
+#+begin_center
+\textcolor{luckydarkred}{Invite} + \textcolor{luckydarkgreen}{Commande} + \textcolor{luckydarkgray}{'espace'} + \textcolor{luckydarkblue}{Mot-clé ou argument}
+#+end_center
+#+begin_quote
+\color{luckydarkgray}Exemples:
+- \textcolor{luckydarkred}{Switch>} \textcolor{luckydarkgreen}{show} \textcolor{luckydarkblue}{ip protocol}
+- \textcolor{luckydarkred}{Switch\#} \textcolor{luckydarkgreen}{ping} \textcolor{luckydarkblue}{192.168.10.5}
+#+end_quote
+
+Un *mot-clé* est un paramètre *spécifique* défini dans l'[[OS][OS]]. \textcolor{luckydarkgray}{(Ex: ip protocol)}
+
+Un *argument* n'est pas défini dans l'OS, c'est une valeur ou variable définie par l'utilisateur. \textcolor{luckydarkgray}{(Ex: 192.168.10.5)}
+** Conventions pour la configuration des noms d'hôte
+Par convention, un nom d'hôte doit respecter les règles suivantes:
+- Débuter par une lettre
+- Ne pas contenir d'espaces
+- Se terminer par une lettre ou un chiffre
+- Ne comporter que des lettres, des chiffres et des tirets
+- Comporter moins de 64 caractères
+
+#+begin_quote
+\color{luckydarkgray}
+Exemple: (attribution du nom "=Sw-Floor-1=" au périphérique =Switch=)
+- =Switch\# configure terminal=
+- =Switch(config)\#=
+- =Switch(config)\# hostname Sw-Floor-1=
+- =Sw-Floor_1\#=
+\color{black}
+#+end_quote
+** Configurer les mots de passe
+Pour *sécuriser* l'accès en mode d'exécution *utilisateur*, il faut utiliser les commandes suivantes:
+- =configure terminal= \textcolor{luckydarkgray}{(Entrer dans le mode de configuration globale)}
+- =line console 0= \textcolor{luckydarkgray}{(Accès à la première interface de la console de ligne, souvent la seule disponible)}
+- =password azerty= \textcolor{luckydarkgray}{(Configuration du mot de passe "azerty")}
+- =login= \textcolor{luckydarkgray}{(Activation de l'accès d'exécution utilisateur)}
+- =end= \textcolor{luckydarkgray}{(Quitter tous les modes de configuration)}
+
+La console d'accès requiert à présent le mot de passe =azerty= avant d'accéder au mode d'exécution utilisateur.
+
+Pour *sécuriser* l'accès en mode *privilégié*, il faut utiliser les commandes suivantes:
+- =configure terminal= \textcolor{luckydarkgray}{(Entrer dans le mode de configuration globale)}
+- =enable secret azerty= \textcolor{luckydarkgray}{(Configuration du mot de passe "azerty")}
+- =exit= \textcolor{luckydarkgray}{(Quitter le mode de configuration)}
+
+Les lignes *VTY* (virtual terminal) activent l'accès *à distance* au périphérique en utilisant [[SSH][SSH]] ou [[Telnet][Telnet]].
+
+Pour sécuriser les lignes *VTY*,il faut utiliser les commandes suivantes:
+- =configure terminal= \textcolor{luckydarkgray}{(Entrer dans le mode de configuration globale)}
+- =line vty 0 15= \textcolor{luckydarkgray}{(Entrer dans le mode de configuration de VTY ligne)}
+- =password azerty= \textcolor{luckydarkgray}{(Configuration du mot de passe "azerty")}
+- =login= \textcolor{luckydarkgray}{(Activation de l'accès VTY)}
+- =end= \textcolor{luckydarkgray}{(Quitter tous les modes de configuration)}
+** Chiffrer les mots de passe
+Pour *chiffrer* tous les mots de passe en texte clair, il faut utiliser les commandes suivantes:
+- =configure terminal= \textcolor{luckydarkgray}{(Entrer dans le mode de configuration globale)}
+- =service password-encryption= \textcolor{luckydarkgray}{(Activation du chiffrement des mots de passe non chiffrés)}
+- =end= \textcolor{luckydarkgray}{(Quitter le mode de configuration globale)}
+- =show running-config= \textcolor{luckydarkgray}{(Vérifier que les mots de passe sont maintenant chiffrés)}
+** Fichiers de configuration
+*Deux fichiers* système stockent la *configuration* des périphériques:
+- =startup config= \textcolor{luckydarkgray}{(Fichier stocké dans la mémoire non volatile, et donc, disponibles lors du démarrage de la machine)}
+- =running-config= \textcolor{luckydarkgray}{(Fichier stocké dans la mémoire RAM, et donc, perdue lors de l'extinction de la machine)}
+En cas de redémarrage ou de panne de courant, toutes les modifications de la configuration non enregistrées seront *perdues*.
+
+Pour enregistrer les configurations dans le fichier "startup-config", il faut utiliser la commande suivant:
+#+begin_center
+=copy running-config startup-config=
+#+end_center
+Pour restaurer l'appareil dans sa configuration précédente (startup-config), il faut utiliser la commande suivante:
+#+begin_center
+=reload=
+
+\textcolor{luckydarkgray}{(Cette commande impliquera une brève interruption du réseau)}
+#+end_center
+Pour supprimer toutes les configurations, il faut utiliser les commandes suivantes:
+- =erase startup-config= \textcolor{luckydarkgray}{(Supprimer le fichier "startu-config")}
+
+- =reload= \textcolor{luckydarkgray}{(Supprimer le fichier "running-config" et charger la configuration initiale d'origine)}
+** Enregistrer une configuration dans un fichier texte
+Pour *enregistrer* une configuration dans un *fichier texte*, il faut utiliser un [[EmulationTerminal][logiciel d'émulation de terminal]] \textcolor{luckydarkgray}{(Ex: PuTTY)} connecté à un [[Switch][Switch]].
+- *Ouvrir* le logiciel d'émulation de terminal
+- *Activer l'enregistrement* dans le logiciel d'émulation, et choisir un emplacement de fichier de sortie
+- *Exécuter* la commande "=show running-config=" ou "=show startup-config=" dans l'invité de commande d'exécution privilégiée \textcolor{luckydarkgray}{(Le texte affiché dans le fenêtre du terminal est alor placé dans le fichier configuré à la deuxième étape)}
+- *Désactiver l'enregistrement* dans le logiciel d'émulation
+
+Pour *restaurer* un fichier de configuration sur un périphérique:
+- Passer en mode de *configuration globale* sur le périphérique
+- *Copier-Coller* le fichier texte dans la fenêtre du terminal connecté
+
+\textcolor{luckydarkgray}{(Le texte contenu dans le fichier est appliqué sous forme de commandes dans l'environnement CLI et devient la configuration en cours du périphérique)}
+** Configuration de l'interface de commutateur virtuelle
+Pour accéder à distance au commutateur, une [[IPAddress][adresse IP]] et un [[SubnetMask][masque de sous-réseau]] doivent être configurés.
+* TODO Suite en cours de création...
+* Vocabulaire de base
+** <<OSIModel>>OSI Model (Open Systems Interconnection)
+Le modèle OSI est une *norme de communication*, en réseau, de tous les systèmes informatiques. C'est un modèle de communications entre ordinateurs proposé par l'ISO (Organisation internationale de normalisation) qui décrit les fonctionnalités nécessaires à la communication et l'organisation de ces fonctions.
+#+caption: Modèle OSI [[https://fr.wikipedia.org/wiki/Mod%C3%A8le_OSI#Architecture_en_couches][(Wikipédia)]]
+file:ModeleOsi-Schema.png
+** <<Protocol>>Protocol
+Ensemble de *règles* qui régissent les *échanges de données* ou le comportement collectif de processus ou d'ordinateurs en réseaux ou d'objets connectés.
+** <<UploadDownload>>Téléchargement ascendant/descendant
+**** *Ascendant:* Envoi de données. \textcolor{luckydarkgray}{(Upload)}
+**** *Descendant:* Réception de données. \textcolor{luckydarkgray}{(Download)}
+
+** <<Paquet>>Packet
+Afin de transmettre un message d'une machine à une autre sur un réseau, celui-ci est *découpé* en plusieurs paquets transmis séparément.
+
+Un paquet inclut un en-tête (en anglais, header), comprenant les informations nécessaires pour acheminer et reconstituer le message, et encapsule une partie des données. \textcolor{luckydarkgray}{(Ex: Le paquet IP)}
+
+Le paquet ne doit pas être confondu avec la [[Frame][trame]], correspondant à la couche liaison (couche 2 du [[OSIModel][modèle OSI]]). \textcolor{luckydarkgray}{(Ex: la trame Ethernet)}
+** <<Frame>>Frame
+Dans les réseaux informatiques, une /trame/ est la *structure de base* d'un ensemble de données encadré par des bits de début /(drapeau)/ et des bits de fin /(fanion)/.
+
+Une trame est composée
+
+- D'un *header* /(en-tête)/
+- Des *données* que l'on veut transmettre
+- D'un *trailer* /(postambule)/. Un [[Paquet][paquet]] (dans le cas d'IP par exemple) ne peut transiter directement sur un réseau : il est *encapsulé* comme données à l'intérieur d'une /trame/ qui elle-même finit en un *enchaînement de bits* qui circule sur le support physique
+
+Il existe trois versions différentes (dont une qui a été abandonnée):
+
+**** +Ethernet Type I (créée par Xerox) abandonnée à l'heure actuelle+
+**** Ethernet Type II (propriétaire Intel, Digital, Xerox)
+**** IEEE 802.3.
+
+** <<MACAddress>>MAC (Media Access Control)
+Une /adresse MAC/, parfois nommée *adresse physique*, est un *identifiant physique* et *unique au monde*, stocké dans une *carte réseau* ou une interface réseau similaire.
+
+*Toutes* les cartes réseau ont une adresse MAC, même celles contenues dans les PC et autres appareils connectés. \textcolor{luckydarkgray}{(Ex: Tablette tactile, smartphone, consoles de jeux, réfrigérateurs, montres ...)}
+
+Une *adresse MAC-48* est constituée de *48 bits* /(6 octets)/ et est généralement représentée sous la forme *hexadécimale* en séparant les octets par un double point. \textcolor{luckydarkgray}{(Ex: 5E:FF:56:A2:AF:15)}
+#+begin_quote
+*Ces 48 bits sont répartis de la façon suivante:*
+- *1 bit* I/G : indique si l'adresse est individuelle, auquel cas le bit sera à 0 (pour une machine unique, unicast) ou de groupe (multicast ou broadcast), en passant le bit à 1
+- *1 bit* U/L : 0 indique si l'adresse est universelle (conforme au format de l'IEEE) ou locale, 1 pour une adresse administrée localement
+- *22 bits* réservés : tous les bits sont à zéro pour une adresse locale, sinon ils contiennent l'adresse du constructeur
+- *24 bits* : adresse unique (pour différencier les différentes cartes réseaux d'un même constructeur)
+#+end_quote
+Les concepteurs d'Ethernet ayant utilisé un adressage de 48 bits, il existe potentiellement 2^{48} d'adresses MAC possibles /(environ 281 000 milliards)/. L'IEEE donne des préfixes de 24 bits (appelés Organizationally Unique Identifier - OUI) aux fabricants, ce qui offre 2^{24} d'adresses MAC disponibles par préfixe /(environ 16 millions)/.
+** <<SubnetMask>>Subnet mask
+Le /masque de sous réseau/ est le masque distinguant les *bits* d'une [[IPAddress][adresse IPv4]] utilisés pour identifier le *sous-réseau* de ceux utilisés pour identifier l'[[Host][hôte]]. L'adresse du *sous-réseau* est obtenue en appliquant l'*opérateur* =ET= binaire entre l'adresse IPv4 et le /masque de sous-réseau/. L'adresse de l'hôte à l'intérieur du sous-réseau est quant à elle obtenue en appliquant l'*opérateur* =ET= entre l'adresse IPv4 et le *complément à un* du masque.
+
+Un masque de sous réseau ne pourra donc *jamais* être composé d'un =0= suivi d'un =1=. Uniquement une suite de =1= suivie d'une suite de =0=.
+
+(+=0.250.250.250=+ n'est *pas* un masque de sous réseau valide, par contre =250.250.250.0= est valide)
+#+begin_quote
+\color{luckydarkgray}
+Exemple:
+#+attr_latex: :align c|c|c|c
+|--------------------------+-----------------+---------------+-------------------------------------------|
+| /Adresse IPv4/           | =192.168.1.2=   | =192.168.1.2= | /Adresse IPv4/                            |
+| /&/                      | =&=             | =&=           | /&/                                       |
+| /Masque de sous réseau/  | =255.255.255.0= | =0.0.0.255=   | /Complément à 1 du masque de sous réseau/ |
+|--------------------------+-----------------+---------------+-------------------------------------------|
+| /=/                      | ===             | ===           | /=/                                       |
+| /Adresse de sous réseau/ | =192.168.1.0=   | =0.0.0.2=     | /Adresse de l'hôte dans le sous réseau/   |
+|--------------------------+-----------------+---------------+-------------------------------------------|
+
+||
+Soit en binaire:
+
+#+attr_latex: :align |c|c|
+|---------------------------------------+---------------------------------------|
+| =11000000.10101000.00000001.00000010= | =11000000.10101000.00000001.00000010= |
+| =&=                                   | =&=                                   |
+| =11111111.11111111.11111111.00000000= | =00000000.00000000.00000000.11111111= |
+|---------------------------------------+---------------------------------------|
+| ===                                   | ===                                   |
+| =11000000.10101000.00000001.00000000= | =00000000.00000000.00000000.00000010= |
+|---------------------------------------+---------------------------------------|
+#+end_quote
+** <<Routing>>Routing
+Le /routage/ est le *mécanisme* par lequel des *chemins* sont *sélectionnés* dans un réseau pour acheminer les données d'un expéditeur jusqu'à un ou plusieurs destinataires. Le /routage/ est une tâche exécutée dans de nombreux réseaux, tels que le réseau téléphonique, les réseaux de données électroniques comme Internet, et les réseaux de transports. Sa performance est importante dans les réseaux décentralisés, c'est-à-dire où l'information n'est pas distribuée par une seule source, mais échangée entre des agents indépendants. C’est grâce à ça que par exemple les mails sont envoyés aux bons destinataires.
+*** <<Unicast>>Unicast
+#+attr_latex: :width 50px :center nil
+file:Unicast-Schema.png Il n'existe qu'*une association* entre une adresse réseau et le *point d'arrivée final* : chaque adresse de destination identifie de manière unique *un seul receveur final*.
+*** <<Anycast>>Anycast
+#+attr_latex: :width 50px :center nil
+file:Anycast-Schema.png Technique d'adressage et de routage permettant de rediriger les données vers le serveur informatique le « *plus proche* » ou le « *plus efficace* » selon la politique de routage.
+*** <<Multicast>>Multicast
+#+attr_latex: :width 50px :center nil
+file:Multicast-Schema.png Forme de diffusion d'un émetteur (source unique) vers un *groupe de récepteurs*. Les termes /diffusion multipoint/ ou /diffusion de groupe/ sont également employés.
+
+Les récepteurs intéressés par les messages adressés à ce groupe doivent s'inscrire à ce groupe. Ces abonnements permettent aux switchs et routeurs intermédiaires d'établir une route depuis le ou les émetteurs de ce groupe vers les récepteurs de ce groupe.
+#+begin_quote
+*Avantages:*
+\color{luckydarkgreen}
+- Plus efficace que l'unicast pour diffuser des contenus simultanément vers une large audience. En streaming unicast, on enverrait l'information autant de fois qu'il y a de connexions, d'où gaspillage de temps, de ressources du serveur et surtout de bande passante. Au contraire, en multicast, chaque paquet n'est émis qu'une seule fois et sera routé vers toutes les machines du groupe de diffusion sans que le contenu ne soit dupliqué sur une quelconque ligne physique
+- Le multicast permet de développer des applications interactives de groupe, comme la visioconférence, le partage de tableau...
+\color{black}
+*Inconvénients:*
+\color{luckydarkred}
+- Ne permet pas le contrôle de la participation au groupe par la source : la source ne peut déterminer ni qui participe, ni qui peut participer ou non au groupe
+- L'identification et l'authentification des participants doivent être prises en charge au niveau applicatif si elles sont souhaitées
+\color{black}
+#+end_quote
+*** <<Broadcast>>Broadcast
+#+attr_latex: :width 50px :center nil
+file:Broadcast-Schema.png Technique d'adressage et de routage permettant de rediriger les données vers *toutes* les machines connectées au réseau.
+** <<Firewall>>Firewall
+Un pare-feu est un logiciel et/ou un matériel permettant de faire respecter la politique de sécurité du réseau, celle-ci définissant quels sont les types de communications autorisés sur ce réseau informatique. Il surveille et contrôle les applications et les flux de données ([[Paquet][paquets]]). 
+** <<Gateway>>Gateway
+Une /passerelle/ est le nom générique d'un dispositif permettant de *relier* deux réseaux informatiques de types différents. \textcolor{luckydarkgray}{(Ex: Un réseau local et le réseau Internet)}
+** <<HUB>>HUB
+Un /concentrateur Ethernet/ est un appareil informatique permettant de *concentrer* les transmissions Ethernet de plusieurs équipements sur un même support dans un réseau informatique local.
+
+Ce dispositif est un *répéteur de données* ne permettant *pas de protection* particulière des données et transmettant les [[Frame][trames]] à toutes les machines connectées (par opposition au [[Switch][commutateur réseau]] qui dirige les données uniquement vers la machine destinataire). Ceci le rend *vulnérable aux attaques* par Analyseur de paquets. Il permet également d'étendre un [[LAN][réseau local]] mais ne permet pas de le transformer en un [[WAN][réseau étendu]].
+
+Le /HUB/ possède deux types de [[PortPhysique][ports]]:
+- Les ports pour la connexion des machines
+- Le port pour extension du réseau auquel se connecte un autre concentrateur (il n'y en a généralement qu'un seul par concentrateur). Ce type de port est identique au précédent à l'exception du câblage qui est inversé (on peut aussi utiliser un câble à connecteur RJ45 croisé pour y connecter un ordinateur supplémentaire).
+** <<Switch>>Switch
+Un /commutateur réseau/ est un équipement qui *relie* plusieurs segments (câbles ou fibres) dans un *réseau* informatique et de télécommunication et qui permet de créer des *circuits virtuels*.
+
+La /commutation/ est un des deux modes de transport de trame au sein des réseaux informatiques et de communication, l'autre étant le *routage*. Dans les [[LAN][réseaux locaux]], il s'agit le plus souvent d'un boîtier disposant de plusieurs ports RJ45 (entre 4 et plusieurs centaines), il a donc la même apparence qu'un [[HUB][concentrateur]].
+
+Contrairement à un [[HUB][concentrateur]], un /commutateur/ ne reproduit pas sur tous les ports chaque trame qu'il reçoit : il sait *déterminer sur quel port* il doit envoyer une [[Frame][trame]], en fonction de l'*adresse de destination* de cette *trame*. Les commutateurs sont souvent utilisés pour remplacer des [[HUB][concentrateurs]] car *ils encombrent moins le réseau*.
+
+#+begin_quote
+*Fonctionnement:*
+
+Le /commutateur/ établit et met à jour une *table*, dans le cas du /commutateur/ pour un réseau [[Ethernet][Ethernet]] il s'agit de la *table d'adresses MAC*, qui lui indique sur quels ports diriger les [[Frame][trames]] destinées à une [[MACAddress][adresse MAC]] donnée, en fonction des adresses MAC source des trames reçues sur chaque [[PortPhysique][port]]. Le commutateur *construit* donc dynamiquement une *table* qui associe numéro de port et adresses MAC. 
+#+end_quote
+** <<DDoS>>DDoS (Distributed Denial of Service attack)
+Une /attaque par déni de service/ (DoS) est une attaque informatique ayant pour but de rendre indisponible un service, d'empêcher les utilisateurs légitimes d'un service de l'utiliser. À l’heure actuelle la grande majorité de ces attaques se font à partir de *plusieurs sources*, on parle alors d'*attaque par déni de service distribuée (DDoS)*.
+
+Il peut s'agir de :
+
+- L’inondation d’un réseau afin d'empêcher son fonctionnement
+- La perturbation des connexions entre deux machines, empêchant l'accès à un service particulier
+- L'obstruction d'accès à un service pour une personne en particulier
+- Le fait d'envoyer des milliards d'octets à une box internet
+
+L'/attaque par déni de service/ peut ainsi *bloquer un serveur* de fichiers, rendre impossible l'accès à un serveur web ou empêcher la distribution de courriel dans une entreprise. 
+** <<VPN>>VPN (Virtual Private Network)
+Le /réseau privé virtuel/ est un système permettant de créer un *lien direct* entre des ordinateurs distants, qui *isole* leurs échanges du reste du trafic se déroulant sur des réseaux de télécommunication publics. 
+
+**** Un VPN permet d'accéder à des ordinateurs distants comme si l'on était connecté au réseau local. Il permet d'avoir un *accès au réseau interne* (réseau d'entreprise, par exemple) ou de créer un *réseau de pairs*.
+
+**** Un VPN dispose généralement aussi d'une [[Gateway][passerelle]] permettant d'accéder à l'extérieur, ce qui permet de *changer l'adresse IP source* apparente de ses connexions. Cela rend plus difficile l'identification et la localisation approximative de l'ordinateur émetteur par le fournisseur de service. Cela permet aussi de contourner les restrictions géographiques de certains services proposés sur Internet. L'utilisation des VPN n'est généralement pas légalement restreinte (sauf en Chine).
+
+Cependant, l'infrastructure de VPN (généralement un serveur) dispose des informations permettant d'identifier l'utilisateur. \textcolor{luckydarkgray}{(Ex: Les sociétés proposant des VPN gratuits ou payants peuvent récolter les données de navigation de leurs clients, ce qui relativise l'anonymat de ces services)}
+
+**** Le VPN permet également de construire des *réseaux overlay*, en construisant un *réseau logique* sur un *réseau sous-jacent*, faisant ainsi abstraction de la topologie de ce dernier. 
