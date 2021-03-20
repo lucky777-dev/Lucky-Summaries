@@ -6,6 +6,126 @@
 
 * Chapitre 1 -- Introduction au calcul des probabilités
 
+** Théorie
+*** Expérience aléatoire
+Processus dont l'issue est aléatoire, c'est à dire soumis au hasard, de telle sorte que le résultat de l'expérience ne puisse pas être connu à l'avance.
+
+\textcolor{luckydarkgray}{(Ex: Lancement d'une pièce de monnaie)}
+
+*** Catégorie d'épreuve \Omega
+Ensemble des issues possibles d'une expérience aléatoire. Cet ensemble est noté \Omega.
+
+\color{luckydarkgray}(Ex: Si on lance une pièce de monnaie, alors \Omega = {Pile, Face})\color{black}
+
+*** Évènement aléatoire
+Une des issues possibles d'une expérience aléatoire, ou plus techniquement un sous-ensemble de \Omega.
+
+\textcolor{luckydarkgray}{(Ex: Si on lance une pièce de monnaie, alors "La pièce tombe sur Pile" est un évènement aléatoire)}
+
+*** Probabilité P(A)
+Nombre réel compris entre 0 et 1 inclus, donnant une mesure de la chance qu'a cet évènement à se réaliser. Si la probabilité vaut 1, on parle d'/évènement certain/, et lorsque la probabilité vaut 0, on parle d'/évènement impossible/. La probabilité de l'évènement aléatoire A est notées P(A). Si la probabilité est la même pour deux évènements distincts, alors ce sont des /évènements équiprobables/.
+
+\color{luckydarkgray}(Ex: Si on lance une pièce de monnaie non truquée, alors P(Pile) = \sfrac{1}{2})\color{black}
+
+*** Probabilité à priori
+P(A) = \(\dfrac{\text{Nombre de cas favorables}}{\text{Nombre de cas équiprobables possibles}}\)
+
+*** Évènements incompatibles
+Évènements ne pouvant pas se produire simultanément.
+
+Ainsi, si A et B sont /incompatibles/, alors *P(A et B) = 0*, et donc, *P(A ou B) = P(A) + P(B)*.
+
+\textcolor{luckydarkgray}{(Ex: Si on lance un dé non truqué, alors P(2) et P(4) sont incompatibles)}
+
+*** Évènements indépendants
+La réalisation d'un évènement n'influence pas la probabilité de réalisation de l'autre.
+
+Ainsi, si A et B sont /indépendants/, alors *P(A | B) = P(A)*.
+
+\textcolor{luckydarkgray}{(Ex: Si on lance deux dés en même temps, alors les deux évènements sont indépendants)}
+
+*** Évènement complémentaire
+\hly{P($\bar A $)} = \textcolor{luckydarkgreen}{1 -- P(A)}
+
+\color{luckydarkgray}(Ex: Si P(A) = \sfrac{1}{3}, alors son évènement complémentaire P($\bar{A}$) = \sfrac{2}{3})\color{black}
+
+*** Addition P(A ou B)
+\hly{P(A ou B)} = \textcolor{luckydarkgreen}{P(A) ou P(B) -- P(A et B)}
+
+= P(A) + P(B) -- ( P(A) * P(B | A) )
+
+*Note:* Si deux évènements sont /\hlc{incompatibles}/ alors \textcolor{luckydarkblue}{P(A et B) = 0}, et la formule se simplifie en \hlc{P(A) + P(B)}.
+
+*** Multiplication P(A et B)
+\hly{P(A et B)} = \textcolor{luckydarkgreen}{P(A) * P(B | A)}
+
+*Note:* Si deux évènements sont /\hlc{ind\'ependants}/ alors \textcolor{luckydarkblue}{P(B | A) = P(B)}, et la formule se simplifie en \hlc{P(A) * P(B)}.
+*** Probabilité conditionnelle P(A | B)
+
+\hly{P(A | B)}
+\color{luckydarkgreen}
+= \(\dfrac{\text{P(A et B)}}{\text{P(B)}}\)
+\color{black}
+
+= \(\dfrac{\text{P(A) * P(B | A)}}{\text{P(B)}}\)
+
+*Note:* Si deux évènements sont /\hlc{ind\'ependants}/ alors \textcolor{luckydarkblue}{P(A et B) = P(A) * P(B)}, et la formule se simplifie en \hlc{P(A)}.
+
+*** Probabilités totales
+Lorsque l'on considère un évènement aléatoire se réalisant avec des probabilités différentes suivant différents cas.
+
+\color{luckydarkgray}
+Ex: La probabilité qu'un bus arrive à l'heure est de 0.9 le week-end, de 0.8 du mardi au jeudi, et de 0.6 le lundi et vendredi. Quelle est la probabilité totale que le bus arrive à l'heure?
+#+begin_quote
+3 cas possibles:
+- P(Bus à l'heure et Week-end) (ou)
+- P(Bus à l'heure et Mardi, Mercredi ou Jeudi) (ou)
+- P(Bus à l'heure et Lundi ou Vendredi)
+#+end_quote
+#+begin_quote
+Donc:
+- P(week-end) * P(Bus à l'heure | Week-end) (ou)
+- P(Mardi, Mercredi ou Jeudi) * P(Bus à l'heure | Mardi, Mercredi ou Jeudi) (ou)
+- P(Lundi ou Vendredi) * P(Bus à l'heure | Lundi ou Vendredi)
+#+end_quote
+Ainsi, P(Bus à l'heure) = (\sfrac{2}{7} * 0.9) + (\sfrac{3}{7} * 0.8) + (\sfrac{2}{7} * 0.6)
+
+= \sfrac{27}{35}
+\color{black}
+
+*** Arbre de probabilités
+#+begin_quote
+Caractéristiques:
+- Les sommets de l'arbre représentent des évènements aléatoires (sauf le premier appelé /racine/)
+- À chaque arête est associée une probabilité
+- Deux évènements issus d'un même sommet sont toujours incompatibles
+- L'ensemble des évènements issus d'un même sommet couvre toutes les possibilités relatives à l'expérience concernée
+- La somme des probabilités associées aux arêtes issues d'un même sommet vaut toujours 1
+#+end_quote
+#+caption: Exemple de relations dans un arbre de probabilité
+#+attr_latex: :width 300px
+file:ArbreProbaRelations.png
+
+*** Système exhaustif d'évènements aléatoires
+Un système d'évènements aléatoires est exhaustif si:
+- Aucun évènement n'est impossible
+- Les évènements sont incompatibles deux à deux
+- La somme des probabilités de tous ses évènements est égale à 1
+
+\color{luckydarkgray}
+Ex:
+- {{1}, {2}, {3}, {4}, {5}, {6}} pour le jet d'un dé à 6 faces
+- {{Pairs}, {Impairs}} pour le jet d'un dé
+- {{Week-end}, {Mardi, Mercredi, Jeudi}, {Lundi, Vendredi}} pour le choix d'un jour de la semaine
+\color{black}
+
+*** Théorème de Bayes
+En probabilité conditionnelle nous avons vu que P(A | B) = \(\dfrac{\text{P(A et B)}}{\text{P(B)}}\)
+
+Le théorème de Bayes nous permet de faire le chemin inverse. Ainsi:
+
+\hly{P(B | A)} = \color{luckydarkgreen}\(\dfrac{P(B) * P(A | B)}{P(A)}\)\color{black}
+
 ** Exercice 3
 
 Un dé est truqué de sorte qu’en le lançant, la probabilité d’obtenir 6 vaut le triple de celle d’obtenir toute autre valeur. Avec ce dé, quelle est la probabilité d’obtenir un point pair ?
@@ -398,10 +518,10 @@ Si les tirages se font sans remise, quelles sont les probabilités d'obtenir:
 4. Une boule rouge en 3ème sachant que les 2 premières sont blanches
 *** Solution (\sfrac{5}{28};\sfrac{9}{140};\sfrac{1}{20};\sfrac{5}{7})
 \color{luckydarkgray}
-=(Voir Figure 1)=
+=(Voir Figure 2)=
 \color{black}
 #+caption: Chapitre 1 Exercice 22 Schéma
-#+attr_latex: :width 100px
+#+attr_latex: :width 150px
 file:1-22.png
 
 **** *P(Trois boules rouges en 3 tirages)*
@@ -441,7 +561,7 @@ On choisit un des deux dés avec une pièce tombant deux fois plus souvent sur p
 
 *** Solution (\sfrac{5}{9};\sfrac{4}{9};\sfrac{5}{9})
 \color{luckydarkgray}
-=(Voir Figure 2)=
+=(Voir Figure 3)=
 \color{black}
 #+caption: Chapitre 1 Exercice 24 Schéma
 #+attr_latex: :width 100px
@@ -476,10 +596,10 @@ Sachant que le baromètre a été vendu dans une région où il pleut en moyenne
 2. Quelle est la probabilité que l'indication du baromètre soit correcte?
 *** Solution (\sfrac{21}{50};\sfrac{37}{50})
 \color{luckydarkgray}
-=(Voir Figure 3)=
+=(Voir Figure 4)=
 \color{black}
 #+caption: Chapitre 1 Exercice 25 Schéma
-#+attr_latex: :width 100px
+#+attr_latex: :width 150px
 file:1-25.png
 **** *P(Affiche Pluie)*
 
@@ -497,4 +617,165 @@ Un patineur participe à une compétition. Deux de ses sauts l'inquiètent. Il n
 2. La probabilité que le patineur rate le deuxième saut sachant que le 1er était réussi
 3. La probabilité que le patineur réussisse les deux sauts
 
-\luckynote{A venir...}{La suite est en cours d'écriture}
+*** Solution (89%;10%;\sfrac{171}{200})
+\color{luckydarkgray}
+=(Voir Figure 5)=
+\color{black}
+
+#+caption: Chapitre 1 Exercice 26 Schéma
+#+attr_latex: :width 150px
+file:1-26.png
+
+**** *P(Deuxième saut réussi)*
+
+= P(Saut1 réussi *et* Saut2 réussi) *ou* P(Saut1 raté *et* Saut2 réussi)
+
+= (95% * 92%) + (5% * 70%) \(\textcolor{luckydarkgreen}{\mathbf{= 89\%}}\)
+
+**** *P(Deuxième saut raté sachant que Premier saut réussi)*
+
+= P(Saut2 raté | Saut1 réussi) \(\textcolor{luckydarkgreen}{\mathbf{= 10\%}}\)
+
+**** *P(Deux sauts réussis)*
+
+= P(Saut1 réussi *et* Saut2 réussi *sachant que* Saut1 réussi)
+
+= 95% * 90% \(\textcolor{luckydarkgreen}{\mathbf{= \sfrac{171}{200}}}\)
+
+** Exercice 27
+Marcel travaille 5 jours par semaine. Chaque jour, il quitte habituellement son bureau vers 17h et se rend à pied à son domicile. Quand il passe devant le Café des Sports, il y aperçoit une fois sur deux son copain Antoine avec lequel il ne manque jamais de déguster une de ses bières préférées. Plus loin, au Café de la Gare, il rencontre également une fois sur deux son autre copain Émile, avec lequel il ne peut non plus refuser de faire la causette devant un autre verre. Évidemment, les rencontres avec Antoine ou Émile sont indépendantes les unes des autres: Parfois il rencontre les deux, parfois un seul, et parfois aucun des deux. Enfin, quand il arrive devant chez lui, il sort de sa poche un trousseau de clés, dont une seule ouvre la porte d'entrée.
+
+Quand Marcel n'a rien bu, ses pensées sont lucides et il ouvre la porte immédiatement avec la bonne clé.
+
+Quand il a bu un verre de bière, il ne reconnaît pas directement la bonne clé, ainsi il les essaie toute les trois une par une jusqu'à ce que la porte s'ouvre.
+
+Enfin, quand il a bu deux bières, il ne réfléchit plus à ce qu'il fait, et après chaque essai de clé, il secoue chaque fois son trousseau et réessaie jusqu'à ce que la porte s'ouvre enfin.
+
+Calculez la probabilité que:
+
+1. Marcel ouvre la porte du premier coup à la fin d'une journée de travail
+2. Marcel ouvre la porte en deux essais à la fin d'une journée de travail
+3. Marcel ouvre la porte en au plus deux essais à la fin d'une journée de travail
+4. Marcel ouvre la porte en au moins trois essais à la fin d'une journée de travail
+
+*** Solution (\sfrac{1}{2};\sfrac{2}{9};\sfrac{13}{18};\sfrac{5}{18})
+\color{luckydarkgray}
+=(Voir Figure 6)=
+\color{black}
+#+caption: Chapitre 1 Exercice 27 Schéma
+#+attr_latex: :width 200px
+file:1-27.png
+
+**** *P(Bonne clé premier coup)*
+
+#+begin_quote
+3 possibilités:
+- P(Bonne clé 1er coup *sachant que* pas de verre bu) \textcolor{luckydarkgray}{(ou)}
+- P(Bonne clé 1er coup *sachant que* 1 verre bu) \textcolor{luckydarkgray}{(ou)}
+- P(Bonne clé 1er coup *sachant que* 2 verres bus)
+#+end_quote
+
+= (\sfrac{1}{4} * 1) + (\sfrac{2}{4} * \sfrac{1}{3}) + (\sfrac{1}{4} * \sfrac{1}{3}) \(\textcolor{luckydarkgreen}{\mathbf{= \sfrac{1}{2}}}\)
+
+**** *P(Bonne clé en deux essais)*
+#+begin_quote
+2 possibilités:
+- P(Bonne clé en deux essais *sachant que* (1 verre bu *et* 1 mauvaise clé)) \textcolor{luckydarkgray}{(ou)}
+- P(Bonne clé en deux essais *sachant que* (2 verres bus *et* 1 mauvaise clé))
+#+end_quote
+
+= (\sfrac{2}{4} * \sfrac{2}{3} * \sfrac{1}{3}) + (\sfrac{1}{4} * \sfrac{2}{3} * \sfrac{1}{3}) \(\textcolor{luckydarkgreen}{\mathbf{= \sfrac{2}{9}}}\)
+
+**** *P(Bonne clé en deux essais max)*
+
+= P(Bonne clé premier coup) + P(Bonne clé en deux essais)
+
+= réponse 1 + réponse 2
+
+= \sfrac{1}{2} + \sfrac{2}{9} \(\textcolor{luckydarkgreen}{\mathbf{= \sfrac{13}{18}}}\)
+
+**** *P(Bonne clé en 3 essais min)*
+
+= 1 -- P(Bonne clé en deux essais max)
+
+= 1 -- réponse 3
+
+= 1 -- \sfrac{13}{18} \(\textcolor{luckydarkgreen}{\mathbf{= \sfrac{5}{18}}}\)
+** Exercice 31
+Une personne envisage d'acheter une voiture d'une certaine marque et apprend via un magazine spécialisé que 5% de ces véhicules ont un problème de transmission. Un mécanicien vient apporter son aide pour juger de l'état de son véhicule:
+
+Sur toutes les autos défectueuses qu'il a examiné dans le passé, il a décelé l'état défectueux dans 90% des cas.
+
+Pour les bonnes voitures son jugement est également bon: Il les déclare "bonne" dans 80% des cas.
+
+Quelle est la probabilité que la voiture que la personne envisage d'acheter ait un problème de transmission:
+1. Avant d'avoir l'avis du mécanicien
+2. Si le mécanicien déclare le véhicule "défectueux"
+3. Si le mécanicien déclare le véhicule "en bon état"
+*** Solution (5%;\sfrac{9}{47};\sfrac{1}{153})
+\color{luckydarkgray}
+=(Voir Figure 7)=
+\color{black}
+#+caption: Chapitre 1 Exercice 31 Schéma
+#+attr_latex: :width 150px
+file:1-31.png
+
+**** *P(Problème sans avis)*
+\(\textcolor{luckydarkgreen}{\mathbf{= 5\%}}\)
+
+**** *P(Problème si Mécanicien pas OK)*
+
+= P(Problème | Mécanicien !OK)
+
+= \(\dfrac{\text{P(Problème }\bold{et}\text{ Mécanicien !OK)}}{\text{P(Mécanicien !OK)}}\)
+
+= \(\frac{\text{5\% * 90\%}}{\text{(5\% * 90\%) + (95\% * 20\%)}}\) \color{luckydarkgray}car P(Mécanicien !OK) = P(Problème et !OK) ou P(!Problème et !OK)\color{black}
+
+= \(\dfrac{\text{\sfrac{9}{200}}}{\text{\sfrac{47}{200}}}\) \(\textcolor{luckydarkgreen}{\mathbf{= \sfrac{9}{47}}}\)
+
+**** *P(Problème si Mécanicien OK)*
+
+= P(Problème | Mécanicien OK)
+
+= \(\dfrac{\text{P(Problème }\bold{et}\text{ Mécanicien OK)}}{\text{P(Mécanicien OK)}}\)
+
+= \(\frac{\text{5\% * 10\%}}{\text{(5\% * 10\%) + (95\% * 80\%)}}\) \color{luckydarkgray}car P(Mécanicien OK) = P(Problème et OK) ou P(!Problème et OK)\color{black}
+
+= \(\dfrac{\text{\sfrac{1}{200}}}{\text{\sfrac{153}{200}}}\) \(\textcolor{luckydarkgreen}{\mathbf{= \sfrac{1}{153}}}\)
+** Exercice 32
+Dans une usine, trois machine M1, M2 et M3 fabriquent des stylos.
+
+Par jour, la machine M1 en fabrique 1000 dont 3% sont défectueux, la machine M2 en fabrique 2000 dont 2% sont défectueux et la machine M3 en fabrique 3000 dont 1% sont défectueux:
+
+1. En fin de journée, on choisit un stylo au hasard parmi les 6000 stylos produits. Quelle est la probabilité de tirer un stylo défectueux?
+2. On constate que le stylo choisit est défectueux, quelle est la probabilité qu'il provienne de M2?
+
+*** Solution (\sfrac{1}{60};\sfrac{2}{5})
+\color{luckydarkgray}
+=(Voir Figure 8)=
+\color{black}
+#+caption: Chapitre 1 Exercice 32 Schéma
+#+attr_latex: :width 150px
+file:1-32.png
+
+**** *P(Tirer stylo défectueux)*
+#+begin_quote
+3 possibilités:
+- P(Stylo !OK | M1) \textcolor{luckydarkgray}{(ou)}
+- P(Stylo !OK | M2) \textcolor{luckydarkgray}{(ou)}
+- P(Stylo !OK | M3)
+#+end_quote
+
+= (\sfrac{1}{6} * 3%) + (\sfrac{2}{6} * 2%) + (\sfrac{3}{6} * 1%)
+
+= \sfrac{1}{200} + \sfrac{1}{150} + \sfrac{1}{200} \(\textcolor{luckydarkgreen}{\mathbf{= \sfrac{1}{60}}}\)
+
+**** *P(M2 sachant que Stylo défectueux)*
+
+= P(M2 | Stylo !OK)
+
+= \(\dfrac{\text{P(M2) * P(Stylo !OK | M2)}}{\text{P(Stylo !OK)}}\)
+
+= \(\dfrac{\text{\sfrac{2}{6} * 2\%}}{\text{réponse 1}}\)
+
+= \(\dfrac{\text{\sfrac{1}{150}}}{\text{\sfrac{1}{60}}}\) \(\textcolor{luckydarkgreen}{\mathbf{= \sfrac{2}{5}}}\)
