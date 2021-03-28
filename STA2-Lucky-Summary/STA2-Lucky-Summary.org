@@ -22,6 +22,27 @@ Une des issues possibles d'une expérience aléatoire, ou plus techniquement un 
 
 \textcolor{luckydarkgray}{(Ex: Si on lance une pièce de monnaie, alors "La pièce tombe sur Pile" est un évènement aléatoire)}
 
+*** Types de valeur
+**** *Quantitatifs discrets*
+
+Nombres bien définis, sans possibilité d'utiliser une valeur entre.
+
+\color{luckydarkgray}(Ex: Pour le jet d'un dé, {1, 2, 3, 4, 5, 6})\color{black}
+**** *Quantitatifs continus*
+
+Valeurs réelles dans un intervalle donné.
+
+\textcolor{luckydarkgray}{(Ex: Pour la taille d'un humain, [1.2, 2.8])}
+**** *Qualitatifs*
+
+Valeurs personnalisées en fonction de l'expérience.
+
+\color{luckydarkgray}(Ex: Pour le jet d'un dé, {pair, impair})\color{black}
+**** *Booléens*
+
+Vrai ou Faux.
+
+\color{luckydarkgray}(Ex: Pour le jet d'un dé est-il pair? {Vrai, Faux})\color{black}
 *** Probabilité P(A)
 Nombre réel compris entre 0 et 1 inclus, donnant une mesure de la chance qu'a cet évènement à se réaliser. Si la probabilité vaut 1, on parle d'/évènement certain/, et lorsque la probabilité vaut 0, on parle d'/évènement impossible/. La probabilité de l'évènement aléatoire A est notées P(A). Si la probabilité est la même pour deux évènements distincts, alors ce sont des /évènements équiprobables/.
 
@@ -643,7 +664,7 @@ file:1-26.png
 = 95% * 90% \(\textcolor{luckydarkgreen}{\mathbf{= \sfrac{171}{200}}}\)
 
 ** Exercice 27
-Marcel travaille 5 jours par semaine. Chaque jour, il quitte habituellement son bureau vers 17h et se rend à pied à son domicile. Quand il passe devant le Café des Sports, il y aperçoit une fois sur deux son copain Antoine avec lequel il ne manque jamais de déguster une de ses bières préférées. Plus loin, au Café de la Gare, il rencontre également une fois sur deux son autre copain Émile, avec lequel il ne peut non plus refuser de faire la causette devant un autre verre. Évidemment, les rencontres avec Antoine ou Émile sont indépendantes les unes des autres: Parfois il rencontre les deux, parfois un seul, et parfois aucun des deux. Enfin, quand il arrive devant chez lui, il sort de sa poche un trousseau de clés, dont une seule ouvre la porte d'entrée.
+   Marcel travaille 5 jours par semaine. Chaque jour, il quitte habituellement son bureau vers 17h et se rend à pied à son domicile. Quand il passe devant le Café des Sports, il y aperçoit une fois sur deux son copain Antoine avec lequel il ne manque jamais de déguster une de ses bières préférées. Plus loin, au Café de la Gare, il rencontre également une fois sur deux son autre copain Émile, avec lequel il ne peut non plus refuser de faire la causette devant un autre verre. Évidemment, les rencontres avec Antoine ou Émile sont indépendantes les unes des autres: Parfois il rencontre les deux, parfois un seul, et parfois aucun des deux. Enfin, quand il arrive devant chez lui, il sort de sa poche un trousseau de clés, dont une seule ouvre la porte d'entrée.
 
 Quand Marcel n'a rien bu, ses pensées sont lucides et il ouvre la porte immédiatement avec la bonne clé.
 
@@ -779,3 +800,957 @@ file:1-32.png
 = \(\dfrac{\text{\sfrac{2}{6} * 2\%}}{\text{réponse 1}}\)
 
 = \(\dfrac{\text{\sfrac{1}{150}}}{\text{\sfrac{1}{60}}}\) \(\textcolor{luckydarkgreen}{\mathbf{= \sfrac{2}{5}}}\)
+** Exercice 34
+Pour se rendre à l'école, Gontran utilise les transports en commun. Il prend le métro 2 fois plus souvent que le bus, et il prend le bus 2 fois plus souvent que le tram. Les probabilités respectives d'arriver en retard en prenant le bus, le tram et le métro sont de 0.3, 0.2 et 0.1:
+1. Quelle est la probabilité que Gontran arrive en retard?
+2. Quelle est la probabilité que Gontran prenne le métro et n'arrive pas en retard?
+3. Sachant que Gontran est arrivé en retard, quelle est la probabilité qu'il ait pris le tram?
+4. Quelle est la probabilité que Gontran arrive en retard deux jours de suite?
+
+*** Solution (\sfrac{6}{35};\sfrac{18}{35};\sfrac{1}{6};\sfrac{36}{1275})
+\color{luckydarkgray}
+=(Voir figure 9)=
+\color{black}
+#+caption: Chapitre 1 Exercice 34 Schéma
+#+attr_latex: :width 150px
+file:1-34.png
+**** *P(Retard)*
+#+begin_quote
+3 possibilités:
+- P(Retard en métro) \textcolor{luckydarkgray}{(ou)}
+- P(Retard en bus) \textcolor{luckydarkgray}{(ou)}
+- P(Retard en tram)
+#+end_quote
+
+P(Retard) = (\sfrac{4}{7} * 10%) + (\sfrac{2}{7} * 30%) + (\sfrac{1}{7} * 20%) \(\textcolor{luckydarkgreen}{\mathbf{= \sfrac{6}{35}}}\)
+
+**** *P(Métro et À l'heure)*
+
+= (\sfrac{4}{7} * 90%) \(\textcolor{luckydarkgreen}{\mathbf{= \sfrac{18}{35}}}\)
+
+**** *P(Tram sachant que Retard)*
+
+= P(Tram | Retard) = \(\dfrac{\text{P(Tram et Retard)}}{\text{P(Retard)}}\)
+
+= \(\dfrac{\sfrac{1}{7} * 20\%}{\text{Réponse 1}}\)
+
+= \(\dfrac{\sfrac{1}{7} * 20\%}{\text{\sfrac{6}{35}}}\) \(\textcolor{luckydarkgreen}{\mathbf{= \sfrac{1}{6}}}\)
+
+**** *P(Retard 2 jours de suite)*
+
+= P(Retard jour1 *et* Retard jour2) = P(Retard) * P(Retard)
+
+= (Réponse 1)^2 \(\textcolor{luckydarkgreen}{\mathbf{= \sfrac{36}{1275}}}\)
+* Chapitre 2 -- Variables aléatoires et grandes distributions théoriques
+** Théorie
+*** Variable aléatoire
+Association d'une valeur numérique au résultat d'une expérience aléatoire.
+
+<<exVariableAléatoire>>\textcolor{luckydarkgray}{(Ex: On jette un dé à six faces. Si on obtient 6, on gagne 3€. Si on obtient 2 ou 4, on perd 2€. Pour les autres faces, il ne se passe rien. On définit ainsi une variable aléatoire dont les valeurs possibles sont -2, 0 et 3)}
+*** Distribution de probabilité d'une variable aléatoire discrète /x_i/ et /p_i/
+La /distribution de probabilité/ d'une variable aléatoire se définit par la donnée des différentes valeurs possibles de la variable (notée /x_i/) accompagnées de leur probabilité respective (notée /p_i/).
+
+La somme des /p_i/ est toujours égale à 1.
+
+Ainsi, si on reprend [[exVariableAléatoire][l'exemple vu dans la définition de la Variable aléatoire]], on obtient la distribution de la variable aléatoire X suivante:
+#+attr_latex: :align |c|c|
+| /x_i/ | /p_i/        |
+|-------+--------------|
+|    -2 | \sfrac{1}{3} |
+|     0 | \sfrac{1}{2} |
+|     3 | \sfrac{1}{6} |
+#+begin_center
+Par définition on a donc: */p_i/ = P[ X = /x_i/ ]*
+
+Et la somme des /p_i/ = (\sfrac{1}{3} + \sfrac{1}{2} + \sfrac{1}{6}) *= 1*
+#+end_center
+On peut représenter cette distribution par un diagramme en bâtonnets:
+#+caption: Distribution de probabilité -- Diagramme
+#+attr_latex: :width 100px
+file:DistributionProbaDiagramme.png
+*** Fonction de répartition d'une variable aléatoire discrète F(/x_i/)
+Pour une variable aléatoire discrète, la /fonction de répartition/ est une fonction en escalier définie par:
+#+begin_center
+F(/x_i/) = P[ X \leq /x_i/ ]
+#+end_center
+Elle possède des valeurs pour tout réel /x/.
+
+Ses valeurs extrêmes sont 0 lorsque /x_i/ tend vers --\infty et 1 lorsque /x_i/ tend vers +\infty.
+
+Pour chaque valeur /x_i/ prise par la variable aléatoire, alors F(/x_i/) est égal à la somme des probabilités correspondant aux valeurs inférieures ou égales à /x_i/.
+
+Reprenons [[exVariableAléatoire][l'exemple vu dans la définition de la Variable aléatoire]], voici le tableau reprenant les valeurs de la fonction de répartition en chaque /x_i/:
+
+#+attr_latex: :align |c|c|c|
+| /x_i/ | /p_i/        | F(/x_i/)     |
+|-------+--------------+--------------|
+|    -2 | \sfrac{1}{3} | \sfrac{1}{3} |
+|     0 | \sfrac{1}{2} | \sfrac{5}{6} |
+|     3 | \sfrac{1}{6} | 1            |
+
+Le diagramme de F(/x/) aura alors l'allure suivante: \color{luckydarkgray} =(Voir Figure 11)= \color{black}
+#+caption: Fonction de répartition F(/x/) -- Diagramme
+#+attr_latex: :width 100px
+file:FonctionRepartitionVarDiscreteDiagramme.png
+*** Espérance mathématique E[X] ou \mu
+Notée \mu, l'espérance mathématique est la valeur moyenne que peut prendre une variable aléatoire.
+
+Ainsi, si X représente le gain associé à un jeu de hasard, alors \mu est le gain moyen de ce jeu, c'est à dire la valeur que l'on peut espérer gagner en jouant à ce jeu.
+
+Elle se calcule grâce à la formule suivante:
+#+begin_center
+\mu = \(\displaystyle\sum_{i=1}^{n} x_i p_i\)
+
+\textcolor{luckydarkgray}{autrement dit:}
+
+\hly{$\mu$} = \hlg{$(x_1 * p_1) + (x_2 * p_2) + (x_3 * p_3) + ... + (x_n * p_n)$}
+#+end_center
+
+\color{luckydarkgray}
+Exemple:
+Dans le cas de l'exemple vu lors de la définition d'une fonction de répartition (cf. 2.1.3), le calcul de l'espérance mathématique donne ceci:
+
+\mu = ((--2) * \sfrac{1}{3}) + (0 * \sfrac{1}{2}) + (3 * \sfrac{1}{6})
+
+\mu = -- \sfrac{1}{6} €
+
+Cela signifie qu'en moyenne, on perd à chaque partie environ 0.17€.
+\color{black}
+
+*Remarque:* Dans le cas de [[DistributionBinomiale][distribution binomiale]], si X~B(/n, p/) alors \mu = /np/ et \sigma = $\sqrt{npq}$
+*** La variance et l'écart-type \sigma^2 et \sigma
+L'écart-type (noté \sigma) mesure la *dispersion* des valeurs de la variable aléatoire autour de sa moyenne (\mu).
+
+La variance (\sigma^2) étant \sigma au carré, on peut obtenir l'écart-type en calculant la racine carré de la variance.
+#+begin_center
+*Écart-type = \(\sqrt{\text{Variance}}\)*
+#+end_center
+
+La formule pour trouver la variance est la suivante:
+#+begin_center
+\sigma^2 = \(\displaystyle\sum_{i=1}^{n} (x_i)^2 p_i - \mu^2\)
+
+\textcolor{luckydarkgray}{autrement dit:}
+
+\hly{$\sigma^2$} = \hlg{$(x_1^2 * p_1) + (x_2^2 * p_2) + (x_3^2 * p_3) + ... + (x_n^2 * p_n) - \mu^2$}
+
+\hly{$\sigma$} = \(\colorbox{luckysoftgreen}{$\sqrt{\sigma^2}$}\)
+#+end_center
+
+Connaissant l'espérance (\mu) et l'écart-type (\sigma) d'une distribution de probabilité, on peut s'attendre à ceci:
+
+\color{luckydarkgray}
+=(Voir Figure 12)=
+\color{black}
+- Environ 68% des valeurs prises par la variable aléatoire se trouveront dans l'intervalle [\mu -- \sigma, \mu + \sigma].
+- Environ 95% des valeurs prises par la variable aléatoire se trouveront dans l'intervalle [\mu -- 2\sigma, \mu + 2\sigma]
+- À peine 1% se trouveront à plus de 3 écart-types d'écart de la moyenne.
+
+#+caption: Courbe de Gauss -- Diagramme
+#+attr_latex: :width 300px
+file:CourbeGaussProbas.png
+
+\color{luckydarkgray}
+Exemple:
+Dans le cas de l'exemple vu lors de la définition de l'espérance mathématique (cf. 2.1.4), le calcul de l'écart-type donne ceci:
+
+Nous avons vu que \mu = -- \sfrac{1}{6}, alors:
+
+\sigma^2 = ((-2)^2 * \sfrac{1}{3}) + (0^2 * \sfrac{1}{2}) + (3^2 * \sfrac{1}{6}) -- (--\sfrac{1}{6})^2
+
+= \sfrac{4}{3} + 0 +  \sfrac{9}{6} -- \sfrac{1}{36} = \(\dfrac{101}{36}\)
+
+\sigma = \(\sqrt{\sfrac{101}{36}}\)
+
+\simeq 1.67...
+
+Il y a donc en moyenne 68% des gens qui vont gagner entre --1.5€ et 1.84€ (car [\mu--\sigma, \mu+\sigma]), ensuite 95% des gens qui vont gagner entre --3.17€ et 3.51€ (car [\mu--2\sigma, \mu+2\sigma]) et seulement 1% qui vont perdre plus que 4.84€ ou gagner plus que 5.18€ (car [\mu--3\sigma, \mu+3\sigma]).
+\color{black}
+
+*Remarque:* Dans le cas de [[DistributionBinomiale][distribution binomiale]], si X~B(/n, p/) alors \mu = /np/ et \sigma = $\sqrt{npq}$
+*** Distribution par classe d'une variable aléatoire continue [ /x_{i--1}/, /x_i/ [
+On donne les probabilités pour des classes /(intervalles)/ de valeurs de la variable aléatoire:
+#+begin_center
+/p_i/ = P[ /x_{i--1}/ \leq X < /x_i/ ]
+#+end_center
+<<ExDistributionVarContinue>>Prenons par exemple la taille d'un individu choisi au hasard dans une grande population où les probabilités connues seraient les suivantes:
+#+attr_latex: :align |c|c|c|c|
+| Classes [ /x_{i--1}/, /x_i/ [ | /p_i/ | /dp_i/ | F(/x_i/) |
+|-------------------------------+-------+--------+----------|
+| \text{[150, 170[}             |   0.3 |  0.015 |      0.3 |
+| \text{[170, 180[}             |  0.45 |  0.045 |     0.75 |
+| \text{[180, 200[}             |  0.25 | 0.0125 |        1 |
+
+*Remarque:* Le tableau indique par exemple que P[150 \leq X < 170] = 0.3, mais ne permet pas de savoir s'il y a plus d'individus dans la 1ère moitié de cette classe (150 à 160) ou dans la seconde (160 à 170). Ceci nous amène à étudier le concept de [[DensiteProba][densité de probabilité]].
+*** Fonction de répartition d'une variable aléatoire continue P[ /a/ \leq X \leq /b/ ]
+\colorbox{luckysoftyellow}{P[ $a \leq$  X  $\leq b$]} = \colorbox{luckysoftgreen}{F($b$) -- F($a$)}
+
+On peut représenter la /fonction de répartition/ F(/x/) de l'exemple précédent dans un diagramme, et constater ces propriétés:
+
+\color{luckydarkgray} =(Voir Figure 13)= \color{black}
+- F(/x/) est la probabilité que X soit inférieur ou égal à /x/, quel que soit le réel /x/
+- F(/x_i/) (où /x_i/ est la bonne droite d'une classe) est la somme des probabilités de toutes les classes à gauche de /x_i/
+- La pente d'un segment équivaut à la [[DensiteProba][densité de probabilité]] /dp_i/ de la classe correspondante
+- L'équation du segment de la classe [ /x_{i--1}, x_i/ [ est y = /dp_i/ (/x -- x_{i--1}/) + F(/x_{i--1})/
+- P[ /a/ \leq X \leq /b/ ] = F(/b/) -- F(/a/)
+- La probabilité en un point donné est toujours nulle: P[ X = /a/ ] = 0
+#+caption: Fonction de répartition d'une variable aléatoire continue -- Diagramme
+#+attr_latex: :width 100px
+file:FonctionRepartitionVarContinueDiagramme.png
+*** <<DensiteProba>>Densité de probabilité /dp_i/
+Dans une classe, en divisant la probabilité par la largeur de la classe, on obtient la densité de probabilité, qui est la probabilité par intervalle d'une unité.
+
+#+begin_center
+\colorbox{luckysoftyellow}{$dp_i$} = \(\colorbox{luckysoftgreen}{$\dfrac{p_i}{l_i}$}\)
+#+end_center
+
+Ainsi, si on reprend [[ExDistributionVarContinue][l'exemple vu dans l'explication de la distribution par classe d'une variable aléatoire continue]], pour la première classe on obtient /dp_i/ = \(\dfrac{0.3}{170-150}\) = \sfrac{0.3}{20} = 0.015, cela signifie que la probabilité de trouver quelqu'un qui mesure entre 150 et 151cm vaut 0.015, et de même entre 151 et 152cm etc.
+
+Si on trace l'histogramme de la densité de probabilité de cet exemple, on remarque que:
+
+\color{luckydarkgray} =(Voir Figure 14)= \color{black}
+- L'aire de chaque rectangle est égale à /p_i/
+- L'aire totale vaut 1
+#+caption: Densité de probabilité -- Histogramme
+#+attr_latex: :width 100px
+file:DensiteProbaHistogramme.png
+*** <<DistributionBinomiale>>Distribution binomiale X~B(/n, p/)
+Modèle théorique qui s'applique dans le cas où une même expérience aléatoire est répétée plusieurs fois dans des conditions identiques et indépendants.
+
+Si X admet une distribution binomiale, alors on peut noter *X~B(/n, p/)*, où:
+
+/n/ = Nombre de fois que l'on répète l'expérience.
+
+/p/ = Probabilité de succès de l'expérience.
+
+/q/ = Probabilité d'échec de l'expérience.
+
+$C_n^k$ = Nombre de possibilités différentes de succès
+
+P[X=k] = $C_n^kp^kq^{n-k}$
+
+\colorbox{luckysoftyellow}{$C_n^k$} = \(\colorbox{luckysoftgreen}{$\dfrac{n!}{k!(n-k)!}$}\)
+
+\hly{L'esp\'erance $\mu$} = \hlg{$np$}
+
+\hly{L'\'ecart-type $\sigma$} = \(\colorbox{luckysoftgreen}{$\sqrt{npq}$}\)
+
+\color{luckydarkgray}
+Exemple:
+On lance 5 fois un dé, quelle est la probabilité d'obtenir 2 fois 6?
+
+/n/ = 5
+
+/p/ = \sfrac{1}{6}
+
+/q/ = \sfrac{5}{6}
+
+C_n^k = C_5^2 = $\dfrac{5!}{2!(5-2)!}$ = $\dfrac{5 * 4 * 3 * 2 * 1}{2 * 1 * 3 * 2 * 1}$ = 10
+
+P(2 fois 6 en 5 lancers) = $C_n^kp^kq^{n-k}$ = $C_5^2(\sfrac{1}{6})^2(\sfrac{5}{6})^3$
+
+= 10 * \sfrac{1}{36} * \sfrac{125}{216} = $\dfrac{625}{3888}$
+
+\mu = $np$ = 5 * \sfrac{1}{6} = \sfrac{5}{6}
+
+\sigma = $\sqrt{npq}$ = $\sqrt{5 * \sfrac{1}{6} * \sfrac{5}{6}}$ = \sfrac{5}{6}
+\color{black}
+
+Exemple de graphique représentant les valeurs de la distribution binomiale de paramètres /n/ = 10 et /p/ = 0.4:
+
+\color{luckydarkgray}
+=(Voir Figure 15)=
+\color{black}
+#+caption: Distribution binomiale n=10 et p=0.4 -- Graphique
+#+attr_latex: :width 150px
+file:DistributionBinomialeGraphique.png
+
+Les probabilités de succès /p/ étant inférieure à \sfrac{1}{2}, le graphique présente une dissymétrie vers la gauche. Dans le cas où /p/ est supérieur à \sfrac{1}{2}, les valeurs seraient plutôt concentrées du coté droit.
+
+Le graphique n'est parfaitement symétrique que lorsque /p/ = /q/ = \sfrac{1}{2}, on a alors P[X=k] = P[X= /n--k/ ] pour toute valeur de k.
+*** Distribution normale X~N(\mu, \sigma)
+C'est la distribution continue sans doute la plus utile et la plus répandue.
+
+Si X admet une distribution normale, alors on peut écrire *X~N(\mu, \sigma)*, où \mu = l'espérance et \sigma = l'écart-type.
+
+Le graphique de la fonction de densité de probabilité $f(x)$ de la distribution normale est la fameuse /courbe en cloche/, ou autrement appelée /courbe de Gauss/.
+\color{luckydarkgray}
+=(Voir Figure 16)=
+\color{black}
+#+caption: Courbe de Gauss
+#+attr_latex: :width 300px
+file:CourbeGauss.png
+*** <<DistributionNormaleReduite>>Distribution normale réduite Z~N(0, 1)
+C'est le nom donné à la distribution normale de paramètres \mu = 0 et \sigma = 1. Afin de la distinguer d'une distribution normale quelconque, on la notera *Z~N(0, 1)*.
+
+Son graphique est donc centré en 0 et les points d'inflexions sont en -1 et 1. \color{luckydarkgray} =(Voir Figure 17)=\color{black}
+#+caption: Distribution normale réduite
+#+attr_latex: :width 300px
+file:DistributionNormaleReduite.png
+
+Comme l'aire totale sous la courbe est égale à 1, on a la formule:
+#+begin_center
+\colorbox{luckysoftgreen}{F(x) = 1 -- F(--x)}
+
+c'est à dire:
+
+\colorbox{luckysoftgreen}{P[Z > x] = 1 -- P[Z < x]}
+
+et donc:
+
+\colorbox{luckysoftgreen}{P[x < Z < y] = F(y) -- F(x)}
+#+end_center
+
+Démontrons la troisième formule en calculant P[0.57 < Z < 1.63], on remarquera ceci:
+
+\color{luckydarkgray}
+=(Voir Figure 18)=
+\color{black}
+#+caption: Graphique de P[0.57 < Z < 1.63]
+#+attr_latex: :width 300px
+file:FonctionDistributionNormaleReduiteExempleGraphique.png
+
+Si on regarde le graphique, on constate que l'on doit calculer tout l'aire supérieur à 0.53, en retirant tout l'aire supérieur à 1.63. C'est à dire: P[Z > 0.57] -- P[Z > 1.63].
+
+Étant donné que le signe doit toujours être \leq ou <, on doit inverser nos deux signes. Ainsi:
+
+P[Z > 0.57] -- P[Z > 1.63]
+
+= 1 -- P[Z < 0.57] -- (1 -- P[Z < 1.63]) \color{luckydarkgray}(F(x) = 1 -- F(--x))\color{black}
+
+= -- P[Z < 0.57] + P[Z < 1.63]
+
+= P[Z < 1.63] -- P[Z < 0.57]
+
+On en conclut donc que: P[x < Z < y] = P[Z < y] -- P[Z < x] *= F(y) -- F(x)*
+
+*** <<TableFRepartitionDistributionNormaleReduite>>Table de la fonction de répartition de la distribution normale réduite Z~N(0, 1)
+Cette table donne les valeurs arrondies à la 4ème décimale de F(/x/) = P[ --\infty \leq Z \leq /x/ ] pour toutes les valeurs positives de /x/ multiples de 0.01 entre 0 et 3.
+
+\color{luckydarkgray} =(Voir Figure 19)=\color{black}
+ 
+#+caption: Table de la fonction de répartition de la distribution normale réduite
+#+attr_latex: :width 300px
+file:TableFRepartitionDistributionNormaleReduite.png
+*** Passage d'une normale quelconque à la normale réduite X~N(\mu, \sigma) --> Z~N(0, 1)
+La [[TableFRepartitionDistributionNormaleReduite][table de la fonction de répartition de la distribution normale réduite]] ne donne que les valeurs de la [[DistributionNormaleReduite][distribution normale réduite]] Z~N(0, 1).
+
+Heureusement, il est possible de passer d'une distribution normale quelconque à une distribution normale réduite grâce à cette simple transformation:
+
+\[
+\colorbox{luckysoftgreen}{$Z = \dfrac{X-\mu}{\sigma}$}
+\]
+
+Il est à présent simple de calculer la probabilité sur un intervalle [a, b] d'une normale X~N(\mu, \sigma) quelconque:
+\[
+\colorbox{luckysoftyellow}{$P[a \leq X \leq b] = P[\dfrac{a-\mu}{\sigma} \leq Z \leq \dfrac{b-\mu}{\sigma}] = F\left(\dfrac{b-\mu}{\sigma}\right) - F\left(\dfrac{a-\mu}{\sigma}\right)$}
+\]
+
+*Remarque:* Le passage d'une normale quelconque à la normale réduite est un simple /changement d'échelle/.
+*** Valeurs typiques de la distribution normale réduite (68%, 95%, 4.56%, 0.2%)
+\[
+P[\mu-\sigma \leq X \leq \mu+\sigma] = P[-1 \leq Z \leq 1] = 0.6826
+\]
+
+Autrement dit, la probabilité de se trouver à *moins d'un écart-type* de distance de la moyenne est d'environ 68%.
+
+\[
+P[\mu-2\sigma \leq \mu+2\sigma] = P[-2 \leq Z \leq 2] = 0.9544
+\]
+Autrement dit, la probabilité de se trouver à *moins de deux écart-types* de distance est d'environ 95%.
+
+Donc, la probabilité de se trouver *au delà de deux écart-types* ne vaut que (1 -- 0.9544) = 0.0456 = 4.56%.
+
+Quant à la probabilité de se trouver *au delà de 3 écart-types*, elle est quasi nulle, (1 -- 0.9974) = 0.0026 = 0.2%
+*** Approximation de la binomiale par la normale (Théorème de Moivre-Laplace)
+Lorsque /n/ est grand, le calcul de probabilité d'une variable distribuée par la loi binomiale s'avère long et fastidieux.
+
+Ce calcul peut être facilité et replacé par une approximation à l'aide de la /distribution normale/.
+
+Pour cela on utilise le théorème de Moivre-Laplace qui affirme que /la distribution binomiale est asymptotiquement normale/.
+
+Si on superpose le graphique en bâtonnets d'une distribution binomiale avec un /n/ grand (\leq 30) et celui de la normale de paramètres correspondants, on observe que le tracé de la courbe de Gauss se confond avec les extrémités des bâtonnets.
+
+Ainsi, on peut approcher chaque probabilité P[X_b = k] par l'aire sous la courbe de Gauss entre les valeurs k -- \sfrac{1}{2} et k + \sfrac{1}{2} sans grande perte de précision. On aura donc:
+
+\[
+P[a \leq X_b \leq b] \simeq P[a-\frac{1}{2} \leq X_n \leq b+\frac{1}{2}]
+\]
+
+*Note:* L'ajout des $\frac{1}{2}$ de part et d'autre de l'intervalle s'appelle la /correction de continuité/. Elle peut être négligée pour des très grandes valeurs de /n/.
+** Exercice 1
+Donnez la distribution de probabilité, la fonction de répartition, l'espérance mathématique et l'écart-type des variables aléatoires suivantes:
+1. On lance un dé bien équilibré: Si le point est impair on gagne autant d'euros que le point indiqué, s'il est perd on perd autant d'euros que le point indiqué.
+2. Une urne contient 13 boules blanches et 7 boules noires. Si on tire une boule noire on gagne 20€, sinon on perd 15€.
+3. On joue à "pile ou face" avec 2 pièces bien équilibrées. Si les cotés sont deux "pile" on gagne 10€, sinon on perd 5€.
+4. On tire successivement et avec remise 3 fruits d'une corbeille contenant 6 oranges et 3 pommes. Soit X le nombre de pommes tirées.
+*** Solution (\sigma=3.86;;;)
+**** *Réponse 1*
+#+attr_latex: :align |c|c|c|
+| /x_i/ | /p_i/        | F(/x_i/)     |
+|-------+--------------+--------------|
+|    -6 | \sfrac{1}{6} | \sfrac{1}{6} |
+|    -4 | \sfrac{1}{6} | \sfrac{2}{6} |
+|    -2 | \sfrac{1}{6} | \sfrac{3}{6} |
+|     1 | \sfrac{1}{6} | \sfrac{4}{6} |
+|     3 | \sfrac{1}{6} | \sfrac{5}{6} |
+|     5 | \sfrac{1}{6} | \sfrac{6}{6} |
+
+***** Espérance:
+
+*\mu =* (--6 * \sfrac{1}{6}) + (--4 * \sfrac{1}{6}) + (--2 * \sfrac{1}{6}) + (1 * \sfrac{1}{6}) + (3 * \sfrac{1}{6}) + (5 * \sfrac{1}{6})
+
+= \sfrac{1}{6} * (--6--4--2+1+3+5)
+
+= -- \sfrac{1}{2}
+***** Variance:
+
+*\sigma^2 =* ((--6)^2 * \sfrac{1}{6}) + ((--4)^2 * \sfrac{1}{6}) + ((--2)^2 * \sfrac{1}{6}) + (1^2 * \sfrac{1}{6}) + (3^2 * \sfrac{1}{6}) + (5^2 * \sfrac{1}{6})
+
+= \sfrac{1}{6} * (36+16+4+1+9+25)
+
+= \sfrac{179}{12}
+***** Écart-type:
+
+*\sigma =* \(\sqrt{\sigma^2}\) = \(\sqrt{\sfrac{179}{12}}\) \(\textcolor{luckydarkgreen}{\mathbf{= 3.86€}}\)
+**** *Réponse 2*
+
+À venir...
+**** *Réponse 3*
+
+À venir...
+**** *Réponse 4*
+
+À venir...
+** Exercice 2
+Un représentant d'un grand laboratoire pharmaceutique téléphone à une pharmacie 3 fois par an.
+
+Au premier appel, il a 8 chances sur 10 de réaliser une vente.
+
+Ensuite, la probabilité de réaliser une vente dépend de ce qui a précédé: Si l'appel suit une vente, la probabilité d'une nouvelle vente est de 0.9, sinon elle est de 0.4. Soit la variable aléatoire du nombre de total de vente par an. Fournissez la distribution de probabilité, la fonction de répartition, l'espérance mathématique et l'écart-type. Quelle est le probabilité de réaliser au moins 2 ventes?
+
+*** Solution (\sigma\simeq0.93808;F[X \geq 2]\simeq0.824)
+\color{luckydarkgray}
+=(Voir Figure 20)=
+\color{black}
+#+caption: Chapitre 2 Exercice 2 -- Schéma
+#+attr_latex: :width 200px
+file:2-2.png
+
+
+X = nombre de ventes par an
+
+\Omega = {0, 1, 2, 3}
+
+P[X=0] = 20% * 60% * 60% = \sfrac{9}{125}
+
+\textcolor{luckydarkgray}{(!Vente appel1 et appel2 et appel3)}
+
+P[X=1] = (80% * 10% * 60%) + (20% * 40% * 10%) + (20% * 60% * 40%) = \sfrac{13}{125}
+
+\textcolor{luckydarkgray}{(Vente appel1 et pas2ni3 ou appel2 et pas1ni3 ou appel3 et pas1ni2)}
+
+P[X=2] = (80% * 90% * 10%) + (80% * 10% * 40%) + (20% * 40% * 90%) = \sfrac{22}{125}
+
+\textcolor{luckydarkgray}{(Vente appel1et2 et pas3 ou Vente appel1et3 et pas2 ou Vente appel2et3 et pas1)}
+
+P[X=3] = (80% * 90% * 90%) = \sfrac{81}{125}
+
+\textcolor{luckydarkgray}{(Vente appel1 et appel2 et appel3)}
+
+#+attr_latex: :align |c|c|c|
+| /x_i/ | /p_i/           | F(/x_i/)        |
+|-------+-----------------+-----------------|
+|     0 | \sfrac{9}{125}  | \sfrac{9}{125}  |
+|     1 | \sfrac{13}{125} | \sfrac{22}{125} |
+|     2 | \sfrac{22}{125} | \sfrac{44}{125} |
+|     3 | \sfrac{81}{125} | 1               |
+
+***** Espérance:
+
+*\mu =* (0 * \sfrac{9}{125}) + (1 * \sfrac{13}{125}) + (2 * \sfrac{22}{125}) + (3 * \sfrac{81}{125})
+
+= \sfrac{13}{125} + \sfrac{44}{125} + \sfrac{243}{125}
+
+= \sfrac{300}{125} = \sfrac{12}{5} 
+***** Variance:
+
+\sigma^2 = (0^2 * \sfrac{9}{125}) + (1^2 * \sfrac{13}{125}) + (2^2 * \sfrac{22}{125}) + (3^2 * \sfrac{81}{125}) -- (\sfrac{12}{5})^2
+
+= \sfrac{13}{125} + \sfrac{88}{125} + \sfrac{729}{125} -- \sfrac{144}{25}
+
+= \sfrac{22}{25}
+***** Écart-type:
+
+\sigma = \(\sqrt{\sigma^2}\) = \(\sqrt{\sfrac{22}{25}}\) \(\textcolor{luckydarkgreen}{\mathbf{\simeq 0.93808...}}\)
+***** Probabilité de réaliser au moins 2 ventes:
+
+F[X \geq 2] = /p_2/ + /p_3/ = \sfrac{22}{125} + \sfrac{81}{125} = \sfrac{103}{125} \(\textcolor{luckydarkgreen}{\mathbf{= 0.824}}\)
+** Exercice 4
+Un installateur de frigos en commande trois nouveaux qui sont garantis par le constructeur.
+
+Chaque frigo a une probabilité de 0.2 d'être défectueux. Soit X la variable aléatoire du nombre total de frigos défectueux:
+1. Fournissez (valeurs et graphiques) la distribution de probabilité de X
+2. Fournissez (valeurs et graphiques) la fonction de répartition de X
+3. Calculez l'espérance mathématique et l'écart-type de X
+4. Le contrat de garantie stipule que les frais de réparation comportent une partie fixe de 25€ et une composante variable de 35€ par frigo à réparer. Quelle est l'espérance des frais de réparation dans le cas de la commande de trois frigos?
+*** Solution (\sigma\simeq0.6928;E[Y]=33.20€)
+X = nombre de frigos défectueux
+
+\Omega = {0, 1, 2, 3}
+**** *Réponse 1*:
+
+P[X=0] = 80% * 80% * 80% = \sfrac{64}{125} \textcolor{luckydarkgray}{(Frigo1 et Frigo2 et Frigo3 OK)}
+
+P[X=1] = 3 * (20% * 80% * 80%) = \sfrac{48}{125} \textcolor{luckydarkgray}{(3 possibilités d'avoir 1 frigo défectueux sur 3)}
+
+P[X=2] = 3 * (20% * 20% * 80%) = \sfrac{12}{125} \textcolor{luckydarkgray}{(3 possibilités d'avoir 2 frigos défectueux sur 3)}
+
+P[X=3] = (20% * 20% * 20%) = \sfrac{1}{125} \textcolor{luckydarkgray}{(Frigo1 et Frigo2 et Frigo3 défectueux)}
+#+attr_latex: :align |c|c|
+| x_i | p_i             |
+|-----+-----------------|
+|   0 | \sfrac{64}{125} |
+|   1 | \sfrac{48}{125} |
+|   2 | \sfrac{12}{125} |
+|   3 | \sfrac{1}{125}  |
+
+**** *Réponse 2:*
+#+attr_latex: :align |c|c|c|
+| x_i | p_i             | F(x_i)           |
+|-----+-----------------+------------------|
+|   0 | \sfrac{64}{125} | \sfrac{64}{125}  |
+|   1 | \sfrac{48}{125} | \sfrac{112}{125} |
+|   2 | \sfrac{12}{125} | \sfrac{124}{125} |
+|   3 | \sfrac{1}{125}  | 1                |
+
+**** *Réponse 3:*
+
+\mu = (0 * \sfrac{64}{125}) + (1 * \sfrac{48}{125}) + (2 * \sfrac{12}{125}) + (3 * \sfrac{1}{125})
+
+= \sfrac{3}{5}
+
+\sigma^2 = (0^2 * \sfrac{64}{125}) + (1^2 * \sfrac{48}{125}) + (2^2 * \sfrac{12}{125}) + (3^2 * \sfrac{1}{125}) -- (\sfrac{3}{5})^2
+
+= \sfrac{12}{25}
+
+\sigma = $\sqrt{\sfrac{12}{25}}$ \(\textcolor{luckydarkgreen}{\mathbf{\simeq 0.6928...}}\)
+
+**** *Réponse 4:*
+
+Y = Frais de réparation des frigos défectueux
+#+attr_latex: :align c|c|c|c
+| x_i | y_i | p_i             | F(x_i)           |
+|-----+-----+-----------------+------------------|
+|   0 |   0 | \sfrac{64}{125} | \sfrac{64}{125}  |
+|   1 |  60 | \sfrac{48}{125} | \sfrac{112}{125} |
+|   2 |  95 | \sfrac{12}{125} | \sfrac{124}{125} |
+|   3 | 130 | \sfrac{1}{125}  | 1                |
+
+\mu_y = (0 * \sfrac{64}{125}) + (60 * \sfrac{48}{125}) + (95 * \sfrac{12}{125}) + (130 * \sfrac{1}{125})
+
+= \sfrac{166}{5} \color{luckydarkgreen} *= 33.20€*\color{black}
+** Exercice 5
+Un jeu très simple consiste à lancer 2 dés. Un gain est associé au lancé de la façon suivante:
+
+Si on obtient un double 6, on gagne 5€. Si on obtient un seul 6, on gagne 2€. Dans tous les autres cas on perd 1€.
+1. Donnez la distribution de probabilité de la variable aléatoire représentant le gain associé à ce jeu
+2. Calculez l'espérance mathématique et l'écart-type de cette variable aléatoire. Ce jeu vous semble-t-il équitable? Pourquoi? Combien doit-on s'attendre à gagner à ce jeu si on joue 20 fois de suite?
+3. Richard Naqueur, le célèbre tricheur professionnel, a fabriqué un dé truqué: La probabilité que ce dé tombe sur 6 est trois fois plus élevée que la probabilité qu'il tombe sur n'importe quel autre chiffre. Pour camoufler sa fraude, il l'utilise avec un dé normal. Quelle est alors l'espérance du gain de Richard Naqueur? Combien de fois en moyenne doit-il jouer à ce jeu pour espérer gagner 50€?
+*** Solution (\sigma=1.58€;\mu=\sfrac{15}{24} il doit jouer 80 fois)
+**** *Réponse 1:*
+
+X = Gain d'un jeu de dé
+
+\Omega = {-1, 2, 5}
+
+P[X=-1] = P(Pas de 6) = \sfrac{5}{6} * \sfrac{5}{6} = \sfrac{25}{36}
+
+P[X=2] = P(Un seul 6) = 2 * (\sfrac{5}{6} * \sfrac{1}{6}) = \sfrac{10}{36}
+
+P[X=5] = P(Deux 6) = \sfrac{1}{6} * \sfrac{1}{6} = \sfrac{1}{36}
+#+attr_latex: :align c|c|c
+| x_i | p_i            | F(x_i)         |
+|-----+----------------+----------------|
+|  -1 | \sfrac{25}{36} | \sfrac{25}{36} |
+|   2 | \sfrac{10}{36} | \sfrac{35}{36} |
+|   5 | \sfrac{1}{36}  | 1              |
+**** *Réponse 2:*
+
+\mu = (-1 * \sfrac{25}{36}) + (2 * \sfrac{10}{36}) + (5 * \sfrac{1}{36})
+
+= 0
+
+\sigma^2 = ((-1)^2 * \sfrac{25}{36}) + (2^2 * \sfrac{10}{36}) + (5^2 * \sfrac{1}{36}) -- 0^2
+
+= \sfrac{10}{4}
+
+\sigma = $\sqrt{\sfrac{10}{4}}$ \(\textcolor{luckydarkgreen}{\mathbf{\simeq 1.58...}}\)
+**** *Réponse 3:*
+
+P(Dé truqué tombe sur 6) = \sfrac{3}{8}
+
+P[X=-1] = P(Pas de 6) = \sfrac{5}{6} * \sfrac{5}{8} = \sfrac{25}{48}
+
+P[X=2] = P(Un seul 6) = (\sfrac{1}{6} * \sfrac{5}{8}) + \sfrac{5}{6} * \sfrac{3}{8}) = \sfrac{5}{12}
+
+P[X=5] = P(Deux 6) = \sfrac{1}{6} * \sfrac{3}{8} = \sfrac{1}{16}
+#+attr_latex: :align c|c|c
+| x_i | p_i            | F(x_i)         |
+|-----+----------------+----------------|
+|  -1 | \sfrac{25}{48} | \sfrac{25}{48} |
+|   2 | \sfrac{5}{12}  | \sfrac{45}{48} |
+|   5 | \sfrac{1}{16}  | 1              |
+
+\mu = (-1 * \sfrac{25}{48}) + (2 * \sfrac{5}{12}) + (5 * \sfrac{1}{16})
+
+= \sfrac{15}{24}
+
+Nombre de coups pour espérer gagner 50€ = \(\dfrac{50}{\sfrac{15}{24}}\) \color{luckydarkgreen} *= Il doit jouer 80 fois*\color{black}
+** Exercice 9
+Pour être certain d'obtenir au moins un garçon, un couple décide d'avoir 5 enfants. Quelles sont ses chances de succès si la probabilité de naissance d'un garçon est de 0.52?
+*** Solution (\simeq0.9745)
+n = 5
+
+p = 0.52
+
+q = 1 -- 0.52 = 0.48
+
+X = nombre de garçons en 5 naissances ~ B(5, 0.52)
+
+P(Avoir au moins 1 garçon) = 1 -- P(Pas de garçon)
+
+P[X\geq1] = 1 -- P[X=0]
+
+1 -- P[X=0] = 1 -- $C_5^0(0.52)^0(0.48)^5$
+
+= 1 -- 1 * (1 * (0.48)^5) = 1 -- (0.48)^5 \color{luckydarkgreen} *\simeq 0.9745...*\color{black}
+** Exercice 11
+En jetant 6 fois une paire de dés, quelle est la probabilité d'avoir un total de 9 à 2 reprises? Et à au moins 2 reprises?
+*** Solution (\simeq0.1156;\simeq0.1368)
+9 = 3+6 = 6+3 = 4+5 = 5+4, il y a donc \sfrac{4}{36} = \sfrac{1}{9} possibilités d'obtenir 9.
+
+n = 6
+
+p = \sfrac{1}{9} (probabilité d'obtenir 9 avec deux dés)
+
+q = 1 -- \sfrac{1}{9} = \sfrac{8}{9}
+
+X = Nombre de 9 obtenus en 6 lancers ~ B(6, \sfrac{1}{9})
+
+C_6^2 = $\dfrac{6!}{2!(6-2)!}$ = 15
+
+P[X=2] = $C_2^6(\sfrac{1}{9})^2(\sfrac{8}{9})^{6-2} = 15(\sfrac{1}{9})^2(\sfrac{8}{9})^4$ \color{luckydarkgreen} *\simeq 0.1156...*\color{black}
+
+P[X\geq2] = 1 -- P[X=0] -- P[X=1]
+#+begin_quote
+P[X=0] = $C_6^0(\sfrac{1}{9})^0(\sfrac{8}{9})^6$ = 1 * (1 * (\sfrac{8}{9})^6) \simeq 0.4933
+
+P[X=1] = $C_6^1(\sfrac{1}{9})^1(\sfrac{8}{9})^5 = 6(\sfrac{1}{9})(\sfrac{8}{9})^5$ \simeq 0.3699
+#+end_quote
+P[X\geq2] = 1 -- 0.4933 -- 0.3699 \color{luckydarkgreen} *\simeq 0.1368...*\color{black}
+** Exercice 13
+Combien de fois doit-on jeter un dé pour que le probabilité d'obtenir au moins une fois 6 soit plus grande que 0.9?
+*** Solution (Au moins 13 fois)
+n = ?
+
+p = \sfrac{1}{6}
+
+q = \sfrac{5}{6}
+
+X = Nombre de 6 obtenus ~ B(?, \sfrac{1}{6})
+
+P(Au moins un 6) = P[X\geq1] \geq 0.9 \color{luckydarkgray}(on sait que P[X\geq1] = 1 -- P[X=0])\color{black}
+
+1 -- P[X=0] \geq 0.9
+
+--P[X=0] \geq 0.9 -- 1
+
+--P[X=0] \geq --0.1
+
+P[X=0] \leq 0.1 \color{luckydarkgray}(On inverse les signes, et donc, le \geq devient \leq)\color{black}
+
+\color{luckydarkgray}P[X=0] représente la probabilité de n'avoir que des échecs, c'est à dire $C_n^0p^0q^{n-0}$ = 1 * 1 * $q^n$, donc:\color{black}
+
+(\sfrac{5}{6})^n \leq 0.1 \color{luckydarkgray}(Pour trouver $n$ on doit effectuer le logarithme)\color{black}
+
+$log((\sfrac{5}{6})^n) \leq log(0.1)$
+
+$n*log(\sfrac{5}{6}) \leq log(0.1)$
+
+$n \geq \dfrac{log(0.1)}{log(\sfrac{5}{6})}$ \color{luckydarkgray}(Le \leq devient \geq car log(\sfrac{5}{6}) donne un résultat négatif)\color{black}
+
+$n \geq 12.6292$ \color{luckydarkgreen} *= Il faut lancer le dé au moins 13 fois*\color{black}
+** Exercice 17
+Quels sont l'espérance mathématique et l'écart-type:
+1. Du nombre de "face" pour le jet de 100 pièces de monnaie
+2. Du nombre d'As obtenus lors du jet de 30 dés de poker
+3. Du nombre de réponses correctes à 50 questions de "VRAI ou FAUX", les réponses étant données au hasard
+*** Solution (\mu=50;\sigma=5;\mu=5;\sigma\simeq2.0412...;\mu=25;\sigma\simeq3.5355...)
+**** *Réponse 1:*
+
+n = 100
+
+p = \sfrac{1}{2}
+
+q = \sfrac{1}{2}
+
+X = Nombre de "face" obtenus ~ B(100, \sfrac{1}{2})
+
+\mu = $np$ = 100 * \sfrac{1}{2} \color{luckydarkgreen} *= 50*\color{black}
+
+\sigma = $\sqrt{npq}$ = $\sqrt{100 * \sfrac{1}{2} * \sfrac{1}{2}}$ \color{luckydarkgreen} *= 5*\color{black}
+**** *Réponse 2:*
+
+n = 30
+
+p = \sfrac{1}{6}
+
+q = \sfrac{5}{6}
+
+X = Nombre d'As obtenus ~ B(30, \sfrac{1}{6})
+
+\mu = 30 * \sfrac{1}{6} \color{luckydarkgreen} *= 5*\color{black}
+
+\sigma = $\sqrt{30 * \sfrac{1}{6} * \sfrac{5}{6}}$ \color{luckydarkgreen} *\simeq 2.0412...*\color{black}
+**** *Réponse 3:*
+
+n = 50
+
+p = \sfrac{1}{2}
+
+q = \sfrac{1}{2}
+
+X = Nombre de réponses correctes ~ B(50, \sfrac{1}{2})
+
+\mu = 50 * \sfrac{1}{2} \color{luckydarkgreen} *= 25*\color{black}
+
+\sigma = $\sqrt{50 * \sfrac{1}{2} * \sfrac{1}{2}}$ \color{luckydarkgreen} *\simeq 3.5355...*\color{black}
+** Exercice 18
+Une compagnie pétrolière doit, sous peine de banqueroute, trouver au moins trois puits de pétrole. Elle réussit à financer douze forages, et pour chacun d'eux, elle a 20% de chances d'aboutir. Quelle est la probabilité de ne pas être en faillite?
+*** Solution (\simeq0.4416)
+n = 12
+
+p = 0.2
+
+q = 0.8
+
+X = Nombre de puits de pétrole trouvés ~ B(12, 0.2)
+
+P(Ne pas être en faillite) = P[X\geq3] = 1 -- P[X\leq2]
+
+= 1 -- P[X=0] -- P[X=1] -- P[X=2]
+
+= 1 -- $C_{12}^00.2^00.8^{12-0}$ -- $C_{12}^10.2^10.8^{12-1}$ -- $C_{12}^20.2^20.8^{12-2}$
+#+begin_quote
+\color{luckydarkgray}
+C_{12}^0 = 1
+
+C_{12}^1 = 12
+
+C_{12}^2 = $\dfrac{12!}{2!(12-2)!}$ = 66
+\color{black}
+#+end_quote
+= 1 -- (1 * 1 * 0.8^{12}) -- (12 * 0.2 * 0.8^{11}) -- (66 * 0.2^2 * 0.8^{10}) \color{luckydarkgreen} *\simeq 0.4416...*\color{black}
+** Exercice 25
+Dessinez sur un même graphique les gaussiennes de distribution N(8, 2) et N(12, 2). À quoi correspond leur intersection?
+*** Solution (2-25.png)
+\color{luckydarkgray}
+=(Voir Figure 21)=
+\color{black}
+
+Elles se croisent au point d'abscisse 10 (point d'inflexion).
+#+caption: Chapitre 2 Exercice 25 -- Graphiques
+#+attr_latex: :width 300px
+file:2-25.png
+** Exercice 27
+Pour la distribution normale réduite, calculez:
+1. P[Z < 1.34]
+2. P[0.57 < Z < 1.63]
+3. P[-0.68 < Z < 1.04]
+4. P[Z > --0.5]
+*** Solution (0.9099;0.2327;0.6026;0.6915)
+**** *Réponse 1:*
+
+P[Z < 1.34]
+
+= F(1.34) \color{luckydarkgreen} *= 0.9099* \color{black} \color{luckydarkgray} (Voir la table de la fonction de répartition de la distribution normale réduite)\color{black}
+**** *Réponse 2:*
+
+P[0.57 < Z < 1.63]
+
+= F(1.63) -- F(0.57) \color{luckydarkgray}(P[x < Z < y] = F(y) -- F(x))\color{black}
+
+= 0.9484 -- 0.7157 \color{luckydarkgreen} *= 0.2327*\color{black}
+**** *Réponse 3:*
+
+P[--0.68 < Z < 1.04]
+
+= F(1.04) -- F(--0.68)
+
+= F(1.04) -- (1 -- F(0.68)) \color{luckydarkgray}(F(x) = 1 -- F(--x))\color{black}
+
+= F(1.04) -- 1 + F(0.68)
+
+= 0.8508 -- 1 + 0.7518 \color{luckydarkgreen} *= 0.6026*\color{black}
+**** *Réponse 4:*
+
+P[Z > --0.5]
+
+= 1 -- P[Z < --0.5]
+
+= 1 -- F(--0.5)
+
+= 1 -- (1 -- F(0.5))
+
+= 1 -- 1 + F(0.5)
+
+= F(0.5) \color{luckydarkgreen} *= 0.6915*\color{black}
+** Exercice 28
+Pour une normale X~B(70, 25), calculez:
+1. P[56 < X < 83]
+2. P[X > 89]
+3. P[40 < X < 67]
+4. P[X = 82]
+*** Solution (0.4108;0.2236;0.3371;0)
+**** *Réponse 1:*
+
+P[56 < X < 83]
+
+= P[$\dfrac{56-70}{25}$ < $\dfrac{X-70}{25}$ < $\dfrac{83-70}{25}$] \color{luckydarkgray}(Z = $\dfrac{X-\mu}{\sigma}$)\color{black}
+
+= P[\sfrac{--14}{25} < \sfrac{X--70}{25} < \sfrac{13}{25}]
+
+= F(\sfrac{13}{25}) -- F(\sfrac{--14}{25})
+
+= F(\sfrac{13}{25}) -- (1 -- F(\sfrac{14}{25}))
+
+= F(\sfrac{13}{25}) -- 1 + F(\sfrac{14}{25})
+
+= 0.6985 -- 1 + 0.7123 \color{luckydarkgreen} *= 0.4108*\color{black}
+**** *Réponse 2:*
+
+P[X > 89]
+
+= 1 -- P[X < 89]
+
+= 1 -- P[$\dfrac{X-70}{25}$ < $\dfrac{89-70}{25}$]
+
+= 1 -- F(0.76)
+
+= 1 -- 0.7764 \color{luckydarkgreen} *= 0.2236*\color{black}
+**** *Réponse 3:*
+
+P[40 < X < 67]
+
+= P[$\dfrac{40-70}{25}$ < $\dfrac{X-70}{25}$ < $\dfrac{67-70}{25}$]
+
+= P[--1.2 < Z < --0.12]
+
+= F(--0.12) -- F(--1.2)
+
+= 1 -- F(0.12) -- (1 -- F(1.2))
+
+= F(1.2) -- F(0.12)
+
+= 0.8849 -- 0.5478 \color{luckydarkgreen} *= 0.3371*\color{black}
+**** *Réponse 4:*
+
+P[X = 82] \color{luckydarkgreen} *= 0* \color{black} \color{luckydarkgray}(En continu, les probabilités ponctuelles sont toujours nulles)\color{black}
+** Exercice 29
+Une certaine marque de pneus permet en moyenne de parcourir 60_000km avec un écart-type de 10 000km. On suppose la distribution normale. Quelle est la probabilité qu'un pneu soit usé avant 50 000km?
+*** Solution (0.1587)
+X = distance parcourue avec un pneu ~N(60 000, 10 000)
+
+P(Pneu usé avant 50 000km)
+
+= P[X < 50 000]
+
+= P[$\dfrac{X-60 000}{10 000}$ < $\dfrac{50 000-60 000}{10 000}$]
+
+= P[Z < --1]
+
+= F(--1)
+
+= 1 -- F(1)
+
+= 1 -- 0.8413 \color{luckydarkgreen} *= 0.1587*\color{black}
+** Exercice 30
+La vitesse des véhicules passant sur une nationale donnée est distribuée par une normale de moyenne 90km/h et d'écart-type 16km/h.
+1. Quelle est la proportion de véhicules roulant à plus de 110km/h?
+2. Quelle est la proportion de véhicules roulant entre 70km/h et 102km/h?
+3. On veut diviser les véhicules en trois catégories d'effectif égal: Les "lent", les "modéré" et les "rapide". Quelles sont les intervalles de vitesse qui les délimitent?
+*** Solution (0.1056;0.6678;83.12 et 96.88 km/h)
+**** *Réponse 1:*
+
+P[X > 110]
+
+= P[$\dfrac{X-90}{16}$ > $\dfrac{110-90}{16}$]
+
+= P[Z > 1.25]
+
+= 1 -- P[Z < 1.25]
+
+= 1 -- F(1.25)
+
+= 1 -- 0.8944 \color{luckydarkgreen} *= 0.1056* \color{black} \color{luckydarkgray}(Donc 10.58% des véhiculent roulent à plus de 110km/h)\color{black}
+**** *Réponse 2:*
+
+P[70 < X < 102]
+
+= P[$\dfrac{70-90}{16}$ < $\dfrac{X-90}{16}$ < $\dfrac{102-90}{16}$]
+
+= P[--1.25 < Z < 0.75]
+
+= F(0.75) -- F(--1.25)
+
+= F(0.75) -- (1 -- F(1.25))
+
+= F(0.75) -- 1 + F(1.25)
+
+= 0.7734 -- 1 + 0.8944 \color{luckydarkgreen} *= 0.6678* \color{black} \color{luckydarkgray}(Donc 66.78% des véhicules roulent entre 70 et 102km/h)\color{black}
+**** *Réponse 3:*
+
+\color{luckydarkgray}
+=(Voir Figure 22)=
+\color{black}
+#+caption: Chapitre 2 Exercice 30 Réponse 3 -- Graphique
+#+attr_latex: :width 200px
+file:2-30.png
+
+Trois catégories d'effectif égal, c'est à dire \sfrac{1}{3} dans chaque groupe (33.333...%).
+
+On cherche la valeur de Z2 qui est telle qu'il y a une probabilité \sfrac{2}{3} d'être à gauche de cette valeur.
+
+P[Z < Z2] = F(Z2) = \sfrac{2}{3} = 0.6666...
+
+On cherche la valeur la plus proche de 0.6666 dans le tableau de distribution normale réduite, on trouve alors 0.6664 qui correspond à 0.43, ainsi Z2 = 0.43 (donc Z1 = --0.43).
+
+On sait que Z = $\dfrac{X-\mu}{\sigma}$, donc on en conclut que X = \mu + Z\sigma, ainsi:
+
+X1 = 90 + 16*(--0.43) \color{luckydarkgreen} *= 83.12km/h*\color{black}
+
+X2 = 90 + 16*(0.43) \color{luckydarkgreen} *= 96.88km/h*\color{black}
+
+Lents: Ceux qui roulent à moins de 83.12km/h.
+Modérés: Ceux qui roulent entre 83.12km/h et 96.88km/h.
+Rapides: Ceux qui roulent à plus de 96.88km/h.
+** Exercice 31
+Le temps nécessaire aux étudiants pour terminer une interrogation est une variable normale de moyenne 90 minutes et d'écart-type 15 minutes.
+1. Quelle est la proportion d'étudiants qui terminent en moins de deux heures?
+2. Quelle devrait être la durée de l'épreuve si on souhaite que 90% des étudiants puissent la terminer?
+*** Solution (97.72%;01h49m12s)
+**** *Réponse 1:*
+
+P[X < 120]
+
+= P[$\dfrac{X-90}{15}$ < $\dfrac{120-90}{15}$]
+
+= P[Z < 2]
+
+= F(2) \color{luckydarkgreen} *= 0.9772*\color{black}
+**** *Réponse 2:*
+
+Soit Z tel que F(Z) = 0.9, le Z le plus proche dans la table est 1.28 qui correspond à 0.8997, on en déduit donc que X = 90 + 1.28*15 = 109.2 = 01h49m12s. \color{luckydarkgray}(X = \mu + Z\sigma)\color{black}
+
+90% des élèves termineront en 1h49m12s max.

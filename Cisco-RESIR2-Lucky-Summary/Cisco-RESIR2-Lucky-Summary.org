@@ -535,16 +535,16 @@ Exemple: (attribution du nom "=Sw-Floor-1=" au périphérique =Switch=)
 ** Configurer les mots de passe
 Pour *sécuriser* l'accès en mode d'exécution *utilisateur*, il faut utiliser les commandes suivantes:
 - =configure terminal= \textcolor{luckydarkgray}{(Entrer dans le mode de configuration globale)}
-- =line console 0= \textcolor{luckydarkgray}{(Accès à la première interface de la console de ligne, souvent la seule disponible)}
-- =password azerty= \textcolor{luckydarkgray}{(Configuration du mot de passe "azerty")}
-- =login= \textcolor{luckydarkgray}{(Activation de l'accès d'exécution utilisateur)}
+- =line console 0= \textcolor{luckydarkgray}{(Accéder à la première interface de la console de ligne, souvent la seule disponible)}
+- =password azerty= \textcolor{luckydarkgray}{(Configurer le mot de passe "azerty")}
+- =login= \textcolor{luckydarkgray}{(Activer l'accès d'exécution utilisateur)}
 - =end= \textcolor{luckydarkgray}{(Quitter tous les modes de configuration)}
 
 La console d'accès requiert à présent le mot de passe =azerty= avant d'accéder au mode d'exécution utilisateur.
 
 Pour *sécuriser* l'accès en mode *privilégié*, il faut utiliser les commandes suivantes:
 - =configure terminal= \textcolor{luckydarkgray}{(Entrer dans le mode de configuration globale)}
-- =enable secret azerty= \textcolor{luckydarkgray}{(Configuration du mot de passe "azerty")}
+- =enable secret azerty= \textcolor{luckydarkgray}{(Configurer le mot de passe "azerty")}
 - =exit= \textcolor{luckydarkgray}{(Quitter le mode de configuration)}
 
 Les lignes *VTY* (virtual terminal) activent l'accès *à distance* au périphérique en utilisant [[SSH][SSH]] ou [[Telnet][Telnet]].
@@ -552,13 +552,13 @@ Les lignes *VTY* (virtual terminal) activent l'accès *à distance* au périphé
 Pour sécuriser les lignes *VTY*,il faut utiliser les commandes suivantes:
 - =configure terminal= \textcolor{luckydarkgray}{(Entrer dans le mode de configuration globale)}
 - =line vty 0 15= \textcolor{luckydarkgray}{(Entrer dans le mode de configuration de VTY ligne)}
-- =password azerty= \textcolor{luckydarkgray}{(Configuration du mot de passe "azerty")}
-- =login= \textcolor{luckydarkgray}{(Activation de l'accès VTY)}
+- =password azerty= \textcolor{luckydarkgray}{(Configurer le mot de passe "azerty")}
+- =login= \textcolor{luckydarkgray}{(Activer l'accès VTY)}
 - =end= \textcolor{luckydarkgray}{(Quitter tous les modes de configuration)}
 ** Chiffrer les mots de passe
 Pour *chiffrer* tous les mots de passe en texte clair, il faut utiliser les commandes suivantes:
 - =configure terminal= \textcolor{luckydarkgray}{(Entrer dans le mode de configuration globale)}
-- =service password-encryption= \textcolor{luckydarkgray}{(Activation du chiffrement des mots de passe non chiffrés)}
+- =service password-encryption= \textcolor{luckydarkgray}{(Activer le chiffrement des mots de passe non chiffrés)}
 - =end= \textcolor{luckydarkgray}{(Quitter le mode de configuration globale)}
 - =show running-config= \textcolor{luckydarkgray}{(Vérifier que les mots de passe sont maintenant chiffrés)}
 ** Fichiers de configuration
@@ -578,14 +578,14 @@ Pour restaurer l'appareil dans sa configuration précédente (startup-config), i
 \textcolor{luckydarkgray}{(Cette commande impliquera une brève interruption du réseau)}
 #+end_center
 Pour supprimer toutes les configurations, il faut utiliser les commandes suivantes:
-- =erase startup-config= \textcolor{luckydarkgray}{(Supprimer le fichier "startu-config")}
+- =erase startup-config= \textcolor{luckydarkgray}{(Supprimer le fichier "startup-config")}
 
 - =reload= \textcolor{luckydarkgray}{(Supprimer le fichier "running-config" et charger la configuration initiale d'origine)}
 ** Enregistrer une configuration dans un fichier texte
 Pour *enregistrer* une configuration dans un *fichier texte*, il faut utiliser un [[EmulationTerminal][logiciel d'émulation de terminal]] \textcolor{luckydarkgray}{(Ex: PuTTY)} connecté à un [[Switch][Switch]].
 - *Ouvrir* le logiciel d'émulation de terminal
 - *Activer l'enregistrement* dans le logiciel d'émulation, et choisir un emplacement de fichier de sortie
-- *Exécuter* la commande "=show running-config=" ou "=show startup-config=" dans l'invité de commande d'exécution privilégiée \textcolor{luckydarkgray}{(Le texte affiché dans le fenêtre du terminal est alor placé dans le fichier configuré à la deuxième étape)}
+- *Exécuter* la commande "=show running-config=" ou "=show startup-config=" dans l'invité de commande d'exécution privilégiée \textcolor{luckydarkgray}{(Le texte affiché dans la fenêtre du terminal est alors placé dans le fichier configuré à la deuxième étape)}
 - *Désactiver l'enregistrement* dans le logiciel d'émulation
 
 Pour *restaurer* un fichier de configuration sur un périphérique:
@@ -595,18 +595,61 @@ Pour *restaurer* un fichier de configuration sur un périphérique:
 \textcolor{luckydarkgray}{(Le texte contenu dans le fichier est appliqué sous forme de commandes dans l'environnement CLI et devient la configuration en cours du périphérique)}
 ** Configuration de l'interface de commutateur virtuelle
 Pour accéder à distance au commutateur, une [[IPAddress][adresse IP]] et un [[SubnetMask][masque de sous-réseau]] doivent être configurés.
+
+- =configure terminal= \textcolor{luckydarkgray}{(Accéder au mode de configuration global)}
+- =interface vlan1= \textcolor{luckydarkgray}{(Accéder au mode de configuration interface de vlan1)}
+- =ip address 192.168.1.20 255.255.255.0= \textcolor{luckydarkgray}{(Ex: Attribuer l'adresse IP en fonction du masque)}
+- =no shutdown= \textcolor{luckydarkgray}{(Activer l'interface virtuelle)}
+- =exit= \textcolor{luckydarkgray}{(Quitter le mode de config interface)}
+- =ip default-gateway 192.168.1.1= \textcolor{luckydarkgray}{(Attribuer l'adresse IP à la passerelle par défaut)}
+* Exigences relatives au Protocole de Réseau
+Les protocoles informatiques communs comprennent le exigences suivantes:
+- Codages des messages
+- Format et encapsulation des messages
+- Taille des messages
+- Synchronisation des messages
+- Options de remise des messages
+
+** Codages des messages
+Il faut que l'[[Sender][expéditeur]] et la [[Destination][destination]] utilisent le même système de /codage/ et de /décodage/.
+
+\textcolor{luckydarkgray}{(Ex: Si on veut dire quelque chose à quelqu'un, il vaut mieux utiliser une langue qu'il comprend)}
+** Format et encapsulation des messages
+Lorsqu'un message est envoyé de la source à la destination, il doit suivre un /format/ ou un /structure/ spécifique. Celui-ci dépend du type de message et du type de canal utilisé.
+
+\textcolor{luckydarkgray}{(Ex: Si on veut envoyer un message à quelq'un, on peut l'envoyer via une lettre par la poste. Celle-ci devra comporter l'adresse du destinataire placée au bon endroit, sans quoi la lettre ne sera pas transmise)}
+** Taille des messages
+
 * TODO Suite en cours de création...
 * Vocabulaire de base
 ** <<OSIModel>>OSI Model (Open Systems Interconnection)
 Le modèle OSI est une *norme de communication*, en réseau, de tous les systèmes informatiques. C'est un modèle de communications entre ordinateurs proposé par l'ISO (Organisation internationale de normalisation) qui décrit les fonctionnalités nécessaires à la communication et l'organisation de ces fonctions.
 #+caption: Modèle OSI [[https://fr.wikipedia.org/wiki/Mod%C3%A8le_OSI#Architecture_en_couches][(Wikipédia)]]
-file:ModeleOsi-Schema.png
+file:ModelOSI-Schema.png
 ** <<Protocol>>Protocol
 Ensemble de *règles* qui régissent les *échanges de données* ou le comportement collectif de processus ou d'ordinateurs en réseaux ou d'objets connectés.
+#+begin_quote
+\color{luckydarkgray}
+Exemple de protocole si on veut discuter avec quelqu'un:
+
+- On l'appelle pour savoir s'il est attentif et prêt à discuter
+- On attend sa réponse pour savoir si on peut commencer la discussion
+- On parle, en se répondant mutuellement à chaque phrase
+- En cas de non réponse à une phrase, on peut lui demander s'il est attentif
+- On précise que l'on va devoir mettre fin à la discussion
+- On lui dit au revoir en partant, pour mettre fin la discussion
+\color{black}
+#+end_quote
 ** <<UploadDownload>>Téléchargement ascendant/descendant
 **** *Ascendant:* Envoi de données. \textcolor{luckydarkgray}{(Upload)}
 **** *Descendant:* Réception de données. \textcolor{luckydarkgray}{(Download)}
 
+** <<Sender>>Sender (Expéditeur)
+Source de l'information. Celui qui envoie le message.
+** <<Destination>>Destination
+Celui qui reçoit le message et l'interprète.
+** <<Canal>>Canal
+Support qui assure le cheminement du message de la source à la destination.
 ** <<Paquet>>Packet
 Afin de transmettre un message d'une machine à une autre sur un réseau, celui-ci est *découpé* en plusieurs paquets transmis séparément.
 
