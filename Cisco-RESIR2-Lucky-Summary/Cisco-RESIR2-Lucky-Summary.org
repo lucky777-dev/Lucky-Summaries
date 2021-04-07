@@ -617,7 +617,7 @@ Il faut que l'[[Sender][expéditeur]] et la [[Destination][destination]] utilise
 ** Format et encapsulation des messages
 Lorsqu'un message est envoyé de la source à la destination, il doit suivre un /format/ ou un /structure/ spécifique. Celui-ci dépend du type de message et du type de canal utilisé.
 
-\textcolor{luckydarkgray}{(Ex: Si on veut envoyer un message à quelq'un, on peut l'envoyer via une lettre par la poste. Celle-ci devra comporter l'adresse du destinataire placée au bon endroit, sans quoi la lettre ne sera pas transmise)}
+\textcolor{luckydarkgray}{(Ex: Si on veut envoyer un message à quelqu'un, on peut l'envoyer via une lettre par la poste. Celle-ci devra comporter l'adresse du destinataire placée au bon endroit, sans quoi la lettre ne sera pas transmise)}
 ** Taille des messages
 
 * TODO Suite en cours de création...

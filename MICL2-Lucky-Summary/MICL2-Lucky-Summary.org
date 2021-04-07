@@ -1,0 +1,494 @@
+#+latex_class: luckypdf
+#+language: fr
+#+title: MICL2 - Lucky Summary
+#+author: Sm!le42
+
+* TD01
+** Théorie
+*** Registres
+Les processeurs 64 bits de la famille x86 possèdent 16 registres d'utilité générale:
+
+\mintinline{nasm}{rax}, \mintinline{nasm}{rbx}, \mintinline{nasm}{rcx}, \mintinline{nasm}{rdx}, \mintinline{nasm}{rsp}, \mintinline{nasm}{rbp}, \mintinline{nasm}{rsi}, \mintinline{nasm}{rdi}, \mintinline{nasm}{r8}, \mintinline{nasm}{r9}, \mintinline{nasm}{r10}, \mintinline{nasm}{r11}, \mintinline{nasm}{r12}, \mintinline{nasm}{r13}, \mintinline{nasm}{r14} et \mintinline{nasm}{r15}
+- Les registres \mintinline{nasm}{rbx} \mintinline{nasm}{rcx} et \mintinline{nasm}{rdx} ont la même structure interne que \mintinline{nasm}{rax}.
+- Les registres \mintinline{nasm}{rdi}, \mintinline{nasm}{rsp} et \mintinline{nasm}{rbp} ont la même structure interne que \mintinline{nasm}{rsi}.
+- Les registres \mintinline{nasm}{r9} à \mintinline{nasm}{r15} ont la même structure interne que \mintinline{nasm}{r8}.
+- Les suffixes =b, w= et =d= signifient \mintinline{nasm}{byte}, \mintinline{nasm}{word} et \mintinline{nasm}{double} \mintinline{nasm}{word}.
+*** =nasm -f elf64 -F dwarf test.asm=
+\color{luckydarkgray}
+=nasm= : Commande
+
+=-f efl64= : Format du fichier objet
+
+=-F dwarf= : Informations de débogage (facultatif)
+
+=test.asm= : Fichier à compiler (code source)
+
+Cette commande va générer un fichier objet nommé "=test.o=".
+\color{black}
+*** =ld -o test -e main test.o=
+\color{luckydarkgray}
+=ld= : Commande
+
+=-o test= : Fichier de destination "test"
+
+=-e main= : Nom de la fonction (=global main=)
+
+=test.o= : Fichier test.o à compiler
+
+Cette commande va générer un fichier exécutable nommé "=test=".
+\color{black}
+
+*** =./test=
+\color{luckydarkgray}
+Cette commande va exécuter le fichier "=test=".
+\color{black}
+* TD02
+** Théorie
+*** Valeurs booléennes
+Les valeurs booléennes sont au nombre de deux:
+- =Vrai= = 1
+- =Faux= = 0
+*** Registre =rflags=
+Le registre =rflags= est un registre de 64 bits dont certain sont des indicateurs (drapeaux ou flags).
+
+Ceux que nous utiliserons ici sont les suivants:
+- \mintinline{nasm}{CF} ou Carry Flag, bit 0 \color{luckydarkgray}(Dernier bit testé)\color{black}
+- \mintinline{nasm}{ZF} ou Zero Flag, bit 6 \color{luckydarkgray}(Vrai si 0 et Faux si pas 0)\color{black}
+- \mintinline{nasm}{SF} ou Sign Flag, bit 7 \color{luckydarkgray}(Vrai si négatif et Faux si négatif)\color{black}
+- \mintinline{nasm}{OF} ou Overflow Flag, bit 11 \color{luckydarkgray}(Vrai si overflow et Faux si pas overflow)\color{black}
+#+begin_quote
+*Remarque:*
+
+\textcolor{luckydarkred}{Attention} au \mintinline{nasm}{ZF} qui peut porter à confusion:
+- Si le nombre testé n'est *PAS ÉGAL* à 0, alors ZF = 0
+- Si le nombre testé *EST ÉGAL* à 0, alors ZF = 1.
+#+end_quote
+** Exercice 1
+Quelles sont les valeurs des =registres= et des =flags= dans le code ci-dessous:
+
+#+begin_src nasm
+global main
+section .text
+main:
+   mov al, 10011101b
+   not al   ;al=01100010b, zf=0, sf=1
+
+   mov al, 11100101b
+   mov ah, 00101010b
+   and al, ah   ;al=00100000b, zf=0, sf=0
+
+   mov al, 11100101b
+   mov ah, 00001010b
+   and al, ah   ;al=00000000b, zf=1, sf=0
+
+   mov al, 01100101b
+   mov ah, 01010101b
+   or al, ah   ;al=01110101b, zf=0, sf=0
+
+   mov al, 11100101b
+   mov ah, 01010101b
+   or al, ah   ;al=11110101, zf=0, sf=1
+
+   mov dx, 1100010011100101b
+   mov si, 0011000001100010b
+   xor dx, si   ;dx=1111010010000111b, zf=0, sf=1
+
+   mov al, 11100101b
+   mov ah, 11100101b
+   xor al, ah   ;al=00000000b, zf=1, sf=0
+
+end:
+   mov rax, 60
+   mor rdi, 0
+   syscall
+#+end_src
+** Exercice 2
+En utilisant la table =ASCII=, écrivez un code qui convertit un caractère minuscule en majuscule, à l'aide d'un masque.
+
+#+caption: Table ASCII
+#+attr_latex: :width 300px
+file:ASCIITable.png
+
+#+begin_src nasm
+global main
+section .text
+main:
+   mov al, 'd'
+   mov ah, al          ;Copie le contenu d'al dans ah
+   and ah, 11011111b   ;Reset le bit 5 à 0 (car 'D' = 'd'-32 ou 68 = 100-32)
+end:
+   mov rax, 60
+   mov rdi, 0
+   syscall
+#+end_src
+** Exercice 3
+Recodez le programme de l'exercice précédant (2) à l'aide d'une ou plusieurs instructions de manipulation de bits au lieu d'utiliser des masques. (Utilisez \mintinline{nasm}{bx} comme destination au lieu de \mintinline{nasm}{ah}).
+
+#+begin_src nasm
+global main
+section .text
+main:
+   mov al, 'd'
+   mov bx, al   ;Copie le contenu d'al dans bx
+   btr bx, 5    ;Reset le bit 5 à 0 (car 'D' = 'd'-32 ou 68 = 100-32)
+end:
+   mov rax, 60
+   mov rdi, 0
+   syscall
+#+end_src
+** Exercice 4
+Écrivez un code qui, partant du contenu de \mintinline{nasm}{bl} dont on garantit qu'il s'agit d'un entier dans l'intervalle =[0, 9]=, stocke dans \(\mintinline{nasm}{bh}\) le code =ASCII= du caractère représentant ce chiffre décimal.
+
+#+begin_src nasm
+global main
+section .text
+main:
+   mov bh, bl         ;Copie bl dans bh
+   or bh, 00110000b   ;Effectue un OR avec le masque pour Set les bits 5 et 6 à 1
+end:
+   mov rax, 60
+   mov rdi, 0
+   syscall
+#+end_src
+* TD03
+** Exercice 1
+Écrivez un code source complet qui:
+1. Initialise \mintinline{nasm}{rax} à la valeur de votre choix
+2. Met \mintinline{nasm}{rbx} à 1 si le contenu de \mintinline{nasm}{rax} est non nul
+
+#+begin_src nasm
+global main
+section .text
+main:
+   mov rax, 42
+   or rax, 00000000b   ;Effectue un masque neutre pour récupèrer les flags
+   jz endif:           ;Si rax = 0 alors saute à endif
+      mov rbx, 1       ;Ici, rax != 0
+endif:
+   mov rax, 60
+   mov rdi, 0
+   syscall
+#+end_src
+** Exercice 2
+Écrivez un code source complet qui:
+1. Initialise \mintinline{nasm}{rax} à la valeur de votre choix
+2. Met \mintinline{nasm}{r8} à =1= si le contenu de \mintinline{nasm}{rax} est impair
+3. Met \mintinline{nasm}{r8} à =0= si le contenu de \mintinline{nasm}{rax} est pair
+
+#+begin_src nasm
+global main
+section .text
+main:
+   mov rax, 42
+   bt rax, 0      ;Teste le bit de poid faible (pair ou impair)
+   jc else        ;Si le bit de poid faible est à 1 alors saute à else
+      mov r8, 0   ;Ici, rax est pair
+      jmp endif   ;Saute à endif pour éviter le else
+else:
+   mov r8, 1      ;Ici, rax est impair
+endif:
+   mov rax, 60
+   mov rdi, 0
+   syscall
+#+end_src
+** Exercice 3
+Écrivez un code source complet qui:
+1. Initialise \mintinline{nasm}{r14} et \mintinline{nasm}{r15} aux valeurs de votre choix
+2. Assigne la valeur 0 aux registres \mintinline{nasm}{r14} et \mintinline{nasm}{r15} si leurs contenus sont égaux
+3. Échange les contenus des registres \mintinline{nasm}{r14} et \mintinline{nasm}{r15} s'ils sont différents
+
+#+begin_src nasm
+global main
+section .text
+   mov r14, 5
+   mov r15, 10
+   cmp r14, r15      ;Compare r14 à r15
+   jnz else          ;Si r14 != r15 alors saute à else
+      mov r14, 0     ;Ici, r14 == r15
+      mov r15, 0
+      jmp endif      ;Saute à endif pour éviter le else
+else:
+   mov r13, r14      ;Inverse r14 et r15 en utilisant une mémoire temporaire (r13)
+   mov r14, r15
+   mov r15, r13
+endif:
+   mov rax, 60
+   mov rdi, 0
+   syscall
+#+end_src
+** Exercice 4
+Écrivez un code source complet qui:
+1. Initialise \mintinline{nasm}{rax} et \mintinline{nasm}{rbx} aux valeurs de votre choix
+2. Copie dans \mintinline{nasm}{r8} le maximum des valeurs contenues dans \mintinline{nasm}{rax} et \mintinline{nasm}{rbx}
+3. Copie dans \mintinline{nasm}{r9} le minimum des valeurs de \mintinline{nasm}{rax} et \mintinline{nasm}{rbx}
+
+#+begin_src nasm
+global main
+section .text
+   mov rax, 5
+   mov rbx, 10
+   cmp rax, rbx      ;Compare rax à rbx
+   js else           ;Si s == 1 alors rax < rbx donc saute à else
+      mov r8, rax    ;Ici, rax >= rbx
+      mov r9, rbx
+      jmp endif      ;Saute à endif pour éviter le else
+else:
+   mov r8, rbx
+   mov r9, rax
+endif:
+   mov rax, 60
+   mov rdi, 0
+   syscall
+#+end_src
+** Exercice 5
+Écrivez un code source complet qui:
+1. Initialise \mintinline{nasm}{rdi} à la valeur de votre choix
+2. Met \mintinline{nasm}{rsi} à =0= si \mintinline{nasm}{rdi} est pair
+3. Met \mintinline{nasm}{rsi} à =1= si \mintinline{nasm}{rdi} est un multiple de =2=, sans être un multiple d'une plus grande puissance de =2=
+4. Met \mintinline{nasm}{rsi} à =2= si \mintinline{nasm}{rdi} est un multiple de =4=, sans être un multiple d'une plus grande puissance de =2=
+5. Met \mintinline{nasm}{rsi} à =3= si \mintinline{nasm}{rdi} est un multiple de =8=, sans être un multiple d'une plus grande puissance de =2=
+
+#+begin_src nasm
+global main
+section .text
+   mov rdi, 10
+   bt rdi, 0           ;Vérifie le bit de poid faible de rdi
+   jnc even            ;Si le bit de poid faible == 1 alors saute à even (pair)
+      mov rsi, 0       ;Ici, rdi est impair
+      jmp end          ;Saute à end pour éviter les autres conditions
+even:
+   bt rdi, 1           ;Vérifie le bit 1 (multiple de 2 et pas plus)
+   jnc notTwo          ;Si pas multiple de 2, alors saute à notTwo
+      mov rsi, 1       ;Ici, rdi est un multiple de 2
+      jmp end          ;Saute à end pour éviter les autres conditions
+notTwo:
+   bt rdi, 2           ;Vérifie le bit 2 (multiple de 4 et pas plus)
+   jnc notFour         ;Si pas multiple de 4 alors saute à notFour
+      mov rsi, 2       ;Ici, rdi est un multiple de 4
+      jmp end          ;Saute à end pour éviter la dernière condition
+notFour:
+   or rdi, 00000000b   ;Effectue un masque neutre pour récupérer les flags
+   jz end              ;Si rdi == 0 alors saute à end car pas multiple de 8 ou plus
+      mov rsi, 3       ;Ici, rdi est un multiple de 8, 16, 32 ou 64
+end:
+   mov rax, 60
+   mov rdi, 0
+   syscall
+#+end_src
+* TD04
+** Théorie
+*** Sections (.text, .data, .rodata, .bss)
+#+attr_latex: :align c|c
+| Nom                        | Rôle                                              |
+|----------------------------+---------------------------------------------------|
+| \mintinline{nasm}{.text}   | Instructions exécutables du programme             |
+| \mintinline{nasm}{.data}   | Variables globales explicitement initialisées     |
+| \mintinline{nasm}{.rodata} | Constantes globales explicitement initialisées    |
+| \mintinline{nasm}{.bss}    | Variables globales implicitement initialisées à 0 |
+*** Pseudo-instructions variables initialisées (=DB, DW, DD, DQ=)
+#+attr_latex: :align c|c|c
+| Taille (octets) | Pseudo-instruction    | Signification     |
+|-----------------+-----------------------+-------------------|
+|               1 | \mintinline{nasm}{DB} | Define Byte       |
+|               2 | \mintinline{nasm}{DW} | Define Word       |
+|               4 | \mintinline{nasm}{DD} | Define Doubleword |
+|               8 | \mintinline{nasm}{DQ} | Define Quadword   |
+*** Pseudo-instructions variables non initialisées (=RESB, RESW, RESD, RESQ=)
+#+attr_latex: :align c|c|c
+| Taille (octets) | Pseudo-instruction      | Signification      |
+|-----------------+-------------------------+--------------------|
+|               1 | \mintinline{nasm}{RESB} | Reserve Byte       |
+|               2 | \mintinline{nasm}{RESW} | Reserve Word       |
+|               4 | \mintinline{nasm}{RESD} | Reserve Doubleword |
+|               8 | \mintinline{nasm}{RESQ} | Reserve Quadword   |
+*** Accès à une variable
+Une variable correspond à une adresse mémoire sur 8 octets. Si l'on veut pouvoir accéder à la valeur contenue dans la variable, il faudra placer l'adresse entre crochets.
+#+begin_src nasm
+;Exemple variables
+
+section .data
+   test DD 42        ;Entier sur 4 bytes
+section .text
+   mov rax, test     ;On met l'adresse de test dans rax (8 bytes)
+   mov ebx, [test]   ;On met la valeur de test dans ebx (4 bytes car ebx)
+   mov ecx, [rax]    ;On met le contenu de rax dans ecx car [rax]=[test] (4 bytes)
+#+end_src
+*** Taille de variable
+L'assembleur =nasm= ne retient pas la taille des variables. Lorsqu'on accède au contenu d'une variable, le nombre de /bytes/ déréférencés à partir de l'adresse entre crochets est déduit de la taille du second opérande, s'il existe et s'il ne s'agit pas d'un immédiat. Dans le cas contraire, il faut renseigner la taille de la donnée à l'aide d'un des spécificateurs de taille (byte, word, dword, qword).
+#+begin_src nasm
+section .data              ;Déclaration des variables
+   testB DB -1
+   testW DW 23
+   testD DD -1
+   testQ DQ 130_761_944
+section .text              ;Changeons la valeur des variables:
+   mov byte [testB], 7     ;Il faut préciser que testB est un Byte
+   mov word [testW], 14    ;Il faut préciser que testW est un Word
+   mov dword [testD], 21   ;Il faut préciser que testD est un Double Word
+   mov qword [testQ], 42   ;Il faut préciser que testQ est un Quad Word
+#+end_src
+*** Little endian (petit boutisme)
+Contrairement au /big endian/, avec le /little endian/, le byte de rang le plus /petit/ est stocké à l'adresse la plus /petite/.
+
+L'architecture x86 adopte le little endian.
+#+begin_src nasm
+;Exemple little endian
+
+section .data
+   vw DW 0x0102
+; ---> petites adresses ---> grandes adresses --->
+;      vw     vw+1
+; .../ 0x02 / 0x01 /...
+   vq DQ 0x1122334455667788
+; ---> petites adresses ---> grandes adresses --->
+;      vq     vq+1   vq+2   vq+3   vq+4   vq+5   vq+6   vq+7
+; .../ 0x88 / 0x77 / 0x66 / 0x55 / 0x44 / 0x33 / 0x22 / 0x11 /...
+;
+; Vue complète de la section .data :
+; ---> petites adresses ---> grandes adresses --->
+;      vw     vw+1   vq     vq+1   vq+2   vq+3   vq+4   vq+5   vq+6   vq+7
+; .../ 0x02 / 0x01 / 0x88 / 0x77 / 0x66 / 0x55 / 0x44 / 0x33 / 0x22 / 0x11 /...
+#+end_src
+** Exercice 1
+Complétez les commentaires:
+#+begin_src nasm
+global main
+section .data
+   var1 DB 1
+   var2 DB 2
+   var3 DW 0x0304
+   var4 DQ 0x000000008000FFFF
+section .text
+main:
+   mov rax, var1     ;rax contient l'adresse de var1
+   mov al, [var1]    ;al contient 00000001b
+   mov ax, [var1]    ;ax contient 0000000000000001b
+   mov al, [var3]    ;al contient 0x04
+   mov ax, [var3]    ;ax contient 0x0304
+   mov rax, -1       ;rax contient -1
+   mov eax, [var4]   ;eax contient 0x8000FFFF
+end:
+   mov rax, 60
+   mov rdi, 0
+   syscall
+#+end_src
+** Exercice 2
+Écrivez un code source complet qui déclare une variable \mintinline{nasm}{nb} de taille /4 bytes/. Il place ensuite l'adresse de cette variable dans \mintinline{nasm}{rax} et son contenu dans \mintinline{nasm}{rbx}.
+#+begin_src nasm
+global main
+section .data
+   nb DD 42        ;Déclaration de la variable nb sur 4 bytes
+section .text
+   mov rax, nb     ;On place l'adresse de nb dans rax
+   mov rbx, [nb]   ;On place la valeur de nb dans rbx
+end:
+   mov rax, 60
+   mov rdi, 0
+   syscall
+#+end_src
+** Exercice 3
+Écrivez un code source complet qui déclare une variable sur /8 bytes/ implicitement initialisée à =0= puis lui assigne la valeur =42=.
+#+begin_src nasm
+global main
+section .bss
+   var RESQ 1            ;On déclare une variable "var" (1x8 bytes)
+section .text
+   mov qword [var], 42   ;On assigne la valeur 42 à "var" en précisant la taille
+end:
+   mov rax, 60
+   mov rdi, 0
+   syscall
+#+end_src
+** Exercice 4
+Soient les déclarations suivantes:
+#+begin_src nasm
+section .data
+   b0 DB 0
+   b1 DB 0
+   b2 DB 0
+   b3 DB 0
+section .rodata
+   nb DD 0x12345678
+#+end_src
+Écrivez un code source complet qui stocke dans \mintinline{nasm}{b0} le bytet de rang =0= de \mintinline{nasm}{nb}, dans \mintinline{nasm}{b1} celui de rang 1, dans \mintinline{nasm}{b2} celui de rang 2 et finalement dans \mintinline{nasm}{b3} celui de rang 3 (Utilisez un ou des registres intermédiaires).
+#+begin_src nasm
+gobal main
+section .data
+   b0 DB 0
+   b1 DB 0
+   b2 DB 0
+   b3 DB 0
+section .rodata
+   nb DD 0x12345678
+section .text
+   mov al, nb            ;On stocke l'adresse de nb dans al (1 byte)
+   mov byte [b0], al     ;On stocke le byte à l'adresse al dans b0
+   mov byte [b1], al+1   ;On stocke le byte à l'adresse al+1 dans b1
+   mov byte [b2], al+2   ;On stocke le byte à l'adresse al+2 dans b2
+   mov byte [b3], al+3   ;On stocke le byte à l'adresse al+3 dans b3
+end:
+   mov rax, 60
+   mov rdi, 0
+   syscall
+#+end_src
+** Exercice 5
+Écrivez un code source complet qui:
+1. Déclare deux variables initialisées aux valeurs de votre choix
+2. Échange les contenus de ces variables
+#+begin_src nasm
+global main
+section .data
+   var1 DB 7        ;Déclaration var1 = 7
+   var2 DB 14       ;Déclaration var2 = 14
+section .text
+   mov al, [var1]   ;Met la valeur de var1 dans le registre al (1 byte)
+   mov ah, [var2]   ;Met la valeur de var2 dans le registre ah (1 byte)
+   mov [var1], ah   ;Remplace var1 par la valeur de ah (var2)
+   mov [var2], al   ;Remplace var2 par la valeur de al (var1)
+end:
+   mov rax, 60
+   mov rdi, 0
+   syscall
+#+end_src
+** Exercice 6
+Écrivez un code source complet qui déclare trois variables dont deux sont constantes et explicitement initialisées mais pas la troisième. Le contenu de cette dernière est calculé. Il est égal au minimum des deux autres.
+#+begin_src nasm
+global main
+section .rodata
+   var1 DB 7                  ;Déclaration de var1 = 7 (1 byte)
+   var2 DB 14                 ;Déclaration de var2 = 14 (1 byte)
+section .bss
+   varMin RESB 1              ;Déclaration de varMin (1x1 byte)
+section .text
+   cmp var1, var2             ;Comparaison de var1 avec var2 (var1 - var2)
+   js else                    ;Si SF = 1 alors var1 < var2 donc saute à else
+      mov al, var2            ;Ici, var1 >= var2
+      mov [varMin], al
+      jmp endif               ;On saute à endif pour éviter le else
+else:
+   mov al, var1               ;Ici, var1 < var2
+   mov [varMin], al
+endif:
+   mov rax, 60
+   mov rdi, 0
+   syscall
+#+end_src
+* TD05
+** Théorie
+*** Appels système (=syscall=)
+Services offerts par le système d'exploitation pour effectuer diverses tâches. Chaque appel système est identifié par un numéro appelé /numéro de service/.
+
+L'appel système se fait au travers de l'instruction \mintinline{nasm}{syscall}. Celle-ci a pour effet de basculer le =CPU= en mode privilégié et passer la main au service système demandé, identifié par son numéro. \color{luckydarkgray}(Voir fichier =/usr/include/asm/unistd_64.h=)\color{black}
+
+Sous GNU/Linux 64 bits, un appel système en langage d'assemblage se fait en quatre étapes:
+1. Placer le numéro du service désiré dans \mintinline{nasm}{rax}
+2. Mettre les paramètres, s'il y en a, dans \mintinline{nasm}{rdi}, \mintinline{nasm}{rsi}, \mintinline{nasm}{rdx}, \mintinline{nasm}{rcx}, \mintinline{nasm}{r8} et \mintinline{nasm}{r9}
+3. Appeler le système par l'instruction \mintinline{nasm}{syscall}
+4. Consulter dans \mintinline{nasm}{rax} la valeur de retour, s'il y en a une, ou le statut d'erreur, si nécessaire ou utile
+#+begin_quote
+*Remarque:*
+Les registres \mintinline{nasm}{rcx}, \mintinline{nasm}{r11} et \mintinline{nasm}{rax} seront modifiés lors d'un \mintinline{nasm}{syscall}.
+- \mintinline{nasm}{rcx} pour la sauvegarde de la valeur du registre \mintinline{nasm}{rip}
+- \mintinline{nasm}{r11} pour la sauvegarde du registre \mintinline{nasm}{rflags}
+- \mintinline{nasm}{rax} pour la valeur de retour de l'appel système
+#+end_quote

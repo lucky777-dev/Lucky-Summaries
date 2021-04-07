@@ -1,0 +1,245 @@
+#+latex_class: luckypdf
+#+language: fr
+#+title: DON2 - Lucky Summary
+#+author: Sm!le42
+
+* Dépendance fonctionnelle /X-->Y/
+** Théorie
+Soit /X/ et /Y/ des ensembles d'attributs dans une relation /R/. Il existe une dépendance fonctionnelle /X-->Y/ si, à tout instant, deux lignes de /R/ qui ont les mêmes valeurs pour /X/ ont aussi les mêmes valeurs pour /Y/.
+#+begin_quote
+*Remarque:*
+
+On omettra les accolades liées à la notation ensembliste pour un unique attribut.
+
+Ainsi, /{PRODUIT} --> {PRIX}/ deviendra /PRODUIT --> PRIX/.
+#+end_quote
+\color{luckydarkgray}
+Exemple:
+
+/PRODUIT --> PRIX/
+- /PRODUIT/ détermine (fonctionnellement) /PRIX/
+- /PRIX/ dépend (fonctionnellement) de /PRODUIT/
+- /PRODUIT/ est le déterminant et /PRIX/ est le déterminé de la dépendance fonctionnelle
+\color{black}
+** Exercices
+*** Trouvez les dépendances fonctionnelles
+**** Un cours n'est donné que par un seul enseignant: \color{luckydarkgreen}COURS --> ENSEIGNANT\color{black}
+**** Un enseignant ne peut pas donner deux cours en même temps: \color{luckydarkgreen}ENSEIGNANT, HEURE --> COURS\color{black}
+**** Un cours porte sur une seule matière: \color{luckydarkgreen}COURS --> MATIÈRE\color{black}
+**** Un numéro de plaque d'immatriculation est lié au propriétaire de la voiture: \color{luckydarkgreen}PLAQUE --> PROPRIO\color{black}
+**** Un modèle LEGO est réalisé avec un certain nombre de pièces: \color{luckydarkgreen}MODÈLE --> NOMBRE DE PIÈCES\color{black}
+**** Suivant la moyenne obtenue par un étudiant pour son année, celui-ci recevra un grade. (12 = satisfaisant, 14 = distinction...): \color{luckydarkgreen}MOYENNE --> GRADE\color{black}
+**** Un 0code /bic/ est associé à chacune des banques: \color{luckydarkgreen}BIC --> BANQUE et BANQUE --> BIC\color{black}
+*** Donnez les implications des DF
+**** /ENSEIGNANT --> COURS/
+***** Un enseignant donne qu'un seul cours: \color{luckydarkgreen}Vrai\color{black}
+***** Un enseignant donne toujours le même cours: \color{luckydarkred}Faux\color{black}
+***** Le cours est donné par un seul enseignant: \color{luckydarkred}Faux\color{black}
+**** /CODEPOSTAL --> VILLE/
+***** Une ville est associée à un et un seul code postal: \color{luckydarkred}Faux\color{black}
+***** Un code postal est associé à une et une seule ville: \color{luckydarkgreen}Vrai\color{black}
+***** Autre: \color{luckydarkgray}Rien\color{black}
+***** La dépendance fonctionnelle /CODEPOSTAL --> VILLE/ représente-t-elle la situation des codes postaux en Belgique?: \color{luckydarkred}Non\color{black}
+**** /VERSIONUNICODE --> TAILLECHARSET/
+***** Le nombre de caractères Unicode est différent d'une version à l'autre: \color{luckydarkgreen}Pas forcément\color{black}
+***** Je connais le nombre de caractères admis dans mon système, je connais donc la version Unicode prise en charge par celui-ci: \color{luckydarkred}Faux\color{black}
+***** Autre: \color{luckydarkgreen}Si je connais la version Unicode, je connais le nombre de caractères admis\color{black}
+**** /{PUISSANCE, ÂGE} --> TAXECIRCULATION/
+***** Si je connais le montant de la taxe de circulation, je connais la puissance et l'âge d'une voiture: \color{luckydarkred}Faux\color{black}
+***** Si je connais l'âge d'une voiture, je connais le montant de la taxe: \color{luckydarkred}Faux\color{black}
+***** Si je connais la puissance et l'âge d'une voiture, je connais le montant de la taxe: \color{luckydarkgreen}Vrai\color{black}
+***** Autre: \color{luckydarkgray}Rien\color{black}
+* Schéma conceptuel
+** Théorie
+*** Identifiant (key)
+Un identifiant est un ensemble d'un ou plusieurs attributs tel que toutes valeurs de ceux-ci nous permette de retrouver, à tout moment, au plus un tuple.
+
+Une table peut posséder plusieurs identifiants. On choisit l'un d'eux, le plus souvent minimal, qu'on déclare *primaire*. Les autres sont dès lors, *secondaires*.
+
+L'identifiant primaire est constitué de *colonnes obligatoires*.
+**** *Identifiant minimal*
+
+Un identifiant est minimal si chacune de ses colonnes est nécessaire pour garantir la contrainte d'unicité.
+
+**** *Identifiant simple*
+
+Identifiant composé d'un seul attribut.
+
+**** *Identifiant composé*
+
+Identifié composé de plusieurs attributs.
+*** Clé étrangère
+Une clé étrangère définit une contrainte référentielle. Elle référence en principe l'identifiant primaire de la table cible. (Elle peut référencer un identifiant secondaire mais ce n'est pas recommandé).
+
+Il se peut qu'une clé étrangère soit également un identifiant.
+*** /<null>/
+L'absence de valeur est généralement indiquée par /<null>/ ou par rien.
+
+*Remarque:* WHERE cat *IS* null; \color{luckydarkgray}(Et pas WHERE cat = null)\color{black}
+** Exercices
+#+caption: Schéma Table
+#+attr_latex: :width 300px
+file:SchemaTable.png
+*** En fonction de l'image, remplissez le tableau suivant en y ajoutant les noms des attributs adéquats. (Certaines cellules peuvent rester vides)
+
+\color{luckydarkgray}(=Voir Figure 1=)\color{black}
+#+attr_latex: :align c|c|c|c|c|c
+| Table    | id primaire | un id minimal | un id simple | un id composé | les clés étrangères |
+|----------+-------------+---------------+--------------+---------------+---------------------|
+| CLIENT   | NCLI        | NCLI          | NCLI         | NCLI, NOM     | /<null>/            |
+| COMMANDE | NCOM        | NCOM          | NCOM         | NCOM, NCLI    | NCLI                |
+| DETAIL   | NCOM, NPRO  | NCOM, NPRO    | /<null>/     | NCOM, NPRO    | NCOM et NPRO        |
+| PRODUIT  | NPRO        | NPRO          | NPRO         | NPRO, PRIX    | /<null>/            |
+
+*** Répondez aux questions
+**** {NCLI, NOM} constitue-t-il un identifiant?
+
+\color{luckydarkgreen}Oui, NCLI étant l'identifiant primaire de CLIENT.\color{black}
+**** DETAIL.NCOM est-il un identifiant de DETAIL?
+
+\color{luckydarkred}Non, car l'identifiant minimal de DETAIL est un identifiant composé {NCOM, NPRO}.\color{black}
+**** Comment retrouver de façon sûre un client? Et un produit?
+
+\color{luckydarkgreen}Avec l'identifiant NCLI pour CLIENT, et NPRO pour PRODUIT.\color{black}
+**** Peut-il y avoir deux clients avec le même nom?
+
+\color{luckydarkgreen}Oui, mais ils auront un identifiant NCLI différent.\color{black}
+**** Un client a-t-il toujours au moins une commande?
+
+\color{luckydarkred}Non, dans la table CLIENT rien ne fait référence à une COMMANDE.\color{black}
+**** Une commande doit-elle toujours avoir au moins une ligne de détail?
+
+\color{luckydarkred}Non, dans la table COMMANDE rien ne fait référence à un DETAIL.\color{black}
+**** Une commande peut-elle exister sans connaître le client qui l'a demandée?
+
+\color{luckydarkred}Non, dans la table COMMANDE l'attribut NCLI n'est pas facultatif, et il référence vers CLIENT.NCLI.\color{black}
+**** Un produit doit-il toujours avoir une quantité en stock connue?
+
+\color{luckydarkgreen}Oui car QSTOCK n'est pas facultatif, mais il peut éventuellement être à 0.\color{black}
+**** Peut-il y avoir plusieurs fois le même produit dans une commande?
+
+\color{luckydarkred}Non, l'identifiant primaire de DETAIL l'interdit.\color{black}
+**** Comment retrouver de façon sûre une ligne DETAIL?
+
+\color{luckydarkgreen}Avec l'identifiant {NCOM, NPRO}\color{black}
+**** La catégorie du client doit-elle toujours avoir une valeur connue?
+
+\color{luckydarkred}Non car CLIENT.CAT est facultatif ([0-1]).\color{black}
+**** Comment retrouver les clients qui ont commandé au moins une fois?
+
+\color{luckydarkgreen}Avec l'identifiant COMMANDE.NCLI.\color{black}
+**** Comment retrouver les produits qui n'ont jamais été commandés?
+
+\color{luckydarkgreen}En retirant les DETAIL.NPRO des PRODUIT.NPRO.\color{black}
+* Projection et sélection
+** Théorie
+*** SELECT
+Toute requête *SELECT* renvoie un résultat sous la forme d'une table.
+
+*Notation:* /\pi_{{attributs de la projection}}/ (Relation) \color{luckydarkgray}(SELECT attributs FROM Relation)\color{black}
+
+\color{luckydarkgray}
+Exemple:
+
+NUMERONOMCLIENT = /\pi_{{NCLI, NOM}}/ (CLIENT)
+
+signifie:
+
+SELECT NCLI, NOM FROM CLIENT;
+\color{black}
+*** DISTINCT
+La commande DISTINCT permet de récupérer les informations en ignorant les doublons.
+
+\color{luckydarkgray}Exemple: SELECT DISTINCT LOCALITE FROM CLIENT;\color{black}
+*** WHERE
+La commande WHERE permet d'ajouer une condition à la requête.
+
+*Notation:* /\sigma_{{condition de la sélection}}/ (Relation)
+
+\color{luckydarkgray}
+Exemple:
+
+CLIENTCATB2 = /\sigma_{{CAT="B2"}}/ (CLIENT)
+
+signifie:
+
+SELECT * FROM CLIENT WHERE CAT="B2";
+\color{black}
+*** Exemple général
+NBCLIENTB2NOTGENEVE = /\color{luckydarkblue}\pi_{{NOM, LOCALITE}}/ \color{luckydarkgreen}(/\sigma_{{CAT="B2" ET LOCALITE!="GENEVE"}}/ \color{luckydarkpurple}(CLIENT))\color{black}
+
+signifie:
+
+\color{luckydarkblue}SELECT NOM, LOCALITE \color{luckydarkpurple}FROM CLIENT \color{luckydarkgreen}WHERE CAT="B2" AND LOCALITE!="GENEVE";\color{black}
+*** IN
+SELECT NCLI FROM CLIENT WHERE CAT IN ("C1", "C2", "C3");
+
+\color{luckydarkgray}
+CAT = "C1" ou "C2" ou "C3"
+\color{black}
+*** BETWEEN
+SELECT NCLI FROM CLIENT WHERE COMPTE BETWEEN 1000 AND 4000;
+
+\color{luckydarkgray}
+COMPTE >= 1000 et <= 4000
+\color{black}
+*** LIKE (_ et %)
+SELECT NCLI FROM CLIENT WHERE CAT LIKE "B_";
+
+\color{luckydarkgray}
+Le '_' remplace un caractère quelconque. (Par exemple "B2" ou "B4" ou "BX")
+
+C'est l'équivalent du '?' dans Linux. (=B?=)
+\color{black}
+
+SELECT NPRO FROM PRODUIT WHERE LIBELLE LIKE "%SAPIN%";
+
+\color{luckydarkgray}
+Le % remplace 0 ou plusieurs caractères quelconques. (Par exemple "1SAPIN2" ou "SAPINXYZ" ou "SAPIN")
+
+C'est l'équivalent du '*' dans Linux. (=*SAPIN*=)
+\color{black}
+*** AS
+SELECT NPRO AS Produits, 0.21*prix*qstock AS ValeurTVA FROM PRODUIT WHERE QSTOCK > 500;
+
+\color{luckydarkgray}
+On donne un alias aux colonnes. (Leur nom sera Produits et ValeurTVA)
+\color{black}
+** Exercices
+#+caption: Projection Selection 1
+#+attr_latex: :width 300px
+file:PROJECTIONSELECTION1.png
+*** Répondez aux questions
+\color{luckydarkgray}(=Voir Figure 2=)\color{black}
+**** Fournissez une expression relationnelle donnant les identifications de sections organisées dans lesquelles au moins un étudiant est inscrit
+
+\color{luckydarkgreen} /\pi_{{etuSec}}/ (Etudiant)\color{black}
+**** Fournissez une expression relationnelle donnant les identifications de sections organisées dans lesquelles au moins un étudiant de troisième bloc est inscrit
+
+\color{luckydarkgreen} /\pi_{{etuSec}}/ (/\sigma_{{etuAn=3}}/ (Etudiant))\color{black}
+*** Donnez la sémantique
+\color{luckydarkgray}(=Voir Figure 2=)\color{black}
+**** /\sigma_{{(etuAn=2 OU etuAn=3) ET etuSec='R'}}/ (Etudiant)
+
+\color{luckydarkgreen}Donne toutes les infos des étudiants de 2ème ou 3ème de la section R.\color{black}
+**** /\pi_{{etuSec}}/ (/\sigma_{{etuNom="Durant" ET etuAn=1}}/ (Etudiant))
+
+\color{luckydarkgreen}Donne la section des étudiants qui s'appellent Durant et qui sont en 1ère.\color{black}
+**** /\pi_{{etuSec, etuTel}}/ (/\sigma_{{etuNom!="Durant" OU etuAn!=1}}/ (Etudiant))
+
+\color{luckydarkgreen}Donne la section et le numéro de téléphone des étudiant ne s'appelant pas Durant ou n'étant pas en 1ère.\color{black}
+**** SELECT * FROM CLIENT;
+
+\color{luckydarkgreen}Donne toutes les informations de la table CLIENT.\color{black}
+**** SELECT DISTINCT NCLI FROM COMMANDE WHERE NCOM BETWEEN 30178 AND 30188;
+
+\color{luckydarkgreen}Donne la liste sans doublon des numéros de clients ayant passé les commandes dont le numéro est compris entre 30179 et 30188 inclus.\color{black}
+**** SELECT QSTOCK*PRIX FROM PRODUIT WHERE LIBELLE LIKE "CHE%";
+
+\color{luckydarkgreen}Donne la valeur du stock des produits dont le libellé commence par "CHE".\color{black}
+**** SELECT NOM, NCLI FROM CLIENT WHERE CAT NOT IN ("B1", "C1") AND CAT IS NOT null;
+
+\color{luckydarkgreen}Donne le nom et le numéro des clients qui ont une catégorie non nulle et autre que B1 et C1.\color{black}
+**** SELECT DISTINCT NPRO FROM PRODUIT WHERE LIBELLE LIKE "%SAPIN%" AND PRIX BETWEEN 100 AND 150;
+
+\color{luckydarkgreen}Donne les différents numéros de produit ayant SAPIN dans leur libellé et un prix entre 100 et 150 inclus.\color{black}
