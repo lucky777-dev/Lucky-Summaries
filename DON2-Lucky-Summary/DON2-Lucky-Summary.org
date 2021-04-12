@@ -22,7 +22,7 @@ Exemple:
 - /PRODUIT/ est le déterminant et /PRIX/ est le déterminé de la dépendance fonctionnelle
 \color{black}
 ** Exercices
-*** Trouvez les dépendances fonctionnelles
+*** Trouver les dépendances fonctionnelles
 **** Un cours n'est donné que par un seul enseignant: \color{luckydarkgreen}COURS --> ENSEIGNANT\color{black}
 **** Un enseignant ne peut pas donner deux cours en même temps: \color{luckydarkgreen}ENSEIGNANT, HEURE --> COURS\color{black}
 **** Un cours porte sur une seule matière: \color{luckydarkgreen}COURS --> MATIÈRE\color{black}
@@ -30,7 +30,7 @@ Exemple:
 **** Un modèle LEGO est réalisé avec un certain nombre de pièces: \color{luckydarkgreen}MODÈLE --> NOMBRE DE PIÈCES\color{black}
 **** Suivant la moyenne obtenue par un étudiant pour son année, celui-ci recevra un grade. (12 = satisfaisant, 14 = distinction...): \color{luckydarkgreen}MOYENNE --> GRADE\color{black}
 **** Un 0code /bic/ est associé à chacune des banques: \color{luckydarkgreen}BIC --> BANQUE et BANQUE --> BIC\color{black}
-*** Donnez les implications des DF
+*** Donner les implications des DF
 **** /ENSEIGNANT --> COURS/
 ***** Un enseignant donne qu'un seul cours: \color{luckydarkgreen}Vrai\color{black}
 ***** Un enseignant donne toujours le même cours: \color{luckydarkred}Faux\color{black}
@@ -80,7 +80,7 @@ L'absence de valeur est généralement indiquée par /<null>/ ou par rien.
 #+caption: Schéma Table
 #+attr_latex: :width 300px
 file:SchemaTable.png
-*** En fonction de l'image, remplissez le tableau suivant en y ajoutant les noms des attributs adéquats. (Certaines cellules peuvent rester vides)
+*** En fonction de l'image, remplir le tableau suivant en y ajoutant les noms des attributs adéquats. (Certaines cellules peuvent rester vides)
 
 \color{luckydarkgray}(=Voir Figure 1=)\color{black}
 #+attr_latex: :align c|c|c|c|c|c
@@ -91,7 +91,7 @@ file:SchemaTable.png
 | DETAIL   | NCOM, NPRO  | NCOM, NPRO    | /<null>/     | NCOM, NPRO    | NCOM et NPRO        |
 | PRODUIT  | NPRO        | NPRO          | NPRO         | NPRO, PRIX    | /<null>/            |
 
-*** Répondez aux questions
+*** Répondre aux questions
 **** {NCLI, NOM} constitue-t-il un identifiant?
 
 \color{luckydarkgreen}Oui, NCLI étant l'identifiant primaire de CLIENT.\color{black}
@@ -133,7 +133,7 @@ file:SchemaTable.png
 \color{luckydarkgreen}En retirant les DETAIL.NPRO des PRODUIT.NPRO.\color{black}
 * Projection et sélection
 ** Théorie
-*** SELECT
+*** SELECT /\pi_{{attributs de la projection}}/ (Relation)
 Toute requête *SELECT* renvoie un résultat sous la forme d'une table.
 
 *Notation:* /\pi_{{attributs de la projection}}/ (Relation) \color{luckydarkgray}(SELECT attributs FROM Relation)\color{black}
@@ -151,10 +151,10 @@ SELECT NCLI, NOM FROM CLIENT;
 La commande DISTINCT permet de récupérer les informations en ignorant les doublons.
 
 \color{luckydarkgray}Exemple: SELECT DISTINCT LOCALITE FROM CLIENT;\color{black}
-*** WHERE
+*** WHERE /\sigma_{{condition de la sélection}}/
 La commande WHERE permet d'ajouer une condition à la requête.
 
-*Notation:* /\sigma_{{condition de la sélection}}/ (Relation)
+*Notation:* /\sigma_{{condition de la sélection}}/ (Relation) \color{luckydarkgray}(SELECT * FROM RELATION WHERE condition)\color{black}
 
 \color{luckydarkgray}
 Exemple:
@@ -165,12 +165,6 @@ signifie:
 
 SELECT * FROM CLIENT WHERE CAT="B2";
 \color{black}
-*** Exemple général
-NBCLIENTB2NOTGENEVE = /\color{luckydarkblue}\pi_{{NOM, LOCALITE}}/ \color{luckydarkgreen}(/\sigma_{{CAT="B2" ET LOCALITE!="GENEVE"}}/ \color{luckydarkpurple}(CLIENT))\color{black}
-
-signifie:
-
-\color{luckydarkblue}SELECT NOM, LOCALITE \color{luckydarkpurple}FROM CLIENT \color{luckydarkgreen}WHERE CAT="B2" AND LOCALITE!="GENEVE";\color{black}
 *** IN
 SELECT NCLI FROM CLIENT WHERE CAT IN ("C1", "C2", "C3");
 
@@ -209,7 +203,7 @@ On donne un alias aux colonnes. (Leur nom sera Produits et ValeurTVA)
 #+caption: Projection Selection 1
 #+attr_latex: :width 300px
 file:PROJECTIONSELECTION1.png
-*** Répondez aux questions
+*** Répondre aux questions
 \color{luckydarkgray}(=Voir Figure 2=)\color{black}
 **** Fournissez une expression relationnelle donnant les identifications de sections organisées dans lesquelles au moins un étudiant est inscrit
 
@@ -217,7 +211,7 @@ file:PROJECTIONSELECTION1.png
 **** Fournissez une expression relationnelle donnant les identifications de sections organisées dans lesquelles au moins un étudiant de troisième bloc est inscrit
 
 \color{luckydarkgreen} /\pi_{{etuSec}}/ (/\sigma_{{etuAn=3}}/ (Etudiant))\color{black}
-*** Donnez la sémantique
+*** Donner la sémantique
 \color{luckydarkgray}(=Voir Figure 2=)\color{black}
 **** /\sigma_{{(etuAn=2 OU etuAn=3) ET etuSec='R'}}/ (Etudiant)
 
@@ -228,18 +222,228 @@ file:PROJECTIONSELECTION1.png
 **** /\pi_{{etuSec, etuTel}}/ (/\sigma_{{etuNom!="Durant" OU etuAn!=1}}/ (Etudiant))
 
 \color{luckydarkgreen}Donne la section et le numéro de téléphone des étudiant ne s'appelant pas Durant ou n'étant pas en 1ère.\color{black}
-**** SELECT * FROM CLIENT;
+**** SELECT *
+
+\quad FROM CLIENT;
 
 \color{luckydarkgreen}Donne toutes les informations de la table CLIENT.\color{black}
-**** SELECT DISTINCT NCLI FROM COMMANDE WHERE NCOM BETWEEN 30178 AND 30188;
+**** SELECT DISTINCT NCLI
+
+\quad FROM COMMANDE
+
+\quad WHERE NCOM BETWEEN 30178 AND 30188;
 
 \color{luckydarkgreen}Donne la liste sans doublon des numéros de clients ayant passé les commandes dont le numéro est compris entre 30179 et 30188 inclus.\color{black}
-**** SELECT QSTOCK*PRIX FROM PRODUIT WHERE LIBELLE LIKE "CHE%";
+**** SELECT QSTOCK*PRIX
+
+\quad FROM PRODUIT
+
+\quad WHERE LIBELLE LIKE "CHE%";
 
 \color{luckydarkgreen}Donne la valeur du stock des produits dont le libellé commence par "CHE".\color{black}
-**** SELECT NOM, NCLI FROM CLIENT WHERE CAT NOT IN ("B1", "C1") AND CAT IS NOT null;
+**** SELECT NOM, NCLI
+\quad FROM CLIENT
+
+\quad WHERE CAT NOT IN ("B1", "C1") AND CAT IS NOT null;
 
 \color{luckydarkgreen}Donne le nom et le numéro des clients qui ont une catégorie non nulle et autre que B1 et C1.\color{black}
-**** SELECT DISTINCT NPRO FROM PRODUIT WHERE LIBELLE LIKE "%SAPIN%" AND PRIX BETWEEN 100 AND 150;
+**** SELECT DISTINCT NPRO
+
+\quad FROM PRODUIT
+
+\quad WHERE LIBELLE LIKE "%SAPIN%" AND PRIX BETWEEN 100 AND 150;
 
 \color{luckydarkgreen}Donne les différents numéros de produit ayant SAPIN dans leur libellé et un prix entre 100 et 150 inclus.\color{black}
+* Jointure (A) $\bowtie_{<condition>}$ (B)
+** Théorie
+La jointure permet de produire une table constituée de données extraites de plusieurs tables. C'est donc l'ensemble des lignes du produit cartésien qui vérifient la condition.
+
+*Notation:* (A) $\bowtie_{<condition>}$ (B) \color{luckydarkgray}(SELECT * FROM A JOIN B ON condition)\color{black}
+*** Produit cartésien A \times B
+Chaque ligne d'une table (A) est couplée avec chaque ligne d'une autre table (B).
+** Exercices
+#+caption: Tables Exercices Jointures
+#+attr_latex: :width 300px
+file:TablesJointuresExercices.png
+*** Donner la liste des tuples de A
+\color{luckydarkgray}(=Voir Figure 3=)\color{black}
+**** La valeur de a2 apparaît dans b2
+
+\color{luckydarkgreen}
+(A) $\bowtie_{a2=b2}$ (B)
+#+attr_latex: :align c|c|c|c|c|c
+| a1 | a2   | a3 | b1 | b2   | b3 |
+|----+------+----+----+------+----|
+| 20 | bbbb | 15 | 15 | bbbb | 40 |
+| 40 | dddd | 33 | 49 | dddd | 75 |
+\color{black}
+**** La valeur de a2 n'apparaît pas dans b2
+
+\color{luckydarkgreen}
+(A) $\bowtie_{a2!=b2}$ (B)
+#+attr_latex: :align c|c|c|c|c|c
+|                        a1 | a2                          |                        a3 |                        b1 | b2                          |                        b3 |
+|---------------------------+-----------------------------+---------------------------+---------------------------+-----------------------------+---------------------------|
+|                        10 | aaaa                        |                        15 |                        33 | xxxx                        |                        10 |
+|                        10 | aaaa                        |                        15 |                        15 | bbbb                        |                        40 |
+|                        10 | aaaa                        |                        15 |                        41 | tttt                        |                        40 |
+|                        10 | aaaa                        |                        15 |                        49 | dddd                        |                        75 |
+|                        20 | bbbb                        |                        15 |                        33 | xxxx                        |                        10 |
+| \color{luckydarkred} +20+ | \color{luckydarkred} +bbbb+ | \color{luckydarkred} +15+ | \color{luckydarkred} +15+ | \color{luckydarkred} +bbbb+ | \color{luckydarkred} +40+ |
+|                        20 | bbbb                        |                        15 |                        41 | tttt                        |                        40 |
+|                        20 | bbbb                        |                        15 |                        49 | dddd                        |                        75 |
+|                        30 | cccc                        |                        22 |                        33 | xxxx                        |                        10 |
+|                        30 | cccc                        |                        22 |                        15 | bbbb                        |                        40 |
+|                        30 | cccc                        |                        22 |                        41 | tttt                        |                        40 |
+|                        30 | cccc                        |                        22 |                        49 | dddd                        |                        75 |
+|                        40 | dddd                        |                        33 |                        33 | xxxx                        |                        10 |
+|                        40 | dddd                        |                        33 |                        15 | bbbb                        |                        40 |
+|                        40 | dddd                        |                        33 |                        41 | tttt                        |                        40 |
+| \color{luckydarkred} +40+ | \color{luckydarkred} +dddd+ | \color{luckydarkred} +33+ | \color{luckydarkred} +49+ | \color{luckydarkred} +dddd+ | \color{luckydarkred} +75+ |
+\color{black}
+*** Calculer
+\color{luckydarkgray}(=Voir Figure 3=)\color{black}
+**** (A) $\bowtie_{a1=b3}$ (/\sigma_{{b3=75}}/ (B))
+
+\color{luckydarkgreen} = $\varnothing$ \color{black}
+**** /\pi_{{a1, b1, b2, b3}}/ (/\sigma_{{b1=15}}/ ((A) $\bowtie_{a1=b3}$ (B)))
+
+***** \color{luckydarkgreen}D'abord (A) $\bowtie_a1=b3$ (B)
+#+attr_latex: :align c|c|c|c|c|c
+| a1 | a2   | a3 | b1 | b2   | b3 |
+|----+------+----+----+------+----|
+| 10 | aaaa | 15 | 33 | xxxx | 10 |
+| 40 | dddd | 33 | 15 | bbbb | 40 |
+| 40 | dddd | 33 | 41 | tttt | 40 |
+\color{black}
+***** \color{luckydarkgreen}Ensuite /\sigma_{{b1=15}} ((A) $\bowtie_a1=b3$ (B))/
+#+attr_latex: :align c|c|c|c|c|c
+| a1 | a2   | a3 | b1 | b2   | b3 |
+|----+------+----+----+------+----|
+| 40 | dddd | 33 | 15 | bbbb | 40 |
+\color{black}
+***** \color{luckydarkgreen}Enfin /\pi_{{a1, b1, b2, b3}}/ (/\sigma_{{b1=15}}/ ((A) $\bowtie_{a1=b3}$ (B)))
+#+attr_latex: :align c|c|c|c
+| a1 | b1 | b2   | b3 |
+|----+----+------+----|
+| 40 | 15 | bbbb | 40 |
+\color{black}
+**** /\pi_{{a1, a2, b1, b2}}/ ((A) $\bowtie_{a2=b2}$ (B))
+
+***** \color{luckydarkgreen}D'abord (A) $\bowtie_a2=b2$ (B)
+#+attr_latex: :align c|c|c|c|c|c
+| a1 | a2   | a3 | b1 | b2   | b3 |
+|----+------+----+----+------+----|
+| 20 | bbbb | 15 | 15 | bbbb | 40 |
+| 40 | dddd | 33 | 49 | dddd | 75 |
+\color{black}
+***** \color{luckydarkgreen}Enfin /\pi_{{a1, a2, b1, b2}}/ ((A) $\bowtie_{a2=b2}$ (B))
+#+attr_latex: :align c|c|c|c
+| a1 | a2   | b1 | b2   |
+|----+------+----+------|
+| 20 | bbbb | 15 | bbbb |
+| 40 | dddd | 49 | dddd |
+\color{black}
+**** (A) $\bowtie_{A.a1=C.b3}$ ((A) $\bowtie_{a3=b1}$ (B))C
+***** \color{luckydarkgreen}D'abord (A) $\bowtie_{a3=b1}$ (B) ce qui nous donne C
+#+attr_latex: :align c|c|c|c|c|c
+| a1 | a2   | a3 | b1 | b2   | b3 |
+|----+------+----+----+------+----|
+| 10 | aaaa | 15 | 15 | bbbb | 40 |
+| 20 | bbbb | 15 | 15 | bbbb | 40 |
+| 40 | dddd | 33 | 33 | xxxx | 10 |
+\color{black}
+***** \color{luckydarkgreen}Enfin (A) $\bowtie_{A.a1=C.b3}$ ((A) $\bowtie_{a3=b1}$ (B))C
+#+attr_latex: :align c|c|c|c|c|c|c|c|c
+| a1 | a2   | a3 | a1 | a2   | a3 | b1 | b2   | b3 |
+|----+------+----+----+------+----+----+------+----|
+| 40 | dddd | 33 | 10 | aaaa | 15 | 15 | bbbb | 40 |
+| 40 | dddd | 33 | 20 | bbbb | 15 | 15 | bbbb | 40 |
+| 10 | aaaa | 15 | 40 | dddd | 33 | 33 | xxxx | 10 |
+\color{black}
+*** Donner la sémantique (ATTENTION! RÉPONSES NON VÉRIFIÉE PAR UN ENSEIGNANT)
+\color{luckydarkgray}(=Voir Figure 4=)\color{black}
+#+caption: Jointure Tables Exercices
+#+attr_latex: :width 300px
+file:SchemaTable.png
+**** SELECT DETAIL.NCOM, DETAIL.NPRO, QCOM, QSTOCK
+
+\quad FROM DETAIL
+
+\quad \quad JOIN PRODUIT ON DETAIL.NPRO = PRODUIT.NPRO
+
+\quad WHERE QCOM > QSTOCK;
+
+\color{luckydarkred}Réponse non vérifiée pas un enseignant... Attention aux erreurs!\color{black}
+
+\color{luckydarkgreen}Retourne le numéro de commande, le numéro de produit, la quantité de commandes et la quantité en stock des produits où la quantité de commande dépasse la quantité en stock.\color{black}
+**** SELECT DISTINCT P.NPRO, LIBELLE, PRIX
+
+\quad FROM PRODUIT P
+
+\quad \quad JOIN DETAIL D ON P.NPRO = D.NPRO
+
+\quad \quad JOIN COMMANDE COM ON COM.NCOM = D.NCOM
+
+\quad \quad JOIN CLIENT C ON C.NCLI = COM.NCLI
+
+\quad WHERE LOCALITE IN ("Bruxelles", "Liège", "Namur");
+
+\color{luckydarkred}Réponse non vérifiée pas un enseignant... Attention aux erreurs!\color{black}
+
+\color{luckydarkgreen}Retourne le numéro de produit, le libellé et le prix des produits qui ont déjà été commandés par des client dont la localité est "Bruxelles", "Liège", ou "Namur" (sans doublon).\color{black}
+**** SELECT DISTINCT CLIENT.NCLI
+
+\quad FROM COMMANDE
+
+\quad \quad JOIN CLIENT ON CLIENT.NCLI = COMMANDE.NCLI
+
+\quad WHERE COMPTE < 0;
+
+\color{luckydarkred}Réponse non vérifiée pas un enseignant... Attention aux erreurs!\color{black}
+
+\color{luckydarkgreen}Retourne le numéro de client des clients qui ont effectué une commande et dont le compte est négatif (sans doublon).\color{black}
+**** Si la table CLIENT comporte 16 lignes et la table COMMANDE 7, combien de lignes seront retournées par la requête suivante:
+\color{luckydarkgray}(=Voir Figure 5=)\color{black}
+
+SELECT *
+
+\quad FROM COMMANDE
+
+\quad \quad JOIN CLIENT ON CLIENT.NCLI!=COMMANDE.NCLI;
+
+#+caption: Tables Ex2
+#+attr_latex: :width 300px
+file:TablesEx2.png
+
+\color{luckydarkred}Réponse non vérifiée pas un enseignant... Attention aux erreurs!\color{black}
+
+\color{luckydarkgreen}105 lignes seront retournées car 16*7 -- 7. Cette requête retourne toutes les infos des clients qui n'ont jamais passé de commandes.\color{black}
+**** SELECT SUP.DptNo, SUP.dptLib, DPT.dptLib
+
+\quad FROM DEPARTEMENT SUP
+
+\quad \quad JOIN DEPARTEMENT DPT ON DPT.dptAdm=SUP.dptNo;
+
+\color{luckydarkgray}(=Voir Figure 6=)\color{black}
+
+#+caption: Tables Ex3
+#+attr_latex: :width 200px
+file:TablesEx3.png
+
+\color{luckydarkred}Réponse non vérifiée pas un enseignant... Attention aux erreurs!\color{black}
+
+\color{luckydarkgreen}Retourne le numéro de département et le libellé de département du produit cartésien de la table DÉPARTEMENT par elle-même ainsi que le libellé de département de la table DÉPARTEMENT où l'Adm du département de la table est égal au numéro de département du produit cartésien de la table DÉPARTEMENT par elle-même.\color{black}
+**** La requête suivante retournera combien de ligne?
+
+\color{luckydarkgray}(=Voir Figure 6=)\color{black}
+
+SELECT SUP.dptNo, SUP.dptLib, DPT.dptLib
+
+\quad FROM DEPARTEMENT SUP
+
+\quad \quad JOIN DEPARTEMENT DPT ON DPT.dptAdm != SUP.dptNo;
+
+\color{luckydarkred}Réponse non vérifiée pas un enseignant... Attention aux erreurs!\color{black}
+
+\color{luckydarkgreen}8 lignes seront retournées car 64 -- 56. Cette requête retourne le numéro de département et le libellé de département du produit cartésien de la table DÉPARTEMENT par elle-même ainsi que le libellé de département de la table DÉPARTEMENT où l'Adm du département de la table est différent du numéro de département du produit cartésien de la table DÉPARTEMENT par elle-même.\color{black}

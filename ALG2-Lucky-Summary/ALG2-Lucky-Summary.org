@@ -1,0 +1,383 @@
+#+latex_class: luckypdf
+#+language: fr
+#+title: ALG2 - Lucky Summary
+#+author: Sm!le42
+
+* Notations
+** Méthode
+\begin{algorithm}[H]
+\Algo{nomMéthode(paramètres) \textbf{---> retour}}{
+\BlankLine
+ \color{luckydarkgray}\emph{Instructions...}\color{black}\\
+ \Return \emph{retour}
+}
+\caption{Méthode}
+\end{algorithm}
+** Print
+\begin{algorithm}[H]
+\tcc{Affiche "Hello World!" à l'écran}
+\Algo{testPrint()}{
+ \textbf{print} "Hello World!"\\
+}
+\caption{Print}
+\end{algorithm}
+** Variable
+\begin{algorithm}[H]
+\tcc{Créé une variable newVar qui vaut 7}
+\tcc{Ajoute la valeur de test donné en paramètre à la variable newVar}
+\tcc{Définit la quatrième valeur du tableau de booléens tab à true}
+\tcc{Retourne le String "OK"}
+\Algo{testVariables(test: \textbf{integer}, tab: \textbf{array of} n $\times$ m \textbf{boolean}) \textbf{---> String}}{
+ \textbf{int} newVar = 7\\
+ newVar += test\\
+ tab[3] = true\\
+ \Return \emph{"Ok"}
+}
+\caption{Variable}
+\end{algorithm}
+** Condition (If)
+\begin{algorithm}[H]
+\tcc{Retourne le signe de l'entier test donné en paramètre}
+\Algo{testConditions(test: \textbf{integer}) \textbf{---> String}} {
+ \textbf{String} result = "error"\\
+ \eIf{test < 0}{
+   result = "negative"
+ }{
+   result = "positive"
+ }
+ \Return result
+}
+\caption{Condition}
+\end{algorithm}
+** Boucles (For, For Each, While)
+*** For
+\begin{algorithm}[H]
+\tcc{Vérifie si le tableau d'objets donné en paramètre est vide}
+\tcc{Retourne true si le tableau est vide, false si il y a au moins 1 élément}
+\Algo{testFor(tab: \textbf{array of} n $\times$ m \textbf{objects}) \textbf{---> boolean}}{
+ \For{i from 0 to tab.length[0]}{
+   \For{j from 0 to tab.length}{
+     \If{tab[i][j] != null}{
+       return false
+     }
+   }
+ }
+ \Return \emph{true}
+}
+\caption{For}
+\end{algorithm}
+*** For Each
+\begin{algorithm}[H]
+\tcc{Vérifie si tous les entiers de la liste donnée en paramètre sont positifs}
+\tcc{Retourne true tous positifs, false si il y a au moins 1 négatif}
+\Algo{testForEach(list: \textbf{arrayList of} n \textbf{integers}) \textbf{---> boolean}}{
+ \ForEach{int nb : tab}{
+  \If{nb < 0}{
+    return false
+  }
+ }
+}
+ \Return \emph{true}
+\caption{For Each}
+\end{algorithm}
+*** While
+\begin{algorithm}[H]
+\tcc{Vérifie si le tableau d'objects donné en paramètre est vide}
+\tcc{Retourne true si le tableau est vide, false si il y a au moins 1 élément}
+\Algo{testWhile(\textbf{array of} n \textbf{objects}) \textbf{---> boolean}}{
+ \textbf{int} i = 0\\
+ \While{i < tab.length \textbf{and} tab[i] == null}{
+   i++
+ }
+ \Return \emph{i == tab.length}
+}
+\caption{While}
+\end{algorithm}
+** Classe
+\begin{algorithm}[H]
+\tcc{Exemple de classe Contact comprenant deux attributs privés Nom et ID}
+\tcc{Avec une méthode constructor pour créer une instance}
+\tcc{Ainsi que deux getter pour pouvoir accéder aux attributs}
+\tcc{Et enfin, deux méthodes permettant de supprimer ou modifier un contact}
+\Class{Contact}{
+ \Private{}{
+  \textbf{String} name\\
+  \textbf{int} ID
+ }
+ \Public{}{
+  \textbf{constructor} Contact(\textbf{String} name)\\
+  \BlankLine
+  \textbf{method} getName( ) \textbf{--->} String\\
+  \textbf{method} getID( ) \textbf{--->} int
+  \BlankLine
+  \textbf{method} deleteContact(\textbf{int} ID)\\
+  \textbf{method} changeName(\textbf{String} newName)
+ }
+}
+\caption{Classe}
+\end{algorithm}
+* Exercices
+** Ruptures
+*** La chasse au gaspi
+À l’ÉSI, les quantités de feuilles imprimées et photocopiées par les professeurs et les étudiants sont enregistrées à des fins de traitement. Le service technique désirant facturer les « exagérations », vous fournit une liste de toutes les impressions effectuées depuis le début de l’année. Cette liste est composée d’objets de la classe Job suivante et est ordonnée alphabétiquement en majeur sur le champ login :
+
+\begin{algorithm}[H]
+\Class{Job}{
+ \Private{}{
+  \textbf{String} login\\
+  \textbf{date} date\\
+  \textbf{int} nombre
+ }
+ \Public{}{
+  \emph{Constructeur et getteur}
+ }
+}
+\caption{La chasse au gaspi - énnoncé}
+\end{algorithm}
+
+Écrire un algorithme permettant d'afficher une ligne (avec login et nombre) par utilisateur dont le nombre total de feuilles imprimées dépasse une valeur limite entrée en paramètre.
+
+\textcolor{luckydarkred}{Solution non vérifiée pas un enseignant... Attention aux erreurs!}
+
+\color{luckydarkgreen}
+\begin{algorithm}[H]
+\Algo{tooManyCopies(\textbf{int} limit, \textbf{ArrayList<Job>} list)}{
+ \ForEach{\textbf{Job} job : list}{
+   \If{job.getNombre() > limit}{
+     \textbf{println} "Login: " + job.getLogin() + " | Nombre: " + job.getNombre()\\
+   }
+ }
+}
+\caption{La chasse au gaspi - solution}
+\end{algorithm}
+\color{black}
+*** Compter les étudiants
+Supposons que la classe =Etudiant= contienne également un attribut indiquant dans quel bloc se trouve l'étudiant (1, 2 ou 3). On voudrait un algorithme qui reçoit une liste d'étudiants et calcule le nombre d'étudiants dans chaque section et, par section, dans chaque bloc.
+
+L'affichage ressemblera à:
+
+=Gestion=
+#+begin_verse
+=bloc 1: 130 étudiants=
+=bloc 1: 42 étudiants=
+=bloc 1: 16 étudiants=
+=Total: 188 étudiants=
+#+end_verse
+
+=Industriel=
+#+begin_verse
+=bloc 1: 32 étudiants=
+=bloc 2: 14 étudiants=
+=bloc 3: 8 étudiants=
+=Total: 54 étudiants=
+#+end_verse
+
+=Réseau=
+#+begin_verse
+=bloc 1: 82 étudiants=
+=bloc 2: 31 étudiants=
+=bloc 3: 13 étudiants=
+=Total: 126 étudiants=
+#+end_verse
+1. Quel doit-être le tri pour pouvoir résoudre cet exercice avec un algorithme de rupture?
+2. Écrire cet algorithme
+
+\textcolor{luckydarkred}{Solution non vérifiée pas un enseignant... Attention aux erreurs!}
+
+\color{luckydarkgreen}
+1. Rupture de niveau 2.
+
+2.
+
+\begin{algorithm}[H]
+\Algo{countStudents(\textbf{Etudiant} students)}{
+ \textbf{int[]} result = \{0, 0, 0, 0, 0, 0, 0, 0, 0\}\\
+ \ForEach{\textbf{Etudiant} student : students}{
+   \Switch{student.getSection()}{
+     \Case{"G"}{
+       \Switch{student.getBloc()}{
+        \Case{1}{
+          result[0]++
+        }
+        \Case{2}{
+          result[1]++
+        }
+        \Case{3}{
+          result[2]++
+        }
+       }
+     }
+     \Case{"I"}{
+       \Switch{student.getBloc()}{
+        \Case{1}{
+          result[3]++
+        }
+        \Case{2}{
+          result[4]++
+        }
+        \Case{3}{
+          result[5]++
+        }
+       }
+     }
+     \Case{"R"}{
+       \Switch{student.getBloc()}{
+        \Case{1}{
+          result[6]++
+        }
+        \Case{2}{
+          result[7]++
+        }
+        \Case{3}{
+          result[8]++
+        }
+       }
+     }
+   }
+ }
+\textbf{println} "Gestion"\\
+\textbf{println} "bloc1: " + result[0]\\
+\textbf{println} "bloc2: " + result[1]\\
+\textbf{println} "bloc3: " + result[2]\\
+\textbf{println} "Total: " + (result[0] + result[1] + result[2])\\
+\textbf{println} "Industriel"\\
+\textbf{println} "bloc1: " + result[3]\\
+\textbf{println} "bloc2: " + result[4]\\
+\textbf{println} "bloc3: " + result[5]\\
+\textbf{println} "Total: " + (result[3] + result[4] + result[5])\\
+\textbf{println} "Réseau"\\
+\textbf{println} "bloc1: " + result[6]\\
+\textbf{println} "bloc2: " + result[7]\\
+\textbf{println} "bloc3: " + result[8]\\
+\textbf{println} "Total: " + (result[6] + result[7] + result[8])
+
+}
+\caption{Compter les étudiants - solution}
+\end{algorithm}
+\color{black}
+*** Les fanas d'info
+Une grande société d’informatique a organisé durant les douze derniers mois une multitude de concours ouverts aux membres de clubs d’informatique. Elle souhaiterait récompenser le club qui aura été le plus « méritant » durant cette période au point de vue de la participation des membres mineurs. Chaque résultat individuel des participants (y compris des majeurs) est repris dans une liste dont les éléments sont de type Participant.
+\begin{algorithm}[H]
+\Class{Participant}{
+  \Private{}{
+  \textbf{String} nom\\
+  \textbf{int} age\\
+  \textbf{String} reference\\
+  \textbf{int} numero\\
+  \textbf{int} resultat
+  }
+  \Public{}{
+  \emph{Constructor et getteurs}
+  }
+}
+\caption{Les fanas d'info - énnoncé}
+\end{algorithm}
+Sachant que la liste est ordonnée en majeur sur le champ référence et en mineur sur le champ nom, on demande d’écrire l’algorithme qui affiche les informations suivantes :
+
+pour chaque club :
+- sa référence
+pour chaque membre mineur de ce club :
+- son nom et prénom
+- la cote moyenne sur 100 des concours auquel ce membre a participé
+- le nombre total de participations des membres mineurs
+*N.B. :* un membre mineur qui s’est inscrit à un concours = une participation. Un club qui n’aura eu aucun membre mineur participant figurera quand même dans le résultat avec la mention "Pas de participation de membre mineur". Par contre, un club dont aucun membre n’a participé au moindre concours ne sera pas affiché. À la fin, on affichera la référence du meilleur club, à savoir celui qui a eu la plus haute cote moyenne de membres mineurs (simplifions en ne gérant pas les possibles ex-æquo).
+
+\textcolor{luckydarkred}{Solution non vérifiée pas un enseignant... Attention aux erreurs!}
+
+\color{luckydarkgreen}
+\begin{algorithm}[H]
+\Algo{getMinorStats(\textbf{ArrayList<Participant>} participants)}{
+\textbf{int} cpt = 0\tcc{Compteur total des éléments de la liste} 
+\textbf{String} tempRef\tcc{Référence temporaire (du club)}
+\textbf{String} tempName\tcc{Nom temporaire (du participant)}
+\textbf{int} nbPart = 0\tcc{Nombre de participants (du club)}
+\textbf{int} nbCompet = 0\tcc{Nombre de compétitions (du participant)}
+\textbf{int} totalPoints = 0\tcc{Total de points (du participant)}
+ \While{cpt < participants.size()}{
+  \textbf{println} "Club: " + participants.get(cpt).getReference()\\
+  tempRef = participants.get(cpt).getReference()\\
+  \While{participants.get(cpt).getReference().equals(tempRef)}{
+   \eIf{participants.get(cpt).getAge() < 18}{
+    \textbf{println} "Name: " + participants.get(cpt).getNom()\\
+    tempName = participants.get(cpt).getName()\\
+    nbCompet = 0\\
+    totalPoints = 0\\
+    npPart ++\\
+    \While{participants.get(cpt).getName().equals(tempName)}{
+     nbCompet++\\
+     totalPoints += participants.get(cpt).getResultat()\\
+     cpt++\\
+    }
+    \textbf{println} "Cote moyenne sur 100: " + (totalPoints/nbCompet)
+    nbCompet = 0\\
+    totalPoints = 0\\
+   }{
+   cpt++
+   }
+  }
+  \textbf{println} "Nombre total de participants mineurs: " + nbPart\\
+  nbPart = 0\\
+ }
+}
+\caption{Les fanas d'info - solution}
+\end{algorithm}
+\color{black}
+*** Éliminer les doublons
+Soit une liste ordonnée d'entiers avec des possibles redondances. Écrire un algorithme qui enlève les redondances de la liste. On vous demande de créer une nouvelle liste (la liste de départ reste inchangée).
+
+\color{luckydarkgray}(Ex: Si la liste est {1, 3, 3, 7, 8, 8, 8} alors le résultat sera {1, 3, 7, 8})\color{black}
+
+\color{luckydarkgreen}
+*Solution:*
+
+\begin{algorithm}[H]
+\Algo{delDuplicates(\textbf{ArrayList<Integers> list}) \textbf{---> \textbf{ArrayList<Integers>}}}{
+ \textbf{ArrayList<Integers>} result = new ArrayList<>\\
+ result.add(list.get(0))\\
+ \textbf{int} tempNb = list.get(0)\\
+ \ForEach{\textbf{int} nb : list}{
+  \If{nb != tempNb}{
+   result.add(nb)\\
+  }
+  tempNb = nb\\
+ }
+ \Return \emph{result}
+}
+\caption{Éliminer les doublons - solution}
+\end{algorithm}
+\color{black}
+
+Test du code:
+#+begin_src java :classname Ruptures5 :exports both :results pp
+  import java.util.*;
+  public class Ruptures5 {
+      public static void main(String[] args) {
+	  ArrayList<Integer> test = new ArrayList<>();
+	  test.add(1);
+	  test.add(3);
+	  test.add(3);
+	  test.add(7);
+	  test.add(8);
+	  test.add(8);
+	  test.add(8);
+	  System.out.println("<Exécution du code>");
+	  System.out.println("Liste de base: " + test);
+	  ArrayList<Integer> result = delDuplicates(test);
+	  System.out.println("Liste modifiée: " + result);
+	  System.out.println("L'algorithme fonctionne!");
+      }
+
+      public static ArrayList<Integer> delDuplicates(ArrayList<Integer> list) {
+	  ArrayList<Integer> result = new ArrayList<>();
+	  result.add(list.get(0));
+	  int tempNb = list.get(0);
+	  for(int nb : list) {
+	      if (nb != tempNb) {
+		  result.add(nb);
+	      }
+	      tempNb = nb;
+	  }
+	  return result;
+      }
+  }
+#+end_src
