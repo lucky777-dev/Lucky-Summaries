@@ -443,7 +443,7 @@ On tire deux cartes dans un jeu de 52 cartes sans remise intermédiaire:
 = 1 -- \sfrac{48}{52} * \sfrac{47}{51} \(\textcolor{luckydarkgreen}{\mathbf{= \sfrac{33}{221}}}\)
 ** Exercice 17
 Trois personnes tirent sans remise un billet au hasard dans un ensemble de billets numérotés de 1 à 20. Quelle est la probabilité que les trois billets soient impairs?
-*** Solution (9%)
+*** Solution (\sfrac{2}{19})
 P(Billet1 impair *et* Billet2 impair *et* Billet3 impair)
 #+begin_quote
 3 conditions à respecter:
@@ -453,9 +453,9 @@ P(Billet1 impair *et* Billet2 impair *et* Billet3 impair)
 #+end_quote
 = P(Billet1 impair) *** P(Billet2 impair *|* Billet1 impair) *** P(Billet3 impair *|* Billet1 impair *** Billet2 impair)
 
-= \sfrac{10}{20} * \sfrac{9}{20} * \sfrac{8}{20}
+= \sfrac{10}{20} * \sfrac{9}{19} * \sfrac{8}{18}
 
-= \sfrac{1}{2} * \sfrac{9}{20} * \sfrac{2}{5} = \sfrac{9}{100} \(\textcolor{luckydarkgreen}{\mathbf{= 9\%}}\)
+= \sfrac{1}{2} * \sfrac{9}{19} * \sfrac{4}{9} \(\textcolor{luckydarkgreen}{\mathbf{= \sfrac{2}{19}}}\)
 ** Exercice 18
 Un sac contient 3 boules blanches et 7 boules noires. Quatre personnes A, B, C et D tirent dans cet ordre une boule sans la remettre dans le sac. La première personne qui tire une boule blanche gagne le jeu. Calculez la probabilité de gagner le jeu pour chacune des personnes.
 
@@ -612,7 +612,7 @@ Un fabricant de baromètres a testé un nouveau modèle très simple, et a const
 
 Pour 10% des jours où il pleuvait, il affichait /beau temps/, et pour 30% des jours où il faisait beau, il affichait /pluie/.
 
-Sachant que le baromètre a été vendu dans une région où il pleut en moyenne  jour sur 5:
+Sachant que le baromètre a été vendu dans une région où il pleut en moyenne un jour sur cinq:
 1. Quelle est la probabilité que le baromètre indique /pluie/?
 2. Quelle est la probabilité que l'indication du baromètre soit correcte?
 *** Solution (\sfrac{21}{50};\sfrac{37}{50})
@@ -1169,7 +1169,7 @@ Ce calcul peut être facilité et replacé par une approximation à l'aide de la
 
 Pour cela on utilise le théorème de Moivre-Laplace qui affirme que /la distribution binomiale est asymptotiquement normale/.
 
-Si on superpose le graphique en bâtonnets d'une distribution binomiale avec un /n/ grand (\leq 30) et celui de la normale de paramètres correspondants, on observe que le tracé de la courbe de Gauss se confond avec les extrémités des bâtonnets.
+Si on superpose le graphique en bâtonnets d'une distribution binomiale avec un /n/ grand (\geq 30) et celui de la normale de paramètres correspondants, on observe que le tracé de la courbe de Gauss se confond avec les extrémités des bâtonnets.
 
 Ainsi, on peut approcher chaque probabilité P[X_b = k] par l'aire sous la courbe de Gauss entre les valeurs k -- \sfrac{1}{2} et k + \sfrac{1}{2} sans grande perte de précision. On aura donc:
 
@@ -1184,7 +1184,7 @@ Donnez la distribution de probabilité, la fonction de répartition, l'espéranc
 2. Une urne contient 13 boules blanches et 7 boules noires. Si on tire une boule noire on gagne 20€, sinon on perd 15€.
 3. On joue à "pile ou face" avec 2 pièces bien équilibrées. Si les cotés sont deux "pile" on gagne 10€, sinon on perd 5€.
 4. On tire successivement et avec remise 3 fruits d'une corbeille contenant 6 oranges et 3 pommes. Soit X le nombre de pommes tirées.
-*** Solution (\sigma=3.86;;;)
+*** Solution (\sigma=3.86;16.69;;)
 **** *Réponse 1*
 #+attr_latex: :align |c|c|c|
 | /x_i/ | /p_i/        | F(/x_i/)     |
@@ -1205,7 +1205,7 @@ Donnez la distribution de probabilité, la fonction de répartition, l'espéranc
 = -- \sfrac{1}{2}
 ***** Variance:
 
-*\sigma^2 =* ((--6)^2 * \sfrac{1}{6}) + ((--4)^2 * \sfrac{1}{6}) + ((--2)^2 * \sfrac{1}{6}) + (1^2 * \sfrac{1}{6}) + (3^2 * \sfrac{1}{6}) + (5^2 * \sfrac{1}{6})
+      *\sigma^2 =* ((--6)^2 * \sfrac{1}{6}) + ((--4)^2 * \sfrac{1}{6}) + ((--2)^2 * \sfrac{1}{6}) + (1^2 * \sfrac{1}{6}) + (3^2 * \sfrac{1}{6}) + (5^2 * \sfrac{1}{6}) -- (--\sfrac{1}{2})^2)
 
 = \sfrac{1}{6} * (36+16+4+1+9+25)
 
@@ -1214,8 +1214,24 @@ Donnez la distribution de probabilité, la fonction de répartition, l'espéranc
 
 *\sigma =* \(\sqrt{\sigma^2}\) = \(\sqrt{\sfrac{179}{12}}\) \(\textcolor{luckydarkgreen}{\mathbf{= 3.86€}}\)
 **** *Réponse 2*
+#+attr_latex: :align c|c
+| $x_i$ | $p_i$ |
+|-------+-------|
+|   -15 | 13/20 |
+|    20 | 7/20  |
+***** Espérance:
 
-À venir...
+\mu = (-- 15 * \sfrac{13}{20}) + (20 * \sfrac{7}{20})
+
+= -- \sfrac{11}{4}
+***** Variance:
+
+\sigma^2 = ((-- 15)^2 * \sfrac{13}{20}) + (20^2 * \sfrac{7}{20}) -- (-- \sfrac{11}{4})^2)
+
+= 278.69...
+***** Écart-type:
+
+\sigma = $\sqrt{278.69}$ \color{luckydarkgreen} *= 16.69* \color{black}
 **** *Réponse 3*
 
 À venir...

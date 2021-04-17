@@ -361,7 +361,7 @@ file:TablesJointuresExercices.png
 | 40 | dddd | 33 | 20 | bbbb | 15 | 15 | bbbb | 40 |
 | 10 | aaaa | 15 | 40 | dddd | 33 | 33 | xxxx | 10 |
 \color{black}
-*** Donner la sémantique (ATTENTION! RÉPONSES NON VÉRIFIÉE PAR UN ENSEIGNANT)
+*** Donner la sémantique
 \color{luckydarkgray}(=Voir Figure 4=)\color{black}
 #+caption: Jointure Tables Exercices
 #+attr_latex: :width 300px
@@ -447,3 +447,60 @@ SELECT SUP.dptNo, SUP.dptLib, DPT.dptLib
 \color{luckydarkred}Réponse non vérifiée pas un enseignant... Attention aux erreurs!\color{black}
 
 \color{luckydarkgreen}8 lignes seront retournées car 64 -- 56. Cette requête retourne le numéro de département et le libellé de département du produit cartésien de la table DÉPARTEMENT par elle-même ainsi que le libellé de département de la table DÉPARTEMENT où l'Adm du département de la table est différent du numéro de département du produit cartésien de la table DÉPARTEMENT par elle-même.\color{black}
+* Agrégats
+** Fonctions agrégatives (COUNT, SUM, MIN, MAX, AVG)
+\color{luckydarkred}Attention! \color{black}Les valeurs nulles ne sont *pas* reprises par les fonctions agrégatives.
+*** COUNT
+Compte le nombre de lignes.
+*** SUM
+Additionne toutes les valeurs.
+*** MIN
+Retourne le plus petit.
+*** MAX
+Retourne le plus grand.
+*** AVG (average)
+Retourne la moyenne des valeurs.
+** GROUP BY /\gamma_{{liste d'attributs pour le groupement;liste d'expressions affichées}}/ (Relation)
+Le groupement permet de regrouper des lignes en une ligne, en fonction d'un ou plusieurs attributs.
+
+On ne peut *SELECT* que des attributs repris dans le *GROUP BY*.
+
+Soit R:
+#+attr_latex: :align c|c|c|c
+|  x | y |  z | t |
+|----+---+----+---|
+|  1 | a | 12 | x |
+|  2 | a | 12 | x |
+|  3 | a |  3 | x |
+|  4 | a |  3 | y |
+|  5 | a | 12 | z |
+|  6 | a |  6 | z |
+|  7 | b |  1 | x |
+|  8 | b | 12 | y |
+|  9 | c |  4 | x |
+| 10 | d |  5 | t |
+| 11 | d |  5 | u |
+| 12 | x | 12 | t |
+| 13 | y |  4 | t |
+
+Alors /\gamma_{{y;y, max(z)}}/ (R) donnera:
+
+#+attr_latex: :align c|c
+| y | max(z) |
+|---+--------|
+| a |     12 |
+| b |     12 |
+| c |      4 |
+| d |      5 |
+| x |     12 |
+| y |      4 |
+** Exercices
+*** Donnez une expression relationnelle
+#+caption: Agrégats Exercices - Tables 1
+#+attr_latex: :width 300px
+file:AgregatsEx1.png
+**** Fournir par id et libelle de section, le nombre d'étudiants régulièrement inscrits
+
+\color{luckydarkgreen}
+/\pi_{{EtuSec, EtuLibelle}}/ ((Section) $\bowtie_{SecId=EtuSec}$ (/\gamma_{{EtuSec;EtuSec, count(*)}}/ (Etudiant)))
+\color{black}
