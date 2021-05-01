@@ -60,9 +60,88 @@ Ceux que nous utiliserons ici sont les suivants:
 *Remarque:*
 
 \textcolor{luckydarkred}{Attention} au \mintinline{nasm}{ZF} qui peut porter à confusion:
-- Si le nombre testé n'est *PAS ÉGAL* à 0, alors ZF = 0
-- Si le nombre testé *EST ÉGAL* à 0, alors ZF = 1.
+- Si le nombre testé n'est *PAS ÉGAL* à 0, alors \mintinline{nasm}{ZF} = 0
+- Si le nombre testé *EST ÉGAL* à 0, alors \mintinline{nasm}{ZF} = 1.
 #+end_quote
+*** =mov=
+L'instruction \mintinline{nasm}{mov} permet de placer une valeur à un emplacement de la mémoire. Elle est donc principalement utilisée pour changer les valeurs des registres ou des variables.
+
+\color{luckydarkred}Attention: \color{black}Cette instruction n'effectue *pas* une /extension de signe/, mais elle remplit les bits restants avec des =0=.
+#+begin_src nasm
+;Exemple mov
+mov rax, 1 ;Maintenant rax = 0x00_00_00_00_00_00_00_01
+
+mov rax, 1111b ;Maintenant rax = 0x00_00_00_00_00_00_00_0F (le b signifie binaire)
+
+mov rax, 0xFF_00_07_14_FA_21_42_77 ;Maintenant rax = 0xFF_00_07_14_FA_21_42_77
+
+mov ah, 11110000b
+mov al, 00001111b
+mov ah, al ;Maintenant ah = 00001111b
+#+end_src
+*** =not=
+L'instruction \mintinline{nasm}{not} (également appelée =complément à 1=) a pour effet d'inverser tous les bits de son opérande.
+
+Cette instruction n'a qu'un seul opérande qui joue le rôle de source et de destination, et qui doit être un registre ou une variable (8, 16, 32 ou 64 bits).
+
+Le registre \mintinline{nasm}{rflags} n'est pas modifié.
+#+begin_src nasm
+;Exemple not
+mov al, 10011101b
+not al ;Maintenant al = 01100010b
+#+end_src
+*** =and=, =or= et =xor=
+Les instructions \mintinline{nasm}{and}, \mintinline{nasm}{or} et \mintinline{nasm}{xor} effectuent respectivement un =et=, un =ou= et un =ou exclusif= logiques /bit à bit/ entre le source et la destination, et placent le *résultat dans la destination*.
+
+Ces instructions ont deux opérandes: /La destination/ à gauche et /la source/ à droite. Ils peuvent être des registres ou des variables (8, 16, 32 ou 64 bits), mais ne *peuvent pas* être tous les deux des variables. La source peut être un immédiat de maximum 32 bits (il y a alors /extension de signe/ si la destination est de 64 bits), ainsi, si les deux opérandes font 64 bits, il est impossible d'utiliser un immédiat comme source, mais il faudra passer par un registre ou une variable.
+
+
+
+Le registre \mintinline{nasm}{rflags} est mis à jour, et les valeurs de \mintinline{nasm}{CF} et \mintinline{nasm}{OF} sont =reset= par défaut (mises à =0=).
+#+begin_src nasm
+;Exemple and, or, xor
+mov al, 11100101b
+mov ah, 10101010b
+and al, ah ;Maintenant al = 10100000b, SF = 1, ZF = 0
+
+mov al, 11100101b
+mov ah, 01010101b
+or al, ah ;Maintenant al = 11110101b, SF = 1, ZF = 0
+
+mov dx, 1100010011100101b
+mov si, 0011000001100010b
+xor dx, si ;Maintenant dx = 1111010010000111b, SF = 1, ZF = 0
+
+mov rax, 0xF0_F0_F0_F0_F0_F0_F0_F0
+and rax, 0x80_00_00_00 ;Attention! Extension de signe
+;Maintenant rax = 0xF0_F0_F0_F0_80_00_00_00, SF = 1, ZF = 0
+#+end_src
+*** Masquage (=and=, =or= et =xor=)
+Le masquage consiste à effectuer une /opération logique/ afin de conserver certains bits d'un opérande et d'en modifier d'autres. \color{luckydarkgray}(Ex: On veut modifier uniquement le 4ème et le 6ème bit)\color{black}
+*** Masque avec =and= (0 --> 0)
+Masque constitué de bits où *1 conserve* et *0 reset*.
+#+begin_src nasm
+;Exemple masque and
+mov al, 11100101b ;On veut conserver les 4 bits de droite et mettre les 4 autres à 0
+and al, 00001111b ;Le masque est 00001111b
+;Maintenant al = 00000101b
+#+end_src
+*** Masque avec =or= (1 --> 1)
+Masque constitué de bits où *0 conserve* et *1 set*.
+#+begin_src nasm
+;Exemple masque or
+mov al, 11100101b ;On veut conserver les 4 bits de droite et mettre les 4 autres à 1
+or al, 11110000b ;Le masque est 11110000b
+;Maintenant al = 11110101b
+#+end_src
+*** Masque avec =xor= (1 --> =not=)
+Masque constitué de bits où *0 conserve* et *1 inverse*.
+#+begin_src nasm
+;Exemple masque xor
+mov al, 11100101b ;On veut conserver les 4 bits de droite et inverser les autres
+xor al, 11110000b ;Le masque est 11110000b
+;Maintenant al = 00010101b
+#+end_src
 ** Exercice 1
 Quelles sont les valeurs des =registres= et des =flags= dans le code ci-dessous:
 
@@ -151,6 +230,21 @@ end:
    syscall
 #+end_src
 * TD03
+** Théorie
+*** Comparaison (=cmp=)
+    Cette instruction compare l'opérande de gauche à celui de droite (8, 16, 32 ou 64 bits). Elle positionne les flags du registre \mintinline{nasm}{rflags} comme le ferait une *soustraction* de ceux-ci.
+#+begin_quote
+\color{luckydarkred}Attention: \color{black}Les deux opérandes doivent avoir la *même taille*. Il peuvent être des registres ou des variables, mais ne *peuvent pas* être tous les deux des variables! L'opérande de droite peut être un immédiat (max 32 bits).
+#+end_quote
+Ainsi, si nous prenons cet exemple:
+#+begin_src nasm
+;Exemple comparaison cmp
+mov rax, 4
+
+cmp rax, 4 ;(4 - 4 == 0) donc ZF = 1 et SF = 0
+cmp rax, 5 ;(4 - 5 == -1) donc ZF = 0 et SF = 1
+cmp rax, 2 ;(4 - 2 == 2) donc ZF = 0 et SF = 0
+#+end_src
 ** Exercice 1
 Écrivez un code source complet qui:
 1. Initialise \mintinline{nasm}{rax} à la valeur de votre choix
