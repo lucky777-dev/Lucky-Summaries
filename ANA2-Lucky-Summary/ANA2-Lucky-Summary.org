@@ -120,9 +120,12 @@ Ensemble des opérations qu'un objet peut exécuter ou subir.
 Connexions sémantiques durables entre des classes.
 ** Associations 1-1 et 1-N
 #+caption: Associations 1-1 1-N
-#+attr_latex: :width 300px :placement [H]
+#+attr_latex: :width 400px :placement [H]
 file:Associations111N.png
-Exemple d'associations /(Java + UML)/:
+**** *Exemple "banque":*
+
+<<Banque>>
+Principe de banque avec des clients et des comptes /(Java + UML)/:
 #+begin_src java
 //Classe Client
 public class Client {
@@ -160,5 +163,169 @@ file:Associations111NEx2.png
 - pierre a pour compte c1
 - c1 joue le rôle de compte pour pierre
 - pierre joue le rôle de titulaire pour c1
-- le (un des) compte(s) de pierre est c1
-- le (un des) titulaire(s) de c1 est pierre
+- le /(un des)/ compte /(s)/ de pierre est c1
+- le /(un des)/ titulaire /(s)/ de c1 est pierre
+**** *Exemple "memory":*
+
+<<Memory>>
+Petit jeu de mémoire nommé "memory" /(Java + UML)/:
+#+begin_src java
+//Classe Memory
+public class Memory {
+   private final Game game;
+}
+//Classe Card
+public class Card {
+   private boolean hidden;
+   private int value;
+}
+//Classe Game
+public class Game {
+   private Card cards; //Une seule carte!
+}
+#+end_src
+Représentation UML du jeu "memory":
+#+caption: Associations "memory" (Exemple)
+#+attr_latex: :width 400px :placement [H]
+file:Associations111NEx3.png
+** Associations N-N
+*** Multiplicités
+Désigne le *nombre d'objets* qui peuvent participer à une *association*.
+
+*Syntaxe:* {minimum} .. {maximum}
+
+Les plus courants:
+- *0..1* \color{luckydarkgray}(= 0 ou 1)\color{black}
+- *1..1* \textcolor{luckydarkgray}{ou} *1* \color{luckydarkgray}(= 1)\color{black}
+- *0..n* \textcolor{luckydarkgray}{ou} *n* \textcolor{luckydarkgray}{ou} *0..** \textcolor{luckydarkgray}{ou} *** \color{luckydarkgray}(= tout)\color{black}
+- *1..n* \textcolor{luckydarkgray}{ou} *1..** \color{luckydarkgray}(= 1 ou plus)\color{black}
+
+Autres:
+- *7..14* \color{luckydarkgray}(= de 7 à 14)\color{black}
+- *0..21* \color{luckydarkgray}(= de 0 à 21)\color{black}
+- *42..** \color{luckydarkgray}(= 42 ou plus)\color{black}
+
+Remarques:
+- *** = *0..** \color{luckydarkgray}(= tout)\color{black}
+- *3* = *3..3* \color{luckydarkgray}(= 3)\color{black}
+**** *Exemple "memory":*
+
+Reprenons l'exemple [[Memory]["memory]] (vu plus haut):
+#+caption: Associations "memory" multiplicités (Exemple)
+#+attr_latex: :width 400px :placement [H]
+file:AssociationsNNEx3.png
+À gauche:
+- À un objet Memory correspond un et un seul objet Game
+- À un objet Game correspond un et un seul objet Memory
+À droite:
+- À un objet Card correspond un et un seul objet Game
+- À un objet Game correspond 0 à plusieurs objets Card
+**** *Exemple "banque":*
+
+Prenons un exemple similaire à l'exemple [[Banque]["banque"]] (vu plus haut):
+#+caption: Associations Client/Comptes multiplicités (Exemple)
+#+attr_latex: :width 400px :placement [H]
+file:AssociationsNNEx4.png
+On en déduit que:
+- Un compte a un et un seul titulaire
+- Un client peut n'être titulaire d'aucun compte, de un, ou plusieurs comptes
+- Un compte peut n'avoir aucun mandataire, ou un, ou plusieurs
+- Un client peut n'être mandataire d'aucun compte, de un, ou de plusieurs comptes
+**** *Exemple "université":*
+
+ Une université veut informatiser son administration pour gérer plus facilement les dossiers *étudiants*. Les étudiants ont un /identifiant/ et un /nom/. Un étudiant fait partie d'un *département*. Ces derniers sont regroupés dans des *facultés*.
+
+Voici un diagramme UML représentant cette structure:
+#+caption: Associations "université" (Exemple)
+#+attr_latex: :width 400px :placement [H]
+file:AssociationsNNEx5.png
+Et son code Java ressemblerait à ceci:
+#+begin_src java
+//Classe Faculte
+public class Faculte {
+   private String nom;
+   //...
+}
+//Classe Departement
+public class Departement {
+   private String nom;
+   private Faculte faculte;
+   //...
+}
+//Classe Etudiant
+public class Etudiant {
+   private String id;
+   private String nom;
+   private Departement departement;
+   //...
+}
+#+end_src
+* Énumérations, structures et compositions
+** Énumérations
+Une énumération n'a *jamais* d'association.
+**** *Exemple "saison":*
+
+Code Java:
+#+begin_src java
+//Exemple Saison
+public enum Saison {
+   ETE, AUTOMNE, HIVER, PRINTEMPS;
+}
+#+end_src
+Diagramme UML:
+#+caption: Énumérations de saisons (Exemple)
+#+attr_latex: :width 400px :placement [H]
+file:Enumerations.png
+**** *Exemple "saison2":*
+
+Classe saison2 /(Java + UML)/:
+#+begin_src java
+//Exemple Saison2
+public enum Saison2 {
+   PRINTEMPS (21, 3), ETE (22, 6), AUTOMNE (23, 9), HIVER (21, 12);
+
+   private final LocalDate dateDebut;
+
+   private Saison2(int jour, int mois) {
+      LocalDate now = LocalDate.now();
+      this.dateDebut = LocalDate.of(now.getYear(), mois, jour);
+   }
+
+   public LocalDate getDateDebut() {
+      return this.dateDebut;
+   }
+
+   public Saison2 next() {
+      Saison2[] saisons = this.values();
+      return saisons[(this.ordinal() + 1) % saisons.length];
+   }
+}
+#+end_src
+Code UML:
+#+caption: Saison2
+#+attr_latex: :width 150px :placement [H]
+file:EnumerationsEx1.png
+** Structures
+#+caption: Structures (Exemple)
+#+attr_latex: :width 300px :placement [H]
+file:Structures.png
+Code Java de la structure /Adresse/:
+#+begin_src java
+//Classe Adresse
+public class Adresse {
+   public TypeVoie typeVoie;
+   public String nomVoie;
+   public int numero;
+   public int codePostal;
+   public String localite;
+}
+//Enumeration TypeVoie
+public enum TypeVoie {
+   AVENUE, RUE, CHAUSSEE, BOULEVARD;
+}
+#+end_src
+** Compositions
+"Est composé de...", "fait partie de..."
+#+caption: Compositions (Exemples)
+#+attr_latex: :width 200px :placement [H]
+file:Compositions.png
