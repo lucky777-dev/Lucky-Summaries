@@ -1,0 +1,164 @@
+#+latex_class: luckypdf
+#+language: fr
+#+title: ANA2 - Lucky Summary
+#+author: Sm!le42
+
+* Diagramme d'activité
+** Transitions automatiques
+#+caption: Transitions automatiques
+#+attr_latex: :width 100px :placement [h]
+file:TransitionsAutomatiques.png
+Une fois l'activité 1 terminée, on passe automatiquement à l'activité 2.
+** Début et Fin
+#+caption: Début et Fin
+#+attr_latex: :width 100px :placement [H]
+file:DebutEtFin.png
+Le /rond gris/ représente le *début* du programme, et le /rond gris entouré d'un cercle/ représente la *fin* du programme (fin normale ou fin après erreur).
+** Conditions
+#+caption: Conditions
+#+attr_latex: :width 200px :placement [H]
+file:Conditions.png
+Arrivé au /losange (=condition)/, il y a *deux possibilités*, soit *cas a*, soit *cas b*. \color{luckydarkgray}(If, Then, Else)\color{black}
+** Itérations (boucles)
+#+caption: Itérations
+#+attr_latex: :width 200px :placement [H]
+file:Iterations.png
+Les /instructions/ seront exécutées *en boucle* tant que la /condition (losange)/ est *vraie*. \color{luckydarkgray}(For, While)\color{black}
+* Classes et objets
+** Classes
+#+begin_src java
+//Exemple de classe Compte en Java
+public class Compte {
+   //solde > decouvertMax
+   private int numero;
+   private int solde;
+   private int decouvertMax;
+
+   public Compte(int numero, int solde) {
+      //...
+   }
+
+   public int consulterSolde() {
+      //...
+      return int;
+   }
+
+   public void crediter(int somme) {
+      //...
+   }
+
+   public void debiter(int somme) {
+      //... (solde > decouvertMax)
+   }
+}
+#+end_src
+Représentation UML de la classe Compte:
+#+caption: Classes
+#+attr_latex: :width 150px :placement [H]
+file:Classes.png
+*** Visibilités
+Il existe 4 types de visibilité:
+#+attr_latex: :align |c|c|
+|----+-----------|
+| +  | public    |
+|----+-----------|
+| -- | private   |
+|----+-----------|
+| ~  | package   |
+|----+-----------|
+| #  | protected |
+|----+-----------|
+**** *public +*
+
+La visibilité /public/ signifie que les données sont accessibles depuis n'importe où.
+**** *private --*
+
+La visibilité /private/ signifie que les données ne sont accessibles que depuis la même classe.
+**** *package ~*
+
+La visibilité /package/ signifie que les données ne sont accessibles que depuis le même package.
+**** *protected #*
+
+La visibilité /protected/ signifie que les données ne sont accessibles que depuis le même package ou les sous-classes.
+*** Attributs
+Les attributs d'une classe sont notés de la manière suivante:
+#+begin_verse
+\hlg{Visibilite} \hlr{Type} \hlb{Nom} ;
+
+\textcolor{luckydarkgray}{Ex:}
+\textcolor{luckydarkgreen}{private} \textcolor{luckydarkred}{int} \textcolor{luckydarkblue}{numero};
+#+end_verse
+*** Opérations
+Les opérations d'une classe sont notées de la manière suivante:
+#+begin_verse
+\hlg{Visibilite} \hlr{Type de retour} \hlb{Nom} (\hly{Parametres}) {...}
+
+\textcolor{luckydarkgray}{Ex:}
+\textcolor{luckydarkgreen}{public} \textcolor{luckydarkred}{String} \textcolor{luckydarkblue}{getNom}(\hly{int numero}) {...}
+\color{luckydarkgray}(Cette méthode prend donc un int en paramètre, et retournera un String)\color{black}
+#+end_verse
+** Objets
+Exemple d'objets de la classe *Compte* (vue plus haut):
+#+caption: Objets
+#+attr_latex: :width 250px :placement [H]
+file:Objets.png
+**** *Identité:*
+
+Permet d'identifier un objet.
+**** *État:*
+
+Caractéristiques de l'objet à un moment donné (Valeurs des attributs).
+**** *Comportement:*
+
+Ensemble des opérations qu'un objet peut exécuter ou subir.
+- Create
+- Read
+- Update
+- Delete
+  
+* Associations
+Connexions sémantiques durables entre des classes.
+** Associations 1-1 et 1-N
+#+caption: Associations 1-1 1-N
+#+attr_latex: :width 300px :placement [H]
+file:Associations111N.png
+Exemple d'associations /(Java + UML)/:
+#+begin_src java
+//Classe Client
+public class Client {
+   private final String nom;
+   private final String prenom;
+   private final Compte compte;
+
+   public Client(String nom, String prenom, Compte compte) {...}
+   public String getNom() {...}
+   public String getPrenom() {...}
+   public Compte getCompte() {...}
+}
+#+end_src
+#+begin_src java
+//Classe Compte
+public class Compte {
+   private final String numero;
+   private int solde;
+   private final Client titulaire;
+
+   public Compte(String numero, int solde, Client titulaire) {...}
+   public String getNumero() {...}
+   public int getSolde() {...}
+   public Client getTitulaire() {...}
+}
+#+end_src
+Représentation UML de l'association des classes Client et Compte:
+#+caption: Associations Client Compte (Exemple)
+#+attr_latex: :width 450px :placement [H]
+file:Associations111NEx.png
+Ainsi, si on créé un Client "pierre" et qu'on lui attribue le compte "c1", on peut dire ceci:
+#+caption: Pierre: c1
+#+attr_latex: :width 300px :placement [H]
+file:Associations111NEx2.png
+- pierre a pour compte c1
+- c1 joue le rôle de compte pour pierre
+- pierre joue le rôle de titulaire pour c1
+- le (un des) compte(s) de pierre est c1
+- le (un des) titulaire(s) de c1 est pierre
