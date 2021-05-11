@@ -18,7 +18,7 @@ Le /rond gris/ représente le *début* du programme, et le /rond gris entouré d
 #+caption: Conditions
 #+attr_latex: :width 200px :placement [H]
 file:Conditions.png
-Arrivé au /losange (=condition)/, il y a *deux possibilités*, soit *cas a*, soit *cas b*. \color{luckydarkgray}(If, Then, Else)\color{black}
+Arrivé au /losange (=condition)/, il y a *plusieurs possibilités*, ici soit *cas a*, soit *cas b*. \color{luckydarkgray}(If, Then, Else)\color{black}
 ** Itérations (boucles)
 #+caption: Itérations
 #+attr_latex: :width 200px :placement [H]
@@ -181,7 +181,7 @@ public class Card {
 }
 //Classe Game
 public class Game {
-   private Card cards; //Une seule carte!
+   private Card cards; //Ici une seule carte possible!
 }
 #+end_src
 Représentation UML du jeu "memory":
@@ -244,19 +244,19 @@ Et son code Java ressemblerait à ceci:
 //Classe Faculte
 public class Faculte {
    private String nom;
+   private List<Departement> departements;
    //...
 }
 //Classe Departement
 public class Departement {
    private String nom;
-   private Faculte faculte;
+   private List<Etudiant> etudiants;
    //...
 }
 //Classe Etudiant
 public class Etudiant {
    private String id;
    private String nom;
-   private Departement departement;
    //...
 }
 #+end_src
@@ -296,8 +296,8 @@ public enum Saison2 {
    }
 
    public Saison2 next() {
-      Saison2[] saisons = this.values();
-      return saisons[(this.ordinal() + 1) % saisons.length];
+      Saison2[] saisons2 = this.values();
+      return saisons2[(this.ordinal() + 1) % saisons2.length];
    }
 }
 #+end_src
@@ -329,3 +329,139 @@ public enum TypeVoie {
 #+caption: Compositions (Exemples)
 #+attr_latex: :width 200px :placement [H]
 file:Compositions.png
+* Classes d'association
+Élément de modélisation /UML/ qui a les propriétés d'une *classe* et d'une *association*.
+**** *Exemple "emplois":*
+
+On donne des emplois dans des sociétés à des employés, et on veut que les employés puissent avoir *deux emplois maximum*, mais *pas dans la même société*:
+#+caption: Classes d'association (1 seul emploi par société)
+#+attr_latex: :width 200px :placement [H]
+file:ClassesDassociation.png
+
+Ceci correspond à cette représentation /UML/:
+#+caption: Classes d'association 2 (1 seul emploi par société)
+#+attr_latex: :width 300px :placement [H]
+file:ClassesDassociation2.png
+
+Le code Java de la classe Personne ressemblerait alors à ceci:
+#+begin_src java
+//Classe Personne
+public class Personne {
+   private String id;
+   private String nom;
+   private Emploi[] emplois; //Liste des emplois actifs
+   private int nbEmplois; //Nombre d'emplois actifs
+   //Constructeurs, getter, setters...
+
+   public void ajouterEmploi(Emploi e) {
+      if (nbEmplois == 2) {
+         throw new IllegalArgumentException("Deux emplois max!");
+      }
+      if (estEmployéDans(e.getSociete()) {
+         throw new IllegalArgumentException("Un seul emploi par société!");
+      } else {
+         emplois[nbEmplois] = e;
+         nbEmplois++;
+      }
+   }
+
+   public boolean estEmployéDans(Societe s) {
+      for (Emploi e : emplois) {
+         if (e.getSociete().equals(s)) {
+            return true;
+         }
+      }
+      return false;
+   }
+}
+#+end_src
+** Associations N-aire
+Associations ternaires, quaternaires, etc...
+**** *Exemple "cours":*
+
+Diagramme /UML/ des liens entre un professeur, un local, une matière et des étudiants:
+#+caption: Associations N-aire
+#+attr_latex: :width 250px :placement [H]
+file:AssociationsNaire.png
+
+Représentation détaillée:
+#+caption: Associations N-aire 2
+#+attr_latex: :width 250px :placement [H]
+file:AssociationsNaire2.png
+* Héritages
+Classification des classes dans une hiérarchie.
+**** *Exemple "point":*
+
+Diagramme /UML/ d'une classe /Point/ et d'une classe /ColoredPoint/ qui *hérite* de /Point/:
+#+caption: Heritages
+#+attr_latex: :width 300px :placement [H]
+file:Heritages.png
+
+Le code Java ressemblerait à ceci:
+#+begin_src java
+public class Point{
+   private double x;
+   private double y;
+
+   public Point(double x, double y) {
+      this.x = x;
+      this.y = y;
+   }
+   //Getters, setters...
+   public void display() {
+      System.out.println("(" + x + ", " + y +")");
+   }
+}
+#+end_src
+
+#+begin_src java
+  public class ColoredPoint extends Point {
+     private Color color;
+
+     public ColoredPoint(double x, double y, Color color) {
+	super(x, y);
+	this.color = color;
+     }
+     //Getters, setters...
+     @Override
+     public void display() {
+	super.display();
+	System.out.println(" Color: " + this.color);
+     }
+  }
+#+end_src
+* Interfaces
+Collection de méthodes qui décrit le service d'une classe ou d'un composant.
+**** *Exemple "animal":*
+
+/Compagnon/ est une *interface*, et /Chat/ et /Chien/ *héritent* de /Animal/:
+#+caption: Interfaces
+#+attr_latex: :width 150px :placement [H]
+file:Interfaces.png
+
+Le code Java ressemblerait à ceci:
+#+begin_src java
+public class Animal {
+   //Constructeur, getters, setters...
+   public void manger() {...}
+}
+
+public class Chien extends Animal implements Compagnon {
+   //Constructeur, getters, setters
+   public void etreAmical() {...}
+   public void jouer() {...}
+
+   @Override
+   public void manger() {...}
+}
+
+public interface Compagnon {
+   public abstract void etreAmical();
+   public abstract void jouer();
+}
+#+end_src
+* Packages
+Éléments d'organisation.
+#+caption: Packages
+#+attr_latex: :width 200px :placement [H]
+file:Packages.png
