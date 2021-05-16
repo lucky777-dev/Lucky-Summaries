@@ -210,7 +210,7 @@ Remarques:
 - *3* = *3..3* \color{luckydarkgray}(= 3)\color{black}
 **** *Exemple "memory":*
 
-Reprenons l'exemple [[Memory]["memory]] (vu plus haut):
+Reprenons l'exemple [[Memory]["memory"]] (vu plus haut) mais avec de multiples cartes:
 #+caption: Associations "memory" multiplicités (Exemple)
 #+attr_latex: :width 400px :placement [H]
 file:AssociationsNNEx3.png
