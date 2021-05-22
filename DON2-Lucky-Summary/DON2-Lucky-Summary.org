@@ -29,7 +29,7 @@ Exemple:
 **** Un numéro de plaque d'immatriculation est lié au propriétaire de la voiture: \color{luckydarkgreen}PLAQUE --> PROPRIO\color{black}
 **** Un modèle LEGO est réalisé avec un certain nombre de pièces: \color{luckydarkgreen}MODÈLE --> NOMBRE DE PIÈCES\color{black}
 **** Suivant la moyenne obtenue par un étudiant pour son année, celui-ci recevra un grade. (12 = satisfaisant, 14 = distinction...): \color{luckydarkgreen}MOYENNE --> GRADE\color{black}
-**** Un 0code /bic/ est associé à chacune des banques: \color{luckydarkgreen}BIC --> BANQUE et BANQUE --> BIC\color{black}
+**** Un code /bic/ est associé à chacune des banques: \color{luckydarkgreen}BIC --> BANQUE et BANQUE --> BIC\color{black}
 *** Donner les implications des DF
 **** /ENSEIGNANT --> COURS/
 ***** Un enseignant donne qu'un seul cours: \color{luckydarkgreen}Vrai\color{black}
@@ -233,7 +233,7 @@ file:PROJECTIONSELECTION1.png
 
 \quad WHERE NCOM BETWEEN 30178 AND 30188;
 
-\color{luckydarkgreen}Donne la liste sans doublon des numéros de clients ayant passé les commandes dont le numéro est compris entre 30179 et 30188 inclus.\color{black}
+\color{luckydarkgreen}Donne la liste sans doublon des numéros de clients ayant passé les commandes dont le numéro est compris entre 30178 et 30188 inclus.\color{black}
 **** SELECT QSTOCK*PRIX
 
 \quad FROM PRODUIT
@@ -242,6 +242,7 @@ file:PROJECTIONSELECTION1.png
 
 \color{luckydarkgreen}Donne la valeur du stock des produits dont le libellé commence par "CHE".\color{black}
 **** SELECT NOM, NCLI
+
 \quad FROM CLIENT
 
 \quad WHERE CAT NOT IN ("B1", "C1") AND CAT IS NOT null;
@@ -330,7 +331,7 @@ file:TablesJointuresExercices.png
 \color{black}
 **** /\pi_{{a1, a2, b1, b2}}/ ((A) $\bowtie_{a2=b2}$ (B))
 
-***** \color{luckydarkgreen}D'abord (A) $\bowtie_a2=b2$ (B)
+***** \color{luckydarkgreen}D'abord (A) $\bowtie_{a2=b2}$ (B)
 #+attr_latex: :align c|c|c|c|c|c
 | a1 | a2   | a3 | b1 | b2   | b3 |
 |----+------+----+----+------+----|
