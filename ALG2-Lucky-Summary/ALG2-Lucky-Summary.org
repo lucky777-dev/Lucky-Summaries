@@ -159,8 +159,8 @@ L'affichage ressemblera à:
 =Gestion=
 #+begin_verse
 =bloc 1: 130 étudiants=
-=bloc 1: 42 étudiants=
-=bloc 1: 16 étudiants=
+=bloc 2: 42 étudiants=
+=bloc 3: 16 étudiants=
 =Total: 188 étudiants=
 #+end_verse
 

@@ -9,10 +9,19 @@
 Les processeurs 64 bits de la famille x86 possèdent 16 registres d'utilité générale:
 
 \mintinline{nasm}{rax}, \mintinline{nasm}{rbx}, \mintinline{nasm}{rcx}, \mintinline{nasm}{rdx}, \mintinline{nasm}{rsp}, \mintinline{nasm}{rbp}, \mintinline{nasm}{rsi}, \mintinline{nasm}{rdi}, \mintinline{nasm}{r8}, \mintinline{nasm}{r9}, \mintinline{nasm}{r10}, \mintinline{nasm}{r11}, \mintinline{nasm}{r12}, \mintinline{nasm}{r13}, \mintinline{nasm}{r14} et \mintinline{nasm}{r15}
-- Les registres \mintinline{nasm}{rbx} \mintinline{nasm}{rcx} et \mintinline{nasm}{rdx} ont la même structure interne que \mintinline{nasm}{rax}.
-- Les registres \mintinline{nasm}{rdi}, \mintinline{nasm}{rsp} et \mintinline{nasm}{rbp} ont la même structure interne que \mintinline{nasm}{rsi}.
-- Les registres \mintinline{nasm}{r9} à \mintinline{nasm}{r15} ont la même structure interne que \mintinline{nasm}{r8}.
+- Les registres \mintinline{nasm}{rbx} \mintinline{nasm}{rcx} et \mintinline{nasm}{rdx} ont la même structure interne que \mintinline{nasm}{rax}. \color{luckydarkgray} =(Figure 1)=\color{black}
+- Les registres \mintinline{nasm}{rdi}, \mintinline{nasm}{rsp} et \mintinline{nasm}{rbp} ont la même structure interne que \mintinline{nasm}{rsi}. \color{luckydarkgray} =(Figure 2)=\color{black}
+- Les registres \mintinline{nasm}{r9} à \mintinline{nasm}{r15} ont la même structure interne que \mintinline{nasm}{r8}. \color{luckydarkgray} =(Figure 3)=\color{black}
 - Les suffixes =b, w= et =d= signifient \mintinline{nasm}{byte}, \mintinline{nasm}{word} et \mintinline{nasm}{double} \mintinline{nasm}{word}.
+#+caption: Structure interne de rax
+#+attr_latex: :width 300px :placement [H]
+file:Pictures/rax.png
+#+caption: Structure interne de rsi
+#+attr_latex: :width 300px :placement [H]
+file:Pictures/rsi.png
+#+caption: Structure interne de r8
+#+attr_latex: :width 300px :placement [H]
+file:Pictures/r8.png
 *** =nasm -f elf64 -F dwarf test.asm=
 \color{luckydarkgray}
 =nasm= : Commande
@@ -186,7 +195,7 @@ En utilisant la table =ASCII=, écrivez un code qui convertit un caractère minu
 
 #+caption: Table ASCII
 #+attr_latex: :width 300px
-file:ASCIITable.png
+file:Pictures/ASCIITable.png
 
 #+begin_src nasm
 global main
@@ -255,7 +264,7 @@ global main
 section .text
 main:
    mov rax, 42
-   or rax, 00000000b   ;Effectue un masque neutre pour récupèrer les flags
+   cmp rax, 0
    jz endif:           ;Si rax = 0 alors saute à endif
       mov rbx, 1       ;Ici, rax != 0
 endif:
@@ -504,7 +513,7 @@ section .data
 section .rodata
    nb DD 0x12345678
 #+end_src
-Écrivez un code source complet qui stocke dans \mintinline{nasm}{b0} le bytet de rang =0= de \mintinline{nasm}{nb}, dans \mintinline{nasm}{b1} celui de rang 1, dans \mintinline{nasm}{b2} celui de rang 2 et finalement dans \mintinline{nasm}{b3} celui de rang 3 (Utilisez un ou des registres intermédiaires).
+Écrivez un code source complet qui stocke dans \mintinline{nasm}{b0} le byte de rang =0= de \mintinline{nasm}{nb}, dans \mintinline{nasm}{b1} celui de rang 1, dans \mintinline{nasm}{b2} celui de rang 2 et finalement dans \mintinline{nasm}{b3} celui de rang 3 (Utilisez un ou des registres intermédiaires).
 #+begin_src nasm
 gobal main
 section .data

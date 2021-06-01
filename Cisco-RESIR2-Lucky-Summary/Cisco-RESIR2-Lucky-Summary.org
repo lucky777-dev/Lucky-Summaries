@@ -670,12 +670,226 @@ Le protocole TCP gère les conversations individuelles. TCP est responsable de g
 Le protocole IP est responsable de la remise des messages de l'expéditeur au destinataire. IP est utilisé par les routeurs pour transférer les messages sur plusieurs réseaux.
 *** Ethernet
 Le protocole Ethernet est responsable de la remise des messages d'une carte réseau à une autre carte réseau sur le même réseau local (LAN) Ethernet.
+** Suites de protocoles
+Une suite de protocole est un ensemble de protocoles qui fonctionnent ensemble pour fournir des services de communication réseau complets.
+*** OSI (Protocole d'interconnexion de systèmes ouverts)
+Il s'agit d'une suite de protocoles comprenant [[OSIModel][sept couches]] qui a été largement remplacée par TCP/IP aujourd'hui.
+*** AppleTalk
+Suite de protocoles propriétaire publiée par Apple en 1985 pour les appareils Apple, remplacée par TCP/IP en 1995.
+*** Novell NetWare
+Suite de protocoles propriétaire et système d'exploitation réseau développé par Novell en 1983 utilisant le protocole réseau IPX, remplacée par TCP/IP en 1995.
+*** TCP/IP (Internet Protocol Suite)
+Il s'agit de la suite de protocoles la plus courante et pertinente utilisée aujourd'hui. C'est une suite de protocoles standard ouverte gérée par Internet Engineering Task Force (IETF).
+
+TCP/IP est la suite de protocoles utilisée par Internet et les réseaux aujourd'hui. Elle a deux aspects importants pour les fournisseurs et les fabricants:
+- *Suite de protocoles standards ouverts:* Librement accessible au public et peut être utilisé par n'importe quel fournisseur sur son matériel ou dans son logiciel.
+- *Suite de protocoles basée sur des normes:* Approuvée par le secteur des réseaux et par un organisme de normalisation. Les produits de différents fabriquant peuvent communiquer entre eux sans problème.
+#+caption: Exemple des trois protocoles TCP/IP
+#+attr_latex: :align c|c
+| Nom de la couche | Pile de protocoles      |
+|------------------+-------------------------|
+| Application      | Protocole HTTP          |
+| Transport        | Protocole TCP           |
+| Internet         | Protocole IP            |
+| Accès réseau     | Ethernet (ou autre)     |
+** Protocoles couche d'application
+*** Nom du système
+**** *DNS (Domain Name System):*
+#+begin_quote
+Traduit les noms de domaine en adresses IP.
+#+end_quote
+*** Configuration hôte
+**** *DHCPv4 (Dynamic Host Configuration Protocol version 4):*
+#+begin_quote
+Affecte dynamiquement les informations d'adressage IPv4 aux clients DHCPv4 au démarrage et permet de réutiliser les adresses lorsqu'elles ne sont plus nécessaires.
+
+(Idem pour DHCPv6 mais adresses IPv6).
+#+end_quote
+**** *SLAAC (StateLess Address AutoConfiguration):*
+#+begin_quote
+Autoconfiguration des adresses apatrides. Permet à un périphérique d'obtenir ses informations d'adressage IPv6 sans utiliser un serveur DHCPv6.
+#+end_quote
+*** E-M@il
+**** *SMTP (Simple Mail Transfer Protocol):*
+#+begin_quote
+Envoi de courriers électroniques.
+#+end_quote
+**** *POP3 (Post Office Protocol version 3):*
+#+begin_quote
+Récupérer le courrier électronique à partir d'un serveur de messagerie et téléchargement dans l'application de messagerie locale du client.
+#+end_quote
+**** *IMAP (Internet Message Access Protocol):*
+#+begin_quote
+Accès au courrier électronique stocké sur un serveur de messagerie et maintenance du courrier sur le serveur.
+#+end_quote
+*** Transfert de fichiers
+**** *FTP (File Transfer Protocol):*
+#+begin_quote
+Accès et transfert de fichiers depuis un hôte vers un autre hôte via un réseau. Protocole fiable, connexion orienté et reconnu.
+#+end_quote
+**** *SFTP (SSH File Transfer Protocol):*
+#+begin_quote
+Session de transfert de fichiers sécurisée dans laquelle le transfert est crypté.
+#+end_quote
+**** *TFTP (Trivial File Transfer Protocol):*
+#+begin_quote
+Protocole simple et sans connexion avec livraison de fichiers sans accusé de réception. Produit moins de surcharge que FTP.
+#+end_quote
+*** Web et Service Web
+**** *HTTP (HyperText Transfer Protocol):*
+#+begin_quote
+Ensemble de règles permettant d'échanger du texte, des graphiques, des sons, des vidéos et autres fichiers multimédia sur le Web.
+#+end_quote
+**** *HTTPS (HyperText Transfer Protocol Secure):*
+#+begin_quote
+Forme sécurisée de HTTP qui crypte les données échangées sur le World Wide Web.
+#+end_quote
+**** *REST (Representational State Transfer):*
+#+begin_quote
+Service Web qui utilise des interfaces de programmation dapplications (API) et des requêtes HTTP pour créer des applications Web.
+#+end_quote
+** Protocoles couche transport
+*** Connexion orienté
+**** *TCP (Transmission Control Protocol):*
+#+begin_quote
+Communication fiable entre des processus fonctionnant sur des hôtes distincts, transmissions fiables et reconnues qui confirment le succès de la livraison.
+#+end_quote
+*** Sans connexion
+**** *UDP (User Datagram Protocol):*
+#+begin_quote
+Permet à un processus s'exécutant sur un hôte d'envoyer des paquets à un processus s'exécutant sur un autre hôte. Cependant l'UDP ne confirme pas la réussite de la transmission des datagrammes.
+#+end_quote
+** Protocoles couche internet
+*** Protocole internet
+**** *IPv4 (Internet Protocol version 4):*
+#+begin_quote
+Adresses codées sur 32 bits (décimal).
+
+Reçoit des segments de la couche transport, emballe les messages en paquets et adresse les paquets pour une livraison de bout en bout sur un réseau.
+#+end_quote
+**** *IPv6 (Internet Protocol version 6):*
+#+begin_quote
+Pareil que IPv4 mais avec des adresses codées sur 128 bits (hexadécimal).
+#+end_quote
+**** *NAT (Network Address Traduction):*
+#+begin_quote
+Traduit les adresses IPv4 d'un réseau privé en adresse IPv4 publiques uniques au monde. (Permet de contourner le problème du manque d'adresses IPv4 différentes possibles par rapport au nombre de machines connectées).
+#+end_quote
+*** Envoi de messages
+**** *ICMPv4 (Internet Control Message Protocol version 4):*
+#+begin_quote
+Fournit un retour d'information d'un hôte de destination à un hôte source sur les erreurs de livraison de paquets.
+#+end_quote
+**** *ICMPv6 (Internet Control Message Protocol version 6):*
+#+begin_quote
+Pareil que ICMPv4 mais pour les paquets IPv6.
+#+end_quote
+**** *ICMPv6 ND (Internet Control Message Protocol version 6 Neighbor Discovery):*
+#+begin_quote
+Inclut quatre messages de protocole utilisés pour la résolution d'adresses et la détection d'adresses en double.
+#+end_quote
+*** Protocoles de routage
+**** *OSPF (Open Shortest Path First):*
+#+begin_quote
+Protocole de routage d'état de liaison qui utilise une conception hiérarchique basée sur des zones. (Ouvrez d'abord le chemin le plus court).
+#+end_quote
+**** *EIGRP (Enhanced Interior Gateway Routing Protocol):*
+#+begin_quote
+Protocole de routage propriétaire de Cisco qui utilise une métrique composite basée sur la largeur de la bande, le délai, la charge et la fiabilité.
+#+end_quote
+**** *BGP (Border Gateway Protocol):*
+#+begin_quote
+Protocole de routage de passerelle extérieure standard ouvert utilisé entre les [[ISP][ISPs]]. Également utilisé entre les ISPs et leurs clients privés plus importants pour échanger des informations de routage.
+#+end_quote
+** Protocoles couche réseau
+*** Résolution d'adresse
+**** *ARP (Address Resolution Protocol):*
+#+begin_quote
+Fournit un mappage d'adresse dynamique entre une adresse IPv4 et une adresse physique.
+#+end_quote
+*** Protocoles de liaison de données
+**** *Ethernet:*
+#+begin_quote
+Définit les règles relatives aux normes de câblage et de signalisation de la couche d'accès au réseau.
+#+end_quote
+**** *WLAN (Wireless Local Area Network):*
+#+begin_quote
+Définit les règles de signalisation sans fil sur les fréquences radio 2.4GHz et 5.0GHz.
+#+end_quote
+** Encapsulation d'une donnée en TCP/IP
+L'utilisateur va d'abord décider d'envoyer une certaine donnée.
+
+#+caption: Données
+#+attr_latex: :align |c| :placement [H]
+|---------|
+| Données |
+|---------|
+
+Ensuite On va ajouter une information =TCP= devant la =donnée=, c'est maintenant un =segment TCP=.
+
+#+caption: Segment TCP
+#+attr_latex: :align |c|c| :placement [H]
+|-----+---------|
+| TCP | Données |
+|-----+---------|
+
+On ajoute également une information =IP= devant =TCP=, on a maintenant un =paquet IP=.
+
+#+caption: Paquet IP
+#+attr_latex: :align |c|c|c| :placement [H]
+|----+-----+---------|
+| IP | TCP | Données |
+|----+-----+---------|
+
+Enfin, on ajoute une donnée =Ethernet= devant =IP= et également une info à la fin, et on obtient une =trame Ethernet=.
+
+#+caption: Trame Ethernet
+#+attr_latex: :align |c|c|c|c|c| :placement [H]
+|----------+----+-----+---------+---|
+| Ethernet | IP | TCP | Données | i |
+|----------+----+-----+---------+---|
+** Normes
+Il existe de nombreux fabricants différents de composants réseau, ils doivent donc tous utiliser les mêmes normes afin d'être compatibles.
+
+Les normes sont élaborées par des organismes internationaux de normalisation.
+*** Normes Internet
+#+caption: Organismes de normalisation Internet
+#+attr_latex: :width 300px :placement [H]
+file:Pictures/NormesInternet.png
+**** *ISOC (Internet Society):*
+#+begin_quote
+Responsable de la promotion du développement ouvert et de l'évolution de l'utilisation de l'Internet dans le monde entier.
+#+end_quote
+**** *IAB (Internet Architecture Board):*
+#+begin_quote
+Responsable de la gestion globale et du développement des normes Internet.
+#+end_quote
+**** *IETF (Internet Engineering Task Force):*
+#+begin_quote
+Développe, met à jour et assure la maintenance des technologies Internet.
+#+end_quote
+**** *IRTF (Internet Research Task Force):*
+#+begin_quote
+Se concentre sur la recherche à long terme liée à l'Internet et aux protocoles TCP/IP comme l'Anti-Spam research Group (ASRG), le Crypto Forum Research Group (CFRG) et le Peer-to-Peer Research Group (P2PRG).
+#+end_quote
+**** *Organismes de normalisation impliqués dans le développement et le soutien du TCP/IP:*
+#+caption: Organismes de normalisation TCP/IP
+#+attr_latex: :width 300px :placement [H]
+file:Pictures/IANAICANN.png
+**** *ICANN (Internet Corporation for Assigned Names and Numbers):*
+#+begin_quote
+Basée aux États-Unis, l'ICANN coordonne l'attribution des adresses IP, la gestion des noms de domaine et l'attribution d'autres informations utilisées dans les protocoles TCP/IP.
+#+end_quote
+**** *IANA (Internet Assigned Numbers Authority):*
+#+begin_quote
+Responsable de la supervision et de la gestion de l'attribution des adresses IP, de la gestion des noms de domaine et des identificateurs de protocole pour l'ICANN.
+#+end_quote
 * TODO Suite en cours de création...
 * Vocabulaire de base
 ** <<OSIModel>>OSI Model (Open Systems Interconnection)
 Le modèle OSI est une *norme de communication*, en réseau, de tous les systèmes informatiques. C'est un modèle de communications entre ordinateurs proposé par l'ISO (Organisation internationale de normalisation) qui décrit les fonctionnalités nécessaires à la communication et l'organisation de ces fonctions.
 #+caption: Modèle OSI [[https://fr.wikipedia.org/wiki/Mod%C3%A8le_OSI#Architecture_en_couches][(Wikipédia)]]
-file:ModelOSI-Schema.png
+file:Pictures/ModelOSI-Schema.png
 ** <<Protocol>>Protocol
 Ensemble de *règles* qui régissent les *échanges de données* ou le comportement collectif de processus ou d'ordinateurs en réseaux ou d'objets connectés.
 #+begin_quote
@@ -771,13 +985,13 @@ Soit en binaire:
 Le /routage/ est le *mécanisme* par lequel des *chemins* sont *sélectionnés* dans un réseau pour acheminer les données d'un expéditeur jusqu'à un ou plusieurs destinataires. Le /routage/ est une tâche exécutée dans de nombreux réseaux, tels que le réseau téléphonique, les réseaux de données électroniques comme Internet, et les réseaux de transports. Sa performance est importante dans les réseaux décentralisés, c'est-à-dire où l'information n'est pas distribuée par une seule source, mais échangée entre des agents indépendants. C’est grâce à ça que par exemple les mails sont envoyés aux bons destinataires.
 *** <<Unicast>>Unicast
 #+attr_latex: :width 50px :center nil
-file:Unicast-Schema.png Il n'existe qu'*une association* entre une adresse réseau et le *point d'arrivée final* : chaque adresse de destination identifie de manière unique *un seul receveur final*.
+file:Pictures/Unicast-Schema.png Il n'existe qu'*une association* entre une adresse réseau et le *point d'arrivée final* : chaque adresse de destination identifie de manière unique *un seul receveur final*.
 *** <<Anycast>>Anycast
 #+attr_latex: :width 50px :center nil
-file:Anycast-Schema.png Technique d'adressage et de routage permettant de rediriger les données vers le serveur informatique le « *plus proche* » ou le « *plus efficace* » selon la politique de routage.
+file:Pictures/Anycast-Schema.png Technique d'adressage et de routage permettant de rediriger les données vers le serveur informatique le « *plus proche* » ou le « *plus efficace* » selon la politique de routage.
 *** <<Multicast>>Multicast
 #+attr_latex: :width 50px :center nil
-file:Multicast-Schema.png Forme de diffusion d'un émetteur (source unique) vers un *groupe de récepteurs*. Les termes /diffusion multipoint/ ou /diffusion de groupe/ sont également employés.
+file:Pictures/Multicast-Schema.png Forme de diffusion d'un émetteur (source unique) vers un *groupe de récepteurs*. Les termes /diffusion multipoint/ ou /diffusion de groupe/ sont également employés.
 
 Les récepteurs intéressés par les messages adressés à ce groupe doivent s'inscrire à ce groupe. Ces abonnements permettent aux switchs et routeurs intermédiaires d'établir une route depuis le ou les émetteurs de ce groupe vers les récepteurs de ce groupe.
 #+begin_quote
@@ -794,7 +1008,7 @@ Les récepteurs intéressés par les messages adressés à ce groupe doivent s'i
 #+end_quote
 *** <<Broadcast>>Broadcast
 #+attr_latex: :width 50px :center nil
-file:Broadcast-Schema.png Technique d'adressage et de routage permettant de rediriger les données vers *toutes* les machines connectées au réseau.
+file:Pictures/Broadcast-Schema.png Technique d'adressage et de routage permettant de rediriger les données vers *toutes* les machines connectées au réseau.
 ** <<Firewall>>Firewall
 Un pare-feu est un logiciel et/ou un matériel permettant de faire respecter la politique de sécurité du réseau, celle-ci définissant quels sont les types de communications autorisés sur ce réseau informatique. Il surveille et contrôle les applications et les flux de données ([[Paquet][paquets]]). 
 ** <<Gateway>>Gateway
