@@ -159,7 +159,7 @@ Connexion *privée* de [[LAN][LAN]] et de [[WAN][WAN]] qui appartiennent à une 
 Il offre un accès aux membres de l'entreprise, à ses employés ou à d'autres personnes sous réserve d'une autorisation.
 #+end_quote
 *** <<Extranet>>Extranet
-Accès sûr et sécurisé pour aux personnes qui travaillent pour une organisation différente, mais qui ont besoin d'accéder aux données de l'organisation.
+Accès sûr et sécurisé aux personnes qui travaillent pour une organisation différente, mais qui ont besoin d'accéder aux données de l'organisation.
 #+begin_quote
 \color{luckydarkgray}
 Exemples:
@@ -181,7 +181,7 @@ Exemples:
 *** <<WISP>>WISP (Wireless Internet Service Provider)
 Un WISP /(Wireless Internet Services Provider)/ est un [[ISP][fournisseur d'accès Internet]] qui connecte les abonnés à un point d'accès ou à un point d'échange désigné en utilisant des technologies *sans fil* similaires à celles que l'on trouve dans les [[WLAN][réseaux locaux sans fil]] des foyers.
 
-Cette configuration n'est pas très différente de la technologie [[DSL][DSL]] ou du [[Cable][câble]]. La *principale différence* est la connexion entre le maison et l'ISP: Celle-ci se fait sans fil et n'utilise pas de câble.
+Cette configuration n'est pas très différente de la technologie [[DSL][DSL]] ou du [[Cable][câble]]. La *principale différence* est la connexion entre la maison et l'ISP: Celle-ci se fait sans fil et n'utilise pas de câble.
 ** Connexions Internet des bureaux à domicile et des petits bureaux
 *** <<Cable>>Câble
 Utilisation du même câble que celui qui achemine la *télévision* par câble.
@@ -239,7 +239,7 @@ Utilisation d'une *ligne téléphonique* et d'un *modem*.
 \textcolor{luckydarkred}{Faible bande passante, insuffisante pour les transferts de données importantes}
 #+end_quote
 ** Connexion Internet d'entreprise
-*** <<LigneLoueeDediee>>Ligne louées dédiée
+*** <<LigneLoueeDediee>>Ligne louée dédiée
 Circuit *réservé* au sein du réseau du [[ISP][fournisseur de service]], qui relie des bureaux géographiquement séparés par un réseau privé de voix et/ou de données. (Généralement loué sur une base mensuelle ou annuelle)
 *** <<Ethernet>>Ethernet (ou Ethernet WAN)
 Étend la technologie d'accès [[LAN][LAN]] au [[WAN][WAN]].
@@ -296,9 +296,9 @@ Avec l'arrivée de nouvelles technologies et de nouveaux appareils sur le march�
 ** <<BYOD>>BYOD (Bring Your Own Device)
 Le BYOD donne aux utilisateurs finaux la liberté d'utiliser des outils personnels pour accéder aux informations et communiquer à travers un réseau d'entreprise ou de campus. C'est ce qu'on appelle le "Bring Your Own Device". \textcolor{luckydarkgray}{(--> "Apporte Ton Propre Appareil")}
 ** <<CollaborationEnLigne>>Collaboration en ligne
-C'est le fait de travailler avec une ou plusieurs autres personnes sur un projet commun. Ceci offre un moyen de se connecter, d'interagir et d'atteindre des objectifs instantanément.
+C'est le fait de travailler avec une ou plusieurs autres personnes sur un projet commun. Ceci offre un moyen de se connecter, d'interagir et d'atteindre des objectifs instantanément. \color{luckydarkgray}(Ex: git)\color{black}
 ** <<CommunicationVideo>>Communication vidéo
-Outil puissant pour communiquer avec d'autres utilisateurs à distance, tant u niveau régional qu'international. La vidéo devient une condition essentielle pour collaborer efficacement à mesure que les entreprises se développent au-delà des frontières géographiques et culturelles.
+Outil puissant pour communiquer avec d'autres utilisateurs à distance, tant au niveau régional qu'international. La vidéo devient une condition essentielle pour collaborer efficacement à mesure que les entreprises se développent au-delà des frontières géographiques et culturelles.
 ** <<CloudComputing>>Cloud computing
 Le cloud computing nous permet de stocker des fichiers personnels, et même de sauvegarder un disque entier sur des serveurs via l'Internet, grâce aux [[DataCenter][centres de données]].
 
@@ -316,13 +316,13 @@ Constitué de deux ou plusieurs clouds, où chaque partie reste un objet distinc
 
 Créé pour une utilisation exclusive par des entités ou des entreprises spécifiques, semblable à un environnement de cloud public, mais offrant les niveaux de sécurité, de confidentialité et de conformité réglementaire d'un cloud privé.
 ** <<TendanceTechnologiqueDomestique>>Tendances technologiques domestiques
-Celles-ci n'affectent pas seulement la façon dont nous communiquons au travail et à l'école, mais elles modifient également de nombreux aspects de la maison. les dernières tendances pour la maison incluent les /technologies domestiques intelligents/.
+Celles-ci n'affectent pas seulement la façon dont nous communiquons au travail et à l'école, mais elles modifient également de nombreux aspects de la maison. les dernières tendances pour la maison incluent les /technologies domestiques intelligentes/.
 
 *Technologies domestiques intelligentes:* Celles-ci s'intègrent dans les appareils ménagers quotidiens, qui peuvent ensuite se connecter à d'autres appareils pour les rendre plus /"intelligents"/ ou /automatisés/.
 
-Les technologies domestiques intelligents sont en cours de développement et s'intègreront bientôt à toutes les pièces de la maison.
+Les technologies domestiques intelligentes sont en cours de développement et s'intègreront bientôt à toutes les pièces de la maison.
 
-La technologie domestique intelligente deviendra de plus en plus courant à mesure que les réseaux domestiques et la technologie de l'Internet à haut débit se développeront.
+La technologie domestique intelligente deviendra de plus en plus courante à mesure que les réseaux domestiques et la technologie de l'Internet à haut débit se développeront.
 
 \textcolor{luckydarkgray}{(Ex: Four programmable afin de déterminer certaines heures et températures en fonction de vos disponibilités et des aliments utilisés, avec possibilité de recevoir une notification sur un autre appareil lorsque le repas est prêt.}
 ** <<ReseauCourantElectrique>>Réseau sur courant électrique
