@@ -22,7 +22,7 @@ Une /adresse IPv4/ est représentée sous la forme de *quatre nombres entiers* s
 
 Chacun des nombres représente *un octet*. La plage d'attribution s'étend de /0.0.0.0/ à /255.255.255.255/, sachant qu'il existe des contraintes empêchant l'utilisation de certaines adresses (réservée, masque, broadcast...).
 **** *IPv6:*
-Grâce à des adresses de *128 bits* /(au lieu de 32 bits en IPv4)/, on dispose d'un espace d'adressage bien plus important qu'IPv4 /(plus de 340 sextillions, ou *340*10^{36}* adresse différentes)/.
+Grâce à des adresses de *128 bits* /(au lieu de 32 bits en IPv4)/, on dispose d'un espace d'adressage bien plus important qu'IPv4 /(plus de 340 undécillions, ou *340*10^{36}* adresse différentes)/.
 
 Cette quantité d'adresses considérable permet une plus grande *flexibilité* dans l'attribution des adresses et une meilleure agrégation des routes dans la table de routage d'Internet. La traduction d'adresse, qui a été rendue populaire par le manque d'adresses IPv4, n'est plus nécessaire.
 
