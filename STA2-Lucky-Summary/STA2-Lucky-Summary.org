@@ -421,10 +421,6 @@ On tire un Roi donc il reste 3 Rois sur 51 cartes restantes.
 
 = \sfrac{1}{13} * \sfrac{1}{17} \(\textcolor{luckydarkgreen}{\mathbf{= \sfrac{1}{221}}}\)
 **** *P(Au moins 1 Roi)*
-
-= P(1ère pas Roi) *et* P(2ème pas Roi *sachant que* 1ère pas Roi)
-
-= 1-- P(Aucun Roi)
 #+begin_quote
 \color{luckydarkgray}
 *P(Aucun Roi)*
