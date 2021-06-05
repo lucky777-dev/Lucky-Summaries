@@ -407,7 +407,7 @@ On tire deux cartes dans un jeu de 52 cartes sans remise intermédiaire:
 1. La première carte est un Roi. Quelle est la probabilité que la deuxième carte soit encore un Roi?
 2. Quelle est la probabilité d'obtenir deux Rois?
 3. Quelle est la probabilité d'obtenir au moins 1 Roi?
-*** Solution (\sfrac{3}{52};\sfrac{1}{221};\sfrac{33}{221})
+*** Solution (\sfrac{3}{51};\sfrac{1}{221};\sfrac{33}{221})
 **** *P(2ème carte est un Roi sachant que la 1ère est un Roi)*
 
 On tire un Roi donc il reste 3 Rois sur 51 cartes restantes.
