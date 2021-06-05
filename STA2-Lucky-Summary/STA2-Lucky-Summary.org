@@ -410,11 +410,9 @@ On tire deux cartes dans un jeu de 52 cartes sans remise intermédiaire:
 *** Solution (\sfrac{3}{52};\sfrac{1}{221};\sfrac{33}{221})
 **** *P(2ème carte est un Roi sachant que la 1ère est un Roi)*
 
-= P(Roi carte2 | Roi carte1)
+On tire un Roi donc il reste 3 Rois sur 51 cartes restantes.
 
-= \sfrac{4}{52} -- \sfrac{1}{52}
-
-\(\textcolor{luckydarkgreen}{\mathbf{= \sfrac{3}{52}}}\)
+\(\textcolor{luckydarkgreen}{\mathbf{= \sfrac{3}{51}}}\)
 **** *P(Deux Rois)*
 
 = P(Roi carte1 *et* Roi carte2)
