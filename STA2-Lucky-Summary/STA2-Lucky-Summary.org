@@ -801,7 +801,7 @@ Pour se rendre à l'école, Gontran utilise les transports en commun. Il prend l
 3. Sachant que Gontran est arrivé en retard, quelle est la probabilité qu'il ait pris le tram?
 4. Quelle est la probabilité que Gontran arrive en retard deux jours de suite?
 
-*** Solution (\sfrac{6}{35};\sfrac{18}{35};\sfrac{1}{6};\sfrac{36}{1275})
+*** Solution (\sfrac{6}{35};\sfrac{18}{35};\sfrac{1}{6};\sfrac{36}{1225})
 \color{luckydarkgray}
 =(Voir figure 9)=
 \color{black}
@@ -834,7 +834,7 @@ P(Retard) = (\sfrac{4}{7} * 10%) + (\sfrac{2}{7} * 30%) + (\sfrac{1}{7} * 20%) \
 
 = P(Retard jour1 *et* Retard jour2) = P(Retard) * P(Retard)
 
-= (Réponse 1)^2 \(\textcolor{luckydarkgreen}{\mathbf{= \sfrac{36}{1275}}}\)
+= (Réponse 1)^2 \(\textcolor{luckydarkgreen}{\mathbf{= \sfrac{36}{1225}}}\)
 * Chapitre 2 -- Variables aléatoires et grandes distributions théoriques
 ** Théorie
 *** Variable aléatoire
