@@ -1199,9 +1199,9 @@ Donnez la distribution de probabilité, la fonction de répartition, l'espéranc
 = -- \sfrac{1}{2}
 ***** Variance:
 
-      *\sigma^2 =* ((--6)^2 * \sfrac{1}{6}) + ((--4)^2 * \sfrac{1}{6}) + ((--2)^2 * \sfrac{1}{6}) + (1^2 * \sfrac{1}{6}) + (3^2 * \sfrac{1}{6}) + (5^2 * \sfrac{1}{6}) -- (--\sfrac{1}{2})^2)
+      *\sigma^2 =* ((--6)^2 * \sfrac{1}{6}) + ((--4)^2 * \sfrac{1}{6}) + ((--2)^2 * \sfrac{1}{6}) + (1^2 * \sfrac{1}{6}) + (3^2 * \sfrac{1}{6}) + (5^2 * \sfrac{1}{6}) -- (--\sfrac{1}{2})^2
 
-= \sfrac{1}{6} * (36+16+4+1+9+25)
+= \sfrac{1}{6} * (36+16+4+1+9+25) -- \sfrac{1}{4}
 
 = \sfrac{179}{12}
 ***** Écart-type:
