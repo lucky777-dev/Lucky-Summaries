@@ -1220,7 +1220,7 @@ Donnez la distribution de probabilité, la fonction de répartition, l'espéranc
 = -- \sfrac{11}{4}
 ***** Variance:
 
-\sigma^2 = ((-- 15)^2 * \sfrac{13}{20}) + (20^2 * \sfrac{7}{20}) -- (-- \sfrac{11}{4})^2)
+\sigma^2 = ((-- 15)^2 * \sfrac{13}{20}) + (20^2 * \sfrac{7}{20}) -- (-- \sfrac{11}{4})^2
 
 = 278.69...
 ***** Écart-type:

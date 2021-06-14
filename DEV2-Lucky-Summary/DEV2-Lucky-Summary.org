@@ -1,0 +1,702 @@
+#+latex_class: luckypdf
+#+language: fr
+#+title: DEV2 - Lucky Summary
+#+author: Sm!le42
+
+* (Array)List
+* Assignation
+<<Assignation>>
+** C'est quoi?
+L'/assignation/ est avant tout une *expression*.
+- Elle a un *type* \color{luckydarkgray}(celui de la variable)\color{black}
+- Elle a une *valeur* \color{luckydarkgray}(celle du /left-hand side/)\color{black}
+On en fait une *instruction* à l'aide du =";"=.
+
+Grammaire de l'assignation:
+#+begin_verse
+/Assignment/:
+   /LeftHandSide   AssignmentOperator   Expression/
+/AssignmentOperator/: one of \mintinline{java}{ = *= /= %= += -=}
+#+end_verse
+
+\color{luckydarkgray}Exemple d'assignations:\color{black}
+#+begin_src java :placement [H]
+element = 1      //Expression
+elements[i] = j  //Idem
+
+elements[i] = j; //Instruction
+element += 2;    //Idem
+foo(i=1, j=0);   //...
+#+end_src
+* break/continue
+<<break>>
+** C'est quoi?
+L'instruction \mintinline{java}{break} permet d'*arrêter brutalement* une instruction et de *sortir* de la boucle (ou du label).
+
+L'instruction \mintinline{java}{continue} permet de *passer* directement à l'itération *suivante* (ou le label).
+* Collections
+* Constructeur
+<<Constructeur>>
+** C'est quoi?
+Le /constructeur/ d'une classe permet de créer des instances de cette classe:
+- Lui *réserver de l'espace* en mémoire (sur le *tas*)
+- *Initialiser son état* (ses attributs)
+\color{luckydarkgray}Exemple de constructeur de la classe Video:\color{black}
+#+begin_src java :classname Video :placement [H]
+public Video(String unAuteur, String unTitre) {
+   this.auteur = unAuteur;
+   this.titre = unTitre;
+   this.publiee = false;
+   this.nbLikes = 0;
+   this.nbDislikes = 0;
+}
+#+end_src
+** new
+Pour instancier un objet on va utiliser l'*opérateur* \mintinline{java}{new} et fournir d'éventuels *paramètres* au [[Constructeur][constructeur]].
+
+\color{luckydarkgray}Exemple d'instanciation d'un objet *threadHorreur* de type *Video*:\color{black}
+#+begin_src java :classname Video :placement [H]
+Video threadHorreur = new Video("SQUEEZIE", "Êtes-vous vraiment seul chez vous ?");
+#+end_src
+** Validité des paramètres
+Le /constructeur/ peut *vérifier* la /validité des paramètres/, il suffit d'ajouter des *test* au début de celui-ci.
+
+\color{luckydarkgray}Exemple de constructeur Video avec vérification de paramètres:\color{black}
+#+begin_src java :classname Video :placement [H]
+public Video(String unAuteur, String unTitre) {
+   if(unAuteur==null || unAuteur.length()==0) {
+      throw new IllegalArgumentException("Auteur invalide");
+   }
+   if(unTitre==null || unTitre.length()==0) {
+      throw new IllegalArgumentException("Titre invalide");
+   }
+   this.auteur = unAuteur;
+   this.titre = unTitre;
+   publiee = false;
+   nbLikes = 0;
+   nbDislikes = 0;
+}
+#+end_src
+** Valeurs par défaut
+Si un constructeur n'*initialise pas* certain attributs, ils auront alors une /valeur par défaut/:
+- \mintinline{java}{0} pour les nombres
+- \mintinline{java}{null} pour les références
+- \mintinline{java}{false} pour les booléens
+** Constructeur par défaut
+Si nous n'écrivons *pas de constructeur*, il existe un /constructeur par défaut/ *sans paramètre et qui ne fait rien*.
+
+\color{luckydarkgray}(Celui-ci ne sera plus disponible si un autre constructeur est fourni)\color{black}
+** Plusieurs constructeurs (surcharge)
+Il est possible de fournir /plusieurs constructeurs/ *différents* pour une *même classe*. (Voir [[Surcharge][surcharge]])
+* Encapsulation
+<<Encapsulation>>
+** C'est quoi?
+Le principe d'/encapsulation/ permet de garder la cohérence de l'objet assurée par la classe.
+- Les *attributs* sont *privés*
+- Les *méthodes* permettant de *modifier l'état* de l'objet sont *publiques*
+* enum
+* equals
+* Expression régulière
+<<ExpressionsRegulieres>>
+** Assignation
+(Voir [[Assignation][assignation]])
+** Incrémentation/Décrémentation
+Permet d'/incrémenter/ ou de /décrémenter/ une *variable*.
+(Voir [[Post-incrémentation][PostIncrementation]])
+** Appel de méthode
+L'/appel de méthode/ est une *expression*. Elle possède:
+- un *type* \color{luckydarkgray}(type du return)\color{black}
+- une *valeur* \color{luckydarkgray}(valeur du return)\color{black}
+\color{luckydarkgray}Exemple d'appel de méthode:\color{black}
+#+begin_src java :placement [H]
+public class Foo {
+   public static void main(String[] args) {
+      double x = Math.sqrt(4);      //Type=double, valeur=2.0
+   }
+}
+#+end_src
+** Instanciation de classe
+Créer une [[Objet][instance]] d'une classe est une *expression*. Elle possède:
+- Un *type* \color{luckydarkgray}(celui de l'objet créé)\color{black}
+- Une *valeur* \color{luckydarkgray}(la /référence/ vers l'objet)\color{black}
+\color{luckydarkgray}Exemple d'instanciation de classe:\color{black}
+#+begin_src java :placement [H]
+public class Foo {
+   public static void main(String[] args) {
+      Video foo = new Video("auteur", "titre"); //Type=Video, Valeur=référence
+   }
+}
+#+end_src
+* extends
+* Fichier texte/binaire
+* Filtrer (fonctionnel)
+* for
+<<for>>
+** C'est quoi?
+L'instruction \mintinline{java}{for} permet d'effectuer du code en *boucle* un certain nombre de fois.
+
+Elle est composée de la manière suivante:
+
+=for (Initialisation ; Expression ; Update) {Instructions}=
+** Initialisation
+*Déclaration* et *initialisation* de la variable utilisée pour *compter* le nombre de répétitions.
+** Expression
+Test de l'expression qui retournera un *booléen*:
+- \mintinline{java}{true}: Instructions - Update - ÉvaluationExpression (etc)
+- \mintinline{java}{false}: On sort de la boucle
+** Update
+Mise à jour la *valeur* de la *variable* initialisée lors de l'entrée dans la boucle.
+* foreach
+<<foreach>>
+** C'est quoi?
+Permet de *parcourir* un [[Iterer][Iterable]].
+
+Ainsi on peut *parcourir* une collection d'objets *sans devoir connaître le nombre* d'objets à parcourir.
+
+Cette méthode est *plus rapide*, mais:
+- *Pas* d'accès à l'indice
+- *Impossible* de modifier un élément
+
+\color{luckydarkgray}Exemple d'instruction  =foreach=:\color{black}
+#+begin_src java :placement [H]
+public void showAuteurs(ArrayList<Video> videos) {
+   for(Video video : videos) {                //Pour chaque Video dans videos
+      System.out.println(video.getAuteur());  //Affiche l'auteur de la vidéo
+   }
+}
+
+//Équivalent avec un for classic:
+public void showAuteurs(ArrayList<Video> videos) {
+   for(int i = 0 ; i < videos.size() ; i++) {
+      System.out.println(videos.get(i).getAuteur());
+      //On a l'indice i donc on peut éventuellement modifier les données
+   }
+}
+#+end_src
+* Grammaire
+<<Grammaire>>
+** C'est quoi?
+La /grammaire/ d'un langage est la *description* des *règles* de ce *langage*.
+- Un *mot* (token) doit être légal \color{luckydarkgray}(grammaire lexicale)\color{black}
+- Une *séquence de mots* doit être légale \color{luckydarkgray}(grammaire syntaxique)\color{black}
+- Le *tout* doit avoir un sens \color{luckydarkgray}(sémantique)\color{black}
+
+La /grammaire/ du *Java* est décrite dans =The Java Language Specification=.
+
+Chaîne de compilation: \color{luckydarkgray}(Du haut vers le bas)\color{black}
+#+attr_latex: :align |c| :placement [H]
+|-------------------------------------------------------------|
+| \textcolor{luckydarkgray}{Programme source}                 |
+|-------------------------------------------------------------|
+| =Analyse lexicale=                                          |
+|-------------------------------------------------------------|
+| =Analyse syntaxique=                                        |
+|-------------------------------------------------------------|
+| =Analyse sémantique=                                        |
+|-------------------------------------------------------------|
+| \textcolor{luckydarkgray}{Génération de code intermédiaire} |
+|-------------------------------------------------------------|
+| \textcolor{luckydarkgray}{Optimisation du code}             |
+|-------------------------------------------------------------|
+| \textcolor{luckydarkgray}{Génération du code}               |
+|-------------------------------------------------------------|
+
+** Fonctionnement d'une grammaire
+- Symbole de départ
+- Règles de productions \color{luckydarkgray}(/productions/)\color{black}
+- Symboles terminaux \color{luckydarkgray}(/token/)\color{black}
+
+Un *code* est *correct* s'il peut être *produit* par la grammaire.
+** Grammaire lexicale
+Des caractères aux mots.
+- Les *symboles terminaux* sont les *caractères*
+- Les *règles de production* forment les *mots* (/tokens/), *éléments d'entrée* (/inputElements/)
+
+\color{luckydarkgray}(Les commentaires et espaces ne passent pas la phase suivante)\color{black}
+** Grammaire syntaxique
+Des mots au programme.
+- Les *symboles terminaux* sont les *tokens*
+- Les *règles de production* permettent de définir ce qu'est un *programme syntaxiquement correct*
+#+begin_quote
+Parmi les *éléments importants d'un programme*, on retrouve:
+- Les *expressions* \color{luckydarkgray}(calculs, possèdent une valeur et un type)\color{black}
+- Les *instructions*
+- Les *expressions-instructions*
+#+end_quote
+Certaines *expressions* peuvent *devenir* une *instruction* dès l'ajout du =";"=.
+** Exemples de grammaire
+\color{luckydarkgray}Grammaire d'un nombre décimal naturel:\color{black}
+#+begin_verse
+/Nombre/:
+   /Chiffre/
+   /Chiffre Nombre/
+/Chiffre/: one of =0 1 2 3 4 5 6 7 8 9=
+#+end_verse
+
+\color{luckydarkgray}Grammaire d'un palindrome binaire:\color{black}
+#+begin_verse
+/Palindrome/:
+   =0=
+   =1=
+   =00=
+   =11=
+   =0= /Palindrome/ =1=
+   =1= /Palindrome/ =0=
+#+end_verse
+
+\color{luckydarkgray}Grammaire de l'instruction =if=:\color{black}
+#+begin_verse
+/IfThenStatement/:
+   =if= (/Expression/) /Statement/
+/IfThenElseStatement/:
+   =if= (/Expression/) /StatementNoShortIf/ =else= /Statement/
+/IfThenElseStatementNoShortIf/:
+   =if= (/Expression/) /StatementNoShortIf/ =else= /StatementNoShortIf/
+#+end_verse
+
+\color{luckydarkgray}Grammaire de l'instruction =switch case=:\color{black}
+#+begin_verse
+/SwitchStatement/:
+   =switch= (/Expression/) /SwitchBlock/
+/SwitchBlock/:
+   { {/SwitchBlockStatementGroup/} {/SwitchLabel/}}
+/SwitchBlockStatementGroup/:
+   /SwitchLabels BlockStatement/
+/SwitchLabel/:
+   =case= /ConstantExpression/:
+   =case= /EnumConstantName/:
+   =default :=
+#+end_verse
+
+\color{luckydarkgray}Grammaire de l'instruction =while=\color{black}
+#+begin_verse
+=while= (/Expression/) /Statement/
+#+end_verse
+
+\color{luckydarkgray}Grammaire de l'instruction =do-while=\color{black}
+#+begin_verse
+=do= /Statement/ =while= (/Expression/)
+#+end_verse
+
+\color{luckydarkgray}Grammaire de l'instruction =for=:\color{black}
+#+begin_verse
+/BasicForStatement/:
+   =for= /(ForInit ; Expression ; ForUpdate) Statement/
+/ForInit/:
+   /StatementExpressionList/
+   /LocalVariableDeclaration/
+/ForUpdate/:
+   /StatementExpressionList/
+#+end_verse
+
+\color{luckydarkgray}Grammaire d'un =foreach=:\color{black}
+#+begin_verse
+/EnhancedForStatement/:
+   =for= (/Type Identifier/ : /Expression/) /Statement/
+#+end_verse
+* if
+** C'est quoi?
+L'instruction \mintinline{java}{if} permet d'exécuter un certain code en fonction d'une *condition*.
+
+\color{luckydarkgray}Exemple de condition =if=}:\color{black}
+#+begin_src java :classname Sign :exports both :results pp :placement [H]
+public class Sign {
+   public static void main(String[] args) {
+      int foo = 0;
+      System.out.println("Résultat du code:");
+
+      //If-Then-Else
+      if (foo < 0) {
+         System.out.println("Foo est négatif");            //Ne sera pas exécuté
+      } else {
+         System.out.println("Foo est positif");
+      }
+
+      //If-Then-ElseIf-Else
+      if (foo >= 0) {
+         System.out.println("Foo est bien positif! *dab*");
+      }
+      else if (foo < 0) {
+         System.out.println("Toujours pas négatif?");      //Ne sera pas exécuté
+      } else {
+         System.out.println("Heu.. Y a un problème ici!"); //Ne sera pas exécuté
+         throw new UnexpectedException("wtf?");            //Ne sera pas exécuté
+      }
+   }
+}
+#+end_src
+** If complexes
+Lorsqu'un ensemble d'instructions =if= devient trop complexe et difficile à lire, on préférera utiliser l'instruction [[switch][=switch-case=]].
+* implements
+* import
+* Itérer (fonctionnel)
+<<Iterer>>
+* Object
+<<Objet>>
+** Orienté objet
+Un langage /orienté objet/ permet de créer *ses propres types*, liés au problème à résoudre.
+
+*Avantages* de l'/orienté objet/:
+\color{luckydarkgreen}
+- lisibilité
+- compactification
+- robustesse
+\color{black}
+** Un objet c'est quoi?
+Un /objet/ est une *instance d'une classe*:
+- construit à partir de la définition donnée par la classe
+- appartenant au type défini par la classe
+
+\color{luckydarkgray}(Ex: Un objet =threadHorreur= pourrait être une instance de la classe =Video=)\color{black}
+*** Caractéristiques
+1. *État* \color{luckydarkgray}(*Données* de l'objet, stockées dans des *attributs*)\color{black}
+2. *Comportement* \color{luckydarkgray}(Ce que l'on peut faire avec l'objet, en utilisant des *méthodes*)\color{black}
+
+\color{luckydarkgray}
+Exemple:
+L'objet =threadHorreur= de la classe =Video= pourrait avoir les attributs et méthodes suivants:
+#+attr_latex: :align |c| :placement [H]
+|-----------------------------------------------|
+| threadHorreur: Video                          |
+|-----------------------------------------------|
+| --auteur="SQUEEZIE"                           |
+| --titre="Êtes-vous vraiment seul chez vous ?" |
+| --publiee=true                                |
+| --nbLikes=581356                              |
+| --nbDislikes=4213                             |
+|-----------------------------------------------|
+| +liker()                                      |
+| +disliker()                                   |
+| +commenter()                                  |
+|-----------------------------------------------|
+\color{black}
+** Instancier un objet
+/Instancier un objet/ c'est le *construire en mémoire* à l'aide d'un [[Constructeur][*constructeur*]]:
+- Lui *réserver de l'espace* en mémoire (sur le *tas*)
+- *Initialiser son état* (ses attributs)
+\color{luckydarkgray}Exemple de constructeur de la classe Video:\color{black}
+#+begin_src java :classname Video :placement [H]
+public Video(String unAuteur, String unTitre) {
+   this.auteur = unAuteur;
+   this.titre = unTitre;
+   this.publiee = false;
+   this.nbLikes = 0;
+   this.nbDislikes = 0;
+}
+#+end_src
+*** new
+Pour instancier un objet on va utiliser l'*opérateur* \mintinline{java}{new} et fournir d'éventuels *paramètres* au [[Constructeur][constructeur]].
+
+\color{luckydarkgray}Exemple d'instanciation d'un objet *threadHorreur* de type *Video*:\color{black}
+#+begin_src java :classname Video :placement [H]
+Video threadHorreur = new Video("SQUEEZIE", "Êtes-vous vraiment seul chez vous ?");
+#+end_src
+** Type référence
+Une *classe* est un type /référence/. \color{luckydarkgray}(Comme les tableaux)\color{black}
+#+begin_src java :classname Video :placement [H]
+Video threadHorreur;
+//Référence créée sur la pile
+
+threadHorreur = new Video("SQUEEZIE", "Êtes-vous vraiment seul chez vous ?";
+//Objet créé sur le tas
+#+end_src
+* Objects
+* Polymorphisme
+* Post-incrémentation
+<<PostIncrementation>>
+** C'est quoi?
+La /post-incrémentation/ lors de l'*évaluation d'une expression*, c'est lorsque cette variable est *incrémentée après* avoir donné sa valeur à l'expression.
+
+\color{luckydarkgray}Exemple de post-incrémentation avec ++:\color{black}
+#+begin_src java :classname PostIncr :exports both :results pp :placement [H]
+public class PostIncr {
+   public static void main(String[] args) {
+      int i = 0;
+      System.out.println("Résultat du code:");
+      System.out.println("  i = " + i);
+      System.out.println("i++ = " + (i++)); //Affiche i puis l'incrémente
+      System.out.println("  i = " + i);
+   }
+}
+#+end_src
+** Pré-décrémentation
+La /pré-décrémentation/ est l'inverse de la /post-incrémentation/. La variable va donc être *décrémentée avant* de donner sa valeur à l'expression.
+
+\color{luckydarkgray}Exemple de pré-décrémentation avec --:\color{black}
+#+begin_src java :classname PreDecr :exports both :results pp :placement [H]
+public class PreDecr {
+   public static void main(String[] args) {
+      int i = 0;
+      System.out.println("Résultat du code:");
+      System.out.println("  i = " + i);
+      System.out.println("--i = " + (--i)); //Décrémente i puis l'affiche
+      System.out.println("  i = " + i);
+   }
+}
+#+end_src
+* static
+<<Static>>
+** C'est quoi?
+Le mot-clé \mintinline{java}{static} permet de préciser qu'un *membre* fait référence à la *classe* (et non à une instance) et donc, celui-ci est *partagé* par toutes les instances. 
+** Trois types de classes
+En Java il existe /trois types de classes/:
+- classe *utilitaire* \color{luckydarkgray}(Ex: Math)\color{black}
+- classe *"objets"* \color{luckydarkgray}(Ex: String, Scanner...)\color{black}
+- classe *mixte*
+** Membre static
+Un /membre static/:
+- fait référence à la *classe* \color{luckydarkgray}(et non à une /instance/)\color{black}
+- est partagé par toutes les instances \color{luckydarkgray}(éventuelles)\color{black}
+** Attribut static
+Un /attribut static/:
+- existe en *un seul* exemplaire
+- est *initialisé* lors du *chargement* de la classe \color{luckydarkgray}(une seule fois)\color{black}
+- est souvent utilisé pour les *constantes*
+
+\color{luckydarkgray}Exemple d'attributs static:\color{black}
+#+begin_src java :classname Math :placement [H]
+public class Math {
+   public static final double PI = 3.141592;
+   public static final double E = 2.718281;
+}
+#+end_src
+** Méthode static
+Une /méthode static/:
+- ne *peut pas accéder* aux membres des instances
+- est souvent utilisée pour les méthodes *non objets*
+
+\color{luckydarkgray}Exemple de méthode static:\color{black}
+#+begin_src java :placement [H]
+public class Outils {
+   public static int abs(int nb) {
+      return nb < 0 ? -nb : nb; //Retourne la valeur absolue
+   }
+}
+#+end_src
+** import static
+Un /import static/ créé un *raccourci* pour l'accès aux *membres statiques*.
+
+\color{luckydarkgray}Exemple d'import static:\color{black}
+#+begin_src java :placement [H]
+import static java.lang.Math.log;
+import static java.lang.Math.E;
+
+public class Test {
+   public static void main(String[] args) {
+      System.out.println(log(E));
+   }
+}
+#+end_src
+* Surcharge/redéfinition
+<<Surcharge>>
+** C'est quoi?
+Il est possible d'écrire *plusieurs fois la même méthode* en changeant le *nombre* ou le *type* de ses *paramètres*.
+
+Par exemple on pourrait écrire une méthode =miser()= de *quatre manières différentes*:
+- \mintinline{java}{miser()} \color{luckydarkgray}qui mise 10€ au BlackJack par défaut\color{black}
+- \mintinline{java}{miser(int mise)} \color{luckydarkgray}qui mise la mise voulue au BlackJack par défaut\color{black}
+- \mintinline{java}{miser(String jeu)} \color{luckydarkgray}qui mise 10€ par défaut au jeu voulu\color{black}
+- \mintinline{java}{miser(int mise, String jeu)} \color{luckydarkgray}qui mise la mise voulue au jeu voulu\color{black}
+
+\color{luckydarkgray}Exemple des méthodes =miser()=:\color{black}
+#+begin_src java :classname Casino :placement [H]
+public void miser() {
+   miser(10, "BlackJack");
+}
+
+public void miser(int mise) {
+   miser(mise, "BlackJack");
+}
+
+public void miser(String jeu) {
+   miser(10, jeu);
+}
+
+public void miser(int mise, String jeu) {
+   //...
+}
+#+end_src
+* switch
+<<switch>>
+** C'est quoi?
+Un \mintinline{java}{switch case} est l'équivalent d'un ensemble de \mintinline{java}{if then - else if - else}.
+
+\color{luckydarkgray}Exemple d'instruction =switch case=:\color{black}
+#+begin_src java :classname Chaussettes :exports both :results pp :placement [H]
+public class Chaussettes {
+   public static void main(String[] args) {
+      int nbChaussettes = 2;
+
+      System.out.println("Résultat du code:");
+      switch(nbChaussettes) {
+         case 3: //if (nbChaussettes == 3)
+            System.out.println("Une de rechange au cas ou ;)");
+            break;
+         case 2: //else if (nbChaussettes == 2)
+            System.out.println("Parfait, tu possèdes une paire.");
+            break;
+         case 1: //else if (nbChaussettes == 1)
+            System.out.println("Tu as une seule chaussette? Pas très pratique..");
+            break;
+         case 0: //else if (nbChaussettes == 0)
+            System.out.println("Zut.. Tu n'as pas de chaussettes");
+            break;
+         default: //else
+            System.out.println("Tu as plus que 3 chaussettes apparemment...");
+      }
+   }
+}
+#+end_src
+On utilise l'instruction [[break][=break=]] afin de sortir du \mintinline{java}{switch} sans exécuter ce qui suit.
+
+\color{luckydarkgray}S'il n'y avait aucun =break= dans le code précédant, le programme aurait exécuté tout ceci:
+- =case 2=
+- =case 1=
+- =case 0=
+- =default=
+\color{black}
+* Tableau 1D
+<<Tableau1D>>
+Un /tableau/ est un *type de données* (de type référence).
+
+On peut *créer* un tableau en fournissant:
+- Les valeurs
+- La taille
+
+\color{luckydarkgray}Exemple de quatre tableaux à une dimension:\color{black}
+#+begin_src java :placement [H]
+public static void main(String[] args) {
+   Video[] videos1;
+   Video[] videos2 = new Video[3]; //Tout est initialisé à null
+   videos1 = new Video[3];         //Tout est initialisé à null
+
+   videos1[0] = new Video("auteur1", "titre1");
+   videos1[1] = new Video("auteur2", "titre2");
+   videos2[0] = new Video("auteur3", "titre3");
+   videos2[1] = new Video("auteur4", "titre4");
+
+   Video[] videos3;
+   Video[] videos4 = /*new Video[]*/ {new Video("auteur5", "titre5"),
+                                      new Video("auteur6", "titre6"),
+                                      null};
+   videos3 = new Video[] {new Video("auteur7", "titre7"),
+                          new Video("auteur8", "titre8"),
+                          null};
+}
+#+end_src
+* Tableau 2D
+<<Tableau2D>>
+** C'est quoi?
+Un /tableau 2D/ n'est rien d'autre qu'un [[Tableau1D][tableau]] de [[Tableau1D][tableau]].
+
+\color{luckydarkgray}Exemple de trois tableaux à deux dimensions:\color{black}
+#+begin_src java :placement [H]
+public static void main(String[] args) {
+   Video[][] videos;
+   videos = new Video[][] {{new Video("aut1", "titr1"), new Video("aut2", "titr2")},
+                           {new Video("aut3", "titr3"), new Video("aut4", "titr4")}};
+   int[][] pascal = {{1},
+                     {1, 1},
+                     {1, 2, 1},
+                     {1, 3, 3, 1},
+                     {1, 4, 6, 4, 1}};
+
+   int[][] sudoku = new int[9][9]; //Tout est initialisé à 0
+}
+#+end_src
+* this/super
+<<This>>
+** This
+/This/ est une *référence à soi-même*.
+
+Elle apparaît dans différents contextes:
+- Constructeur \mintinline{java}{this()}
+- Attributs \mintinline{java}{this.auteur}
+- Méthodes \mintinline{java}{this.liker()}
+
+\color{luckydarkgray}Exemple d'utilisation du mot-clé =this=:\color{black}
+#+begin_src java :classname Video :placement [H]
+public Video(String unAuteur, String unTitre, boolean publiee) {
+   this.auteur = unAuteur;       //"this" facultatif car auteur != unAuteur
+   this.titre = unTitre;           //Idem
+   this.publiee = publiee;       //"this" important car publiee == publiee
+   this.nbLikes = 0;             //"this" facultatif car nbLikes est unique ici
+   this.nbDislikes = 0;          //Idem
+}
+
+public Video(String unAuteur, String unTitre) {
+   this(unAuteur, unTitre, false); //Doit être la 1ère instruction!
+}
+
+public void liker() {
+   this.addLike();
+   System.out.println("Vous avez liké la vidéo");
+}
+
+private void addLike() {
+   this.nbLikes++;
+}
+#+end_src
+* throw(s)
+* toString
+<<toString>>
+** C'est quoi?
+La méthode \mintinline{java}{String toString()}:
+- fournit une représentation *textuelle basique* de l'état
+- a un *nom standardisé*
+- est *appelée automatiquement* par \mintinline{java}{println} ou lors de concaténation
+- une *version par défaut* existe, mais n'est *pas intéressante*
+
+\color{luckydarkgray}Exemple d'utilisation de la méthode toString():\color{black}
+#+begin_src java :placement [H]
+public String toString() {
+   return "Auteur: " + this.auteur
+        + "Titre: " + this.titre
+        + "Est publiée: " + this.publiee
+        + "Nombre de likes: " + this.nbLikes
+        + "Nombre de dislikes: " + this.nbDislikes; 
+}
+#+end_src
+* Trier
+* try-catch
+* var
+* Var args
+* Visibilité
+<<Visibilité>>
+** C'est quoi?
+En Java, chaque *membre* possède un des *quatre types* de visibilité suivants:
+- \mintinline{java}{public} \color{luckydarkgray}(Accessible depuis *toutes les classes*)\color{black}
+- \mintinline{java}{private} \color{luckydarkgray}(Accessible uniquement depuis la *classe*)\color{black}
+- \mintinline{java}{package} \color{luckydarkgray}(Accessible depuis le *package*)\color{black}
+- \mintinline{java}{protected} \color{luckydarkgray}(Accessibilité liée à l'*héritage*)\color{black}
+* while/do while
+<<while>>
+** C'est quoi?
+Les instructions \mintinline{java}{while} et \mintinline{java}{do while} permettent d'effectuer des *boucles* qui s'exécuteront *tant que* l'expression est *vraie*.
+
+Contrairement aux boucles [[for][=for=]], on peut utiliser les \mintinline{java}{while} et \mintinline{java}{do while} pour effectuer du code à répétition *sans connaître* le nombre de fois à l'avance.
+
+** Différence entre =while= et =do while=
+- L'instruction \mintinline{java}{while} va d'abord *vérifier* si l'expression est *vraie*, puis éventuellement *exécuter* le code.
+- L'instruction \mintinline{java}{do while} va d'abord *exécuter* le code, puis *vérifier* si l'expression est *vraie*.
+\color{luckydarkgray}Exemple de boucles =while= et =do while=:\color{black}
+#+begin_src java :classname HelloWorldx7 :exports both :results pp :placement [H]
+public class HelloWorldx7 {
+   public static void main(String[] args) {
+      int i = 0;
+
+      System.out.println("Résultat du code:");
+      while (i++ < 3) { //Incrémentation après évaluation de l'expression
+         System.out.println("Hello world!");
+      }
+
+      System.out.println();
+
+      do {
+         System.out.println("Hello world!");
+      } while (--i > 0); //Décrémentation avant évaluation de l'expression
+   }
+}
+#+end_src
+(Pour comprendre le fonctionnement de =i++= et =--i=, voir [[PostIncrementation][post-incrémentation]])
+* Wrapper/boxing
